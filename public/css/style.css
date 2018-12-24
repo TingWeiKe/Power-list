@@ -1,0 +1,117 @@
+body
+{
+  background-image:url(https://a-www.kfs.io/assets/images/og-image/lets-music-edff145083.png);
+  background-size:cover;
+  background-attachment:fixed;
+  margin:0
+}
+
+.container
+{
+  padding-top:100px;
+  background-color:rgba(0,0,0,0.6);
+  min-height:100vh
+}
+
+.row
+{
+  width:1100px;
+  margin:0 auto
+}
+
+.col
+{
+  width:315px;
+  background:rgba(11,11,11,0.7);
+  box-sizing:border-box;
+  display:inline-block;
+  margin-top:20px;
+  margin-right:50px
+}
+
+.col:hover
+{
+  cursor:pointer;
+  box-shadow:10px 6px 15px 8px rgba(11,11,11,0.5);
+  transition:all .7s
+}
+
+.col:hover .preview img
+{
+  transition:.5s;
+  filter:brightness(160%);
+  -webkit-filter:brightness(160%)
+}
+
+.btm
+{
+  width:300px;
+  height:70px;
+  padding:5px
+}
+
+.preview
+{
+  height:300.75px;
+  width:315px
+}
+
+.preview img
+{
+  opacity:0;
+  width:100%;
+  transition:1s ease-in
+}
+
+.icon
+{
+  margin-top:16px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  overflow:hidden
+}
+
+.icon img
+{
+  width:100%;
+  height:100%
+}
+
+.intro
+{
+  position:relative;
+  bottom:50px;
+  left:55px;
+  color:#fff;
+  max-width:240px;
+  font-size:16px;
+  overflow:hidden
+}
+
+.channal_name
+{
+  width:100px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-decoration:none
+}
+
+.real_name
+{
+  width:250px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-decoration:none;
+  font-size:20px;
+  text-shadow:1px 1px 1px #ccc;
+  text-align:center
+}
+
+#placeholder
+{
+  position:relative;
+  background-image:url(https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/2e/d1/1b/2ed11b67-e9de-eca5-8029-7229efe3a06a/AppIcon-85-220-0-4-0-0-0-2x-0-0.png/1200x630bb.png);
+  height:300px
+}
+
