@@ -90,16 +90,16 @@ function getCookie(name) {
 }
 
 
-let newAccessToken = getCookie("currentToken")
+let newAccessToken = ''
 
 // console.log(newAccessToken)
 
 $(document).ready(function () {
 	get_Authorization_Code().then(data => {
-		getCookie("refreshToken") ? null : data.refresh_token
 		doCookieSetup('currentToken', data.access_token)
 		doCookieSetup('refreshToken', data.refresh_token)
 		//拿access_token對伺服器請求KKbox API
+		newAccessToken ? null :newAccessToken = data.access_token
 		get_KKbox_API(newAccessToken)
 			.then(data => {
 				console.log(data)
