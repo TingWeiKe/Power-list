@@ -80,8 +80,8 @@ function appendData(data) {
 
 function doCookieSetup(name, value) {
 	var expires = new Date();
-	//有效時間保存 2 天 2*24*60*60*1000
-	expires.setTime(expires.getTime() + 2592000);
+	//cookie expire time 1m30s
+	expires.setTime(expires.getTime() + 150*1000);
 	document.cookie = name + "=" + escape(value) + ";expires=" + expires.toGMTString()
 }
 function getCookie(name) {
@@ -89,17 +89,20 @@ function getCookie(name) {
 	if (arr != null) return unescape(arr[2]); return null;
 }
 
-
-let newAccessToken = ''
+	// init 
+	let newAccessToken = ''
 
 // console.log(newAccessToken)
 
 $(document).ready(function () {
+
 	get_Authorization_Code().then(data => {
 		doCookieSetup('currentToken', data.access_token)
 		doCookieSetup('refreshToken', data.refresh_token)
 		//拿access_token對伺服器請求KKbox API
-		newAccessToken ? null :newAccessToken = data.access_token
+		console.log(newAccessToken)
+		data.access_token = newAccessToken ? null :newAccessToken = data.access_token
+		console.log(newAccessToken)
 		get_KKbox_API(newAccessToken)
 			.then(data => {
 				console.log(data)
@@ -121,11 +124,11 @@ $(document).ready(function () {
 		//Refresh the Access_Token every 2 miniunt before expire time
 		//get new refresh code and get new Access code by refreshing and save in cooke
 		setInterval(() => {
-			let refreshToken = getCookie("refreshToken")
 			// console.log(refreshToken)
+			let refreshToken = getCookie("refreshToken")
 			get_Access_Code_by_Refresh_Token(refreshToken)
 				.then(data => {
-					// console.log(data)
+					console.log(data)
 					data.refresh_token ? newAccessToken = data.access_token : console.log('Can not get new access_token')
 					doCookieSetup('refreshToken', data.refresh_token)
 					doCookieSetup('currentToken', newAccessToken)
