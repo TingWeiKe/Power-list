@@ -32,7 +32,7 @@ async function get_KKbox_API(access_token) {
 
 //POST method to get refresh_Token in order to get new accessCode from refresing.
 async function get_Access_Code_by_Refresh_Token(refreshToken) {
-	let url = 'http://localhost:3000/post/refresh'
+	let url = '/post/refresh'
 	const res = await axios.post(url, { code: refreshToken })
 	try {
 		return res.data
