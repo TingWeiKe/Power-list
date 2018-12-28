@@ -1,5 +1,6 @@
 // POST method to get access_code
 // by Urls params from function get_Authorization_Code()
+let axios = require('axios')
 async function get_Authorization_Code() {
 	const urlPara = getUrlVars()
 	if (urlPara != null) {

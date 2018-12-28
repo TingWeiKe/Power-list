@@ -19,7 +19,7 @@ body
 .row
 {
   width:100%;
-  margin:0 auto
+  margin:0 auto;
 }
 
 .col
@@ -31,7 +31,7 @@ body
   display:inline-block;
   margin-top:20px;
   margin-right:20px;
-  margin-left:45px;
+  margin-left:40px;
 }
 
 .col:hover
@@ -120,5 +120,4 @@ body
   background-image:url(../img/placeholder.png);
   width: 100%;
   height: 100%;
- 
 }
