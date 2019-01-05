@@ -36,7 +36,7 @@ ReactDOM.render(
           <Route exact path='/today' component={Today}></Route>
           <Route path='/playlist' component={Playlist}></Route>
           <Route path='/recents' component={Recent}></Route>
-          <Route path='/setting' component={Setting}></Route>
+        
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           Ant Design ©2018 Created by Ant UED
