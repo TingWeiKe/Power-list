@@ -35,8 +35,10 @@ router.post('/refresh', function (req, res, next) {
       data: data
     }
     const res = await axios(config)
+    
     return res.data
   }
+
 
   get_refresh_access_data()
     .then(data => {
@@ -68,7 +70,8 @@ router.post('/', function (req, res, next) {
 
   get_access_data(grant_type, code)
     .then(data => {
-      data.access_token ? res.send(data) : res.send('No access_token')
+      console.log(data)
+      data.access_token ? res.json(data) : res.send('No access_token')
     }).catch(error => {
       res.send(error)
     }

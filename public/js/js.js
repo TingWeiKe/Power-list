@@ -82,7 +82,7 @@ function appendData(data) {
 function doCookieSetup(name, value) {
 	var expires = new Date();
 	//cookie expire time 1m30s
-	expires.setTime(expires.getTime() + 150*1000);
+	expires.setTime(expires.getTime() + 150 * 1000);
 	document.cookie = name + "=" + escape(value) + ";expires=" + expires.toGMTString()
 }
 function getCookie(name) {
@@ -90,8 +90,8 @@ function getCookie(name) {
 	if (arr != null) return unescape(arr[2]); return null;
 }
 
-	// init 
-	let newAccessToken = ''
+// init 
+let newAccessToken = ''
 
 // console.log(newAccessToken)
 
@@ -102,7 +102,7 @@ $(document).ready(function () {
 		doCookieSetup('refreshToken', data.refresh_token)
 		//拿access_token對伺服器請求KKbox API
 		console.log(newAccessToken)
-		data.access_token = newAccessToken ? null :newAccessToken = data.access_token
+		data.access_token = newAccessToken ? null : newAccessToken = data.access_token
 		console.log(newAccessToken)
 		get_KKbox_API(newAccessToken)
 			.then(data => {
