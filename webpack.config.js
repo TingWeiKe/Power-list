@@ -1,14 +1,14 @@
 const path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+// var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: "development",
     //如果有一個以上的檔案需要打包，可以傳陣列給entry
-    entry: ['./public/js/app.js'],
+    entry: ['./public/app.js'],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './public/js'),
-        publicPath: '/public/js'
+        path: path.resolve(__dirname, './public'),
+        publicPath: '/public'
     },
     //將loader的設定寫在module的rules屬性中
     module: {
@@ -28,13 +28,13 @@ module.exports = {
         historyApiFallback: true,
         port: 9000,
         compress:true,
-        publicPath: '/public/js',
+        publicPath: '/public',
         
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-          template: './public/index.html'
-        })
-      ]
+    // plugins: [
+    //     new HtmlWebpackPlugin({
+    //       template: './public/index.html'
+    //     })
+    //   ]
     
 };

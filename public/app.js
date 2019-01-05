@@ -12,7 +12,7 @@ import Today from './container/today'
 import Playlist from './container/playlist'
 import Recent from './container/recents'
 import Setting from './container/setting'
-import Box from '../js/component/box'
+import Box from './component/box'
 import reducer from './reducer';
 
 const { Header, Footer, Content, } = Layout
