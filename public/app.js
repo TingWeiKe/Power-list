@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { Layout } from 'antd';
+import  {Layout}  from 'antd';
 import HeaderRoutre from './component/headerRoute'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 
-import Today from './container/today'
-import Playlist from './container/playlist'
-import Recent from './container/recents'
-import Setting from './container/setting'
-import Box from './component/box'
+import Today from './container/today/today'
+import Playlist from './container/playlist/playlist'
+import Recent from './container/recents/recents'
+import Setting from './container/setting/setting'
+
 import reducer from './reducer';
 
 const { Header, Footer, Content, } = Layout
@@ -25,25 +25,28 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? compose
 
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <Layout className="layout">
-        <Header>
-          <div className="logo" />
+  <Provider store={store}>
+    <BrowserRouter>
+
+        <Layout className="layout">
           <HeaderRoutre />
-        </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <Route exact path='/today' component={Today}></Route>
-          <Route path='/playlist' component={Playlist}></Route>
-          <Route path='/recents' component={Recent}></Route>
-        
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
+          <Content style={{ padding: '0 0px'}}>
+            <Switch>
+              <Redirect exact from='/' to='/today'></Redirect>
+              <Route path='/today' component={Today} />
+              <Route path='/playlist' component={Playlist} />
+              <Route path='/recents' component={Recent} />
+              <Route path='/setting' component={Setting} />
+              <Redirect exact paht='/' to='/today'></Redirect>
+            </Switch>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Ant Design ©2018 Created by Ant UED
         </Footer>
-      </Layout>
-    </div>
-  </BrowserRouter>
+        </Layout>
+
+    </BrowserRouter>
+  </Provider>
   ,
   document.getElementById('app')
 );

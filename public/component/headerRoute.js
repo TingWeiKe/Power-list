@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Link, Redirect , withRouter } from 'react-router-dom'
 import { Menu } from 'antd';
-import Today from '../container/today'
 
 
-export default class headerRoute extends Component {
-  constructor(props) {
+class HeaderRoute extends Component {
+  constructor(props){
     super(props)
   }
+  componentDidMount(){
+    //defaul Route
+    this.props.match.path='/today'?null:this.props.history.push('/today')
+  }
   render() {
-    console.log(this.props)
+    
     return (
-
+      
       <Menu
-        theme="dark"
+        theme="light"
         mode="horizontal"
         defaultSelectedKeys={['1']}
-        style={{ lineHeight: '64px' }}
+        style={{ lineHeight: '50px', paddingRight:'20px' }}
       >
         <Menu.Item key="1"> <Link to="/today" />今日精選</Menu.Item>
         <Menu.Item key="2"><Link to="/playlist" />歌單</Menu.Item>
@@ -26,3 +29,5 @@ export default class headerRoute extends Component {
     )
   }
 }
+
+export default withRouter(HeaderRoute)

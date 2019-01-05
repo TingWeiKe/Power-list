@@ -9,7 +9,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "antd": "^3.11.6",
+    "antd": "github:serguzest/ant-design#3.4.1-NoCssPollution",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",

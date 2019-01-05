@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Box from '../../component/box/box'
 
 export default class Today extends Component {
   constructor(props) {
@@ -7,7 +8,12 @@ export default class Today extends Component {
   render() {
     console.log(this.props)
     return (
-      <h1>今日精選</h1>
+      <div>
+        <h1>今日精選</h1>
+        <Box>
+        </Box>
+        
+      </div>
     )
   }
 }

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Row, Col, } from 'antd';
+import { style } from './box.css.js'
+
+
 class Box extends Component {
     constructor(props) {
         super(props)
@@ -30,7 +34,7 @@ class Box extends Component {
 
 
     async get_KKbox_API(access_token) {
-        let url = 'https://api.kkbox.com/v1.1/charts?territory=TW'
+        let url = 'https://api.kkbox.com/v1.1/featured-playlists'
         let config = {
             method: "GET",
             headers: { 'Authorization': 'Bearer ' + access_token }
@@ -52,37 +56,38 @@ class Box extends Component {
                     .then(data => {
                         this.setState({ data: data })
                         console.log(this.state.data)
+
+                    })
+                    .catch(err => {
+                        console.log(err)
                     })
             })
 
     }
     render() {
-        const style = {
-            textDecoration:'none'
-        }
-        console.log(this.state.data.length);
+
         return (
-            <div>
-                {this.state.data.map(data => {
-                    return <div className="col">
-                        <a href={data.url} style={style}></a>
-                        <div className='preview'>
-                            <div id="placeholder">
-                                <img src={data.images[0].url}/>
-                            </div>
-                            <div className='btm'>
-                                <div className="icon">
-                                    <img src={data.images[0].url}/>
+
+            <Row type="flex" justify="center">
+                {this.state.data ? this.state.data.map(data => {
+                    return <Col xs={24} md={12} lg={9} style={style.col}>
+                        <div style={style.playlistBox}>
+                            <a href={data.url} style={style.a}>
+                                <img style={style.img} src={data.images[0].url} />
+                                <div style={style.text}>
+                                    <h2>{data.title}</h2>
+                                    <p style={style.description}> {data.description}</p>
+                                    <p style={style.owner}>作者：{data.owner.name}</p>
+                                    <p style={style.updated} >{data.updated_at}</p>
                                 </div>
-                                <div className='intro'>
-                                    <div className='channal_name'>{data.title}</div>
-                                    <div className='real_name'>{data.updated}</div>
-                                </div>
-                            </div>
+                                
+                            </a>
+
                         </div>
-                    </div>
-                })}
-            </div>
+                    </Col>
+                }) : null}
+            </Row>
+
         )
     }
 }

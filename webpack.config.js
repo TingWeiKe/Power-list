@@ -8,7 +8,6 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './public'),
-        publicPath: '/public'
     },
     //將loader的設定寫在module的rules屬性中
     module: {
@@ -25,16 +24,12 @@ module.exports = {
     //增加一個給devserver的設定
     devServer: {
         //指定開啟port為9000
+        contentBase: path.join(__dirname, './public'),
         historyApiFallback: true,
         port: 9000,
         compress:true,
-        publicPath: '/public',
+   
         
     },
-    // plugins: [
-    //     new HtmlWebpackPlugin({
-    //       template: './public/index.html'
-    //     })
-    //   ]
-    
+
 };
