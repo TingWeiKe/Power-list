@@ -13,7 +13,7 @@ class HeaderRoute extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   componentDidMount() {
     // default route
-    this.props.location.pathname == '/today/' ? null : this.props.history.push('/today/')
+    // this.props.location.pathname == '/today/' ? null : this.props.history.push('/today/')
   }
   render() {
     const { activeItem } = this.state

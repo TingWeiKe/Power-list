@@ -1,7 +1,9 @@
 const SUCCESS = 'SUCCESS'
 
 let initState = {
-    msg: ''
+    msg: '',
+    data:{},
+    urlParam:''
 }
 
 export function box(state = initState, action) {

@@ -33,7 +33,7 @@ ReactDOM.render(
               <Route path='/playlist' component={Playlist} />
               <Route path='/recents' component={Recent} />
               <Route path='/setting' component={Setting} />
-              <Redirect exact paht='/' to='/today'></Redirect>
+              {/* <Redirect exact paht='/' to='/today'></Redirect> */}
             </Switch>
         
          
@@ -41,6 +41,8 @@ ReactDOM.render(
 
     </BrowserRouter>
   </Provider>
+
+  
   ,
   document.getElementById('app')
 );

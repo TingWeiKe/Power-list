@@ -13,88 +13,13 @@ a{
 
 }
 .header{
-    padding: 30px
+    padding: 30px;
+    background-color: #f0f2f5
 }
 .header>h1{
     margin: 30px
 }
-.img{
-    
-    background-size:cover;
-    border: 1px solid #666;
-}
-.playlist{
-    border: 1.5px solid #666;
-    width: 270px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    background-color: #fff;
-}
-.playlist>a{
-    text-decoration: none;
-  
-}
 
-.playlist:hover{
-    background-color:#fafaff;
-    cursor:pointer;
-    filter:brightness(96%);
-    box-shadow:6px 4px 12px 4px rgba(11,11,11,0.5);
-    transition:all .1s
-}
-.ui.grid>.row{
-    margin: 0 30px;
-}
-.textbox{
-    height: 300px;
-}
-.title{
-    height: 100%;
-    padding-right: 65px;
-    padding-top:10px;
-    padding-left: 10px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2
-    
-}
-.title>a:hover{
-    
-    color: #4183c4 !important;
-}
-.text{
-    padding:5px 10px 15px;
-}
-.description
-{
-    padding:10px 10px;
-}
-.description>p{
-    font-size: 16px;
-    line-height: 1.2;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-
-
-}
-.text>p{
-    line-height: 1.2;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-
-}
-.text>:first-child{
-    text-decoration: underline;
-    font-weight:bold;
-}
-.text>:first-child:hover{
-    color: #4183c4 !important;
+.ui.input {
+    width: 100%;
 }

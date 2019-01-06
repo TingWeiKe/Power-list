@@ -4,7 +4,7 @@ import { Image, Grid } from 'semantic-ui-react'
 import { Loader } from 'semantic-ui-react'
 import {connect} from 'react-redux'  
 import {getUrlVars} from '../../redux/box.redux'
-
+import './box.css'
 
 class Box extends Component {
     constructor(props) {
@@ -72,18 +72,16 @@ class Box extends Component {
     render() {
         console.log(this.props)
         const s = this.state.v
-
         return (
-            
             <Grid>
                 <Grid.Row>
                 <Loader active={s} inline='centered' size='huge' disabled />
                  
                     {this.state.data ? this.state.data.map(data => {
-                        return <div key ={data.id}className='playlist'>
+                        return <div key ={data.id} className='playlist'>
                             <Grid.Column>
                                 <a href={data.url}>
-                                    <Image centered={true} className='img' src={data.images[0].url}></Image>
+                                    <Image style={{width:' 100%'}} centered={true} className='img' src={data.images[0].url}></Image>
                                 </a>
                                 <div className='title'>
                                     <a href={data.url}><h2>{data.title}</h2></a>
