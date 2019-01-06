@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Row, Col, } from 'antd';
-import { style } from './box.css.js'
+import { Image, Grid } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
+import {connect} from 'react-redux'  
+import {getUrlVars} from '../../redux/box.redux'
 
 
 class Box extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: []
+            data: [],
+            v:true,
         }
     }
 
@@ -55,6 +58,7 @@ class Box extends Component {
                 this.get_KKbox_API(data.access_token)
                     .then(data => {
                         this.setState({ data: data })
+                        data?this.setState({v:false}):null
                         console.log(this.state.data)
 
                     })
@@ -62,33 +66,47 @@ class Box extends Component {
                         console.log(err)
                     })
             })
-
+            this.props.getUrlVars()
     }
+   
     render() {
+        console.log(this.props)
+        const s = this.state.v
 
         return (
-
-            <Row type="flex" justify="center">
-                {this.state.data ? this.state.data.map(data => {
-                    return <Col xs={24} md={12} lg={9} style={style.col}>
-                        <div style={style.playlistBox}>
-                            <a href={data.url} style={style.a}>
-                                <img style={style.img} src={data.images[0].url} />
-                                <div style={style.text}>
-                                    <h2>{data.title}</h2>
-                                    <p style={style.description}> {data.description}</p>
-                                    <p style={style.owner}>作者：{data.owner.name}</p>
-                                    <p style={style.updated} >{data.updated_at}</p>
+            
+            <Grid>
+                <Grid.Row>
+                <Loader active={s} inline='centered' size='huge' disabled />
+                 
+                    {this.state.data ? this.state.data.map(data => {
+                        return <div key ={data.id}className='playlist'>
+                            <Grid.Column>
+                                <a href={data.url}>
+                                    <Image centered={true} className='img' src={data.images[0].url}></Image>
+                                </a>
+                                <div className='title'>
+                                    <a href={data.url}><h2>{data.title}</h2></a>
                                 </div>
-                                
-                            </a>
-
+                                <div className='description'>
+                                    <p >{data.description}</p>
+                                </div>
+                                <div className='text'>
+                                    <a href={data.owner.url}><p>{data.owner.name}</p></a>
+                                    <p>{data.updated_at}</p>
+                                </div>
+                            </Grid.Column>
                         </div>
-                    </Col>
-                }) : null}
-            </Row>
-
+                    }) : null}
+                
+                </Grid.Row>
+            </Grid>
         )
     }
 }
+const mapStatetoProps = state =>{
+    return {num:state}
+}
+const actionCreate = {getUrlVars}
+Box = connect(mapStatetoProps,actionCreate)(Box)
 export default Box

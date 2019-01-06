@@ -1,7 +1,7 @@
 export const style = {
     col: {
-        margin: '30px  20px ',
-        maxWidth: '280px',
+        margin: '30px  5px ',
+        maxWidth: '270px',
         minWidth: '270px'
     },
     playlistBox: {
@@ -15,8 +15,8 @@ export const style = {
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         display:'-webkit-box',
-        '-webkit-box-orient': 'vertical',
-        '-webkit-line-clamp': '3',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: '3',
         
     },
     updated: {
