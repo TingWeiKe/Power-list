@@ -1,0 +1,40 @@
+.back{
+    margin-bottom: 25px !important;
+
+}
+
+
+.list_description>pre{
+    
+    font-size: 16px;
+    line-height: 1.4;
+    white-space: pre-wrap ;  /* 防止overflow */
+     
+
+}
+.play
+{
+    margin-bottom: 10px !important;
+}
+
+.play_text{
+    text-align: center;
+    margin-top: 30px;
+  
+}
+
+.play_text>p{
+    
+}
+
+.play_text>:first-child{
+    text-decoration: underline;
+    font-weight:bold;
+}
+.play_text>:first-child:hover{
+    color: #4183c4 !important;
+}
+
+.playlist_text_box{
+
+}

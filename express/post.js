@@ -11,22 +11,20 @@ var Qs = require('qs');
 
 
 router.post('/refresh', function (req, res, next) {
-  
+
 
   let code = req.body.code
- 
+
   // POST access_token from KKbox
   async function get_refresh_access_data() {
-    
-     //FormData must be a String in order to fit in content-type: application/x-www-form-urlencoded
-     //Use Qs.stringify
+    //FormData must be a String in order to fit in content-type: application/x-www-form-urlencoded
+    //Use Qs.stringify
     let data = Qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: code,
       client_id: 'b89dc89b34b7f4d2759580c9b53141ae',
       client_secret: 'c47d5eebae5d6cf9da082e55447d4ec8'
     })
-  
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
       headers: { 'host': 'account.kkbox.com', 'content-type': 'application/x-www-form-urlencoded' },
@@ -35,7 +33,7 @@ router.post('/refresh', function (req, res, next) {
       data: data
     }
     const res = await axios(config)
-    
+
     return res.data
   }
 
@@ -44,7 +42,7 @@ router.post('/refresh', function (req, res, next) {
     .then(data => {
       console.log(data)
       res.json(data)
-    }).catch(error=>{
+    }).catch(error => {
       res.json(error)
     })
 });
@@ -54,10 +52,10 @@ router.post('/refresh', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   /* POST access_token from KKbox */
-  async function get_access_data(grant_type, code) {
+  async function get_access_data() {
     //FormData must be a String in in content-type: application/x-www-form-urlencoded prevent Axios JSON it again.
     //Use raw String
-    let formData = 'grant_type=' + grant_type + '&code=' + req.body.urlPara + '&client_id=b89dc89b34b7f4d2759580c9b53141ae&client_secret=c47d5eebae5d6cf9da082e55447d4ec8'
+    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara + '&client_id=b89dc89b34b7f4d2759580c9b53141ae&client_secret=c47d5eebae5d6cf9da082e55447d4ec8'
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
       headers: { 'host': 'account.kkbox.com', 'content-type': 'application/x-www-form-urlencoded' },
@@ -71,9 +69,10 @@ router.post('/', function (req, res, next) {
   get_access_data(grant_type, code)
     .then(data => {
       console.log(data)
-      data.access_token ? res.json(data) : res.send('No access_token')
+      console.log(req.body)
+      data.access_token ? res.json(data) : res.json('No access_token')
     }).catch(error => {
-      res.send(error)
+      res.json('error')
     }
     )
 });

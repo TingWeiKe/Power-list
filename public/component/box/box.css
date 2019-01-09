@@ -1,10 +1,14 @@
 .img{
-    
+    position: absolute;
     background-size:cover;
+    border-bottom: 1.2px solid #666;
+    position:absolute;
+    z-index: 3;
    
 }
 .playlist{
-    border: 1.5px solid #666;
+    z-index: 3;
+    border: 1.2px solid #666;
     width: 270px;
     margin-left: auto;
     margin-right: auto;
@@ -17,10 +21,10 @@
 }
 
 .playlist:hover{
-    background-color:white;
+    background-color:#F0F0F0;
     cursor:pointer;
-    filter:brightness(96%);
-    box-shadow:6px 4px 12px 4px rgba(11,11,11,0.5);
+    filter:brightness(102%);
+    box-shadow:0px 0px 10px 4px rgba(0,0,0,0.3);
     transition:all .1s
 }
 .ui.grid>.row{
@@ -32,12 +36,9 @@
 .title{
     height: 100%;
     padding-right: 65px;
-    padding-top:10px;
+    position: relative;
     padding-left: 10px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2
+    bottom: 23px;
     
 }
 .title>a:hover{
@@ -59,8 +60,6 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
-
-
 }
 .text>p{
     line-height: 1.2;
@@ -77,4 +76,25 @@
 }
 .text>:first-child:hover{
     color: #4183c4 !important;
+}
+
+.icon{
+    position: relative;
+    border-radius: 8px;
+    left:215px;
+    bottom: 18px;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 4;
+    border: 1.2px solid white;
+    background-color:#F0F0F0 !important;
+}
+.icon:hover{
+    
+    cursor:pointer;
+    filter:brightness(101%);
+    box-shadow:0px 0px 10px 4px rgba(0,0,0,0.3);
+   
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Image } from 'semantic-ui-react'
-export default class hotboard extends Component {
+class category extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -31,7 +31,7 @@ export default class hotboard extends Component {
 
 
     async get_KKbox_API(access_token) {
-        let url = 'https://api.kkbox.com/v1.1/charts?territory=TW'
+        let url = 'https://api.kkbox.com/v1.1/featured-playlist-categories'
         let config = {
             method: "GET",
             headers: { 'Authorization': 'Bearer ' + access_token }
@@ -73,3 +73,5 @@ export default class hotboard extends Component {
     )
   }
 }
+
+export default category

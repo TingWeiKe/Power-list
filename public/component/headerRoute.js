@@ -11,10 +11,13 @@ class HeaderRoute extends Component {
     }
   }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+
   componentDidMount() {
     // default route
     // this.props.location.pathname == '/today/' ? null : this.props.history.push('/today/')
   }
+  
   render() {
     const { activeItem } = this.state
     return (
@@ -32,10 +35,10 @@ class HeaderRoute extends Component {
 
           <Menu.Item
             as={Link}
-            name='playlist'
-            active={activeItem === 'playlist'}
+            name='playlist_category'
+            active={activeItem === 'playlist_category'}
             onClick={this.handleItemClick}
-            to={{ pathname: '/playlist/', search: this.props.location.search }}
+            to={{ pathname: '/playlist_category/', search: this.props.location.search }}
           >
             歌單
         </Menu.Item>

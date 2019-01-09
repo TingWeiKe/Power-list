@@ -7,19 +7,24 @@ a{
     color:black !important;
 }
 .row{
-
     margin-left: 0px !important;
     margin-right: 0px !important; 
 
 }
 .header{
-    padding: 30px;
+    padding: 25px;
     background-color: #f0f2f5
 }
 .header>h1{
-    margin: 30px
+
 }
 
 .ui.input {
     width: 100%;
 }
+.errMsg{
+    color: red;
+    text-align: center;
+    padding: 15px;
+}
+
