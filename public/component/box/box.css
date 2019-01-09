@@ -6,10 +6,20 @@
     z-index: 3;
    
 }
+@media screen  and (max-width: 700px) {
+   .playlist {
+    width: 350px !important;
+    }
+}
+@media screen  and (min-width: 700px) {
+    .playlist {
+     max-width: 270px !important;
+     }
+ }
+
 .playlist{
     z-index: 3;
     border: 1.2px solid #666;
-    width: 270px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
@@ -34,11 +44,11 @@
     height: 300px;
 }
 .title{
+    margin-top: 12px;
     height: 100%;
     padding-right: 65px;
     position: relative;
     padding-left: 10px;
-    bottom: 23px;
     
 }
 .title>a:hover{
@@ -79,9 +89,10 @@
 }
 
 .icon{
-    position: relative;
+   
     border-radius: 8px;
-    left:215px;
+    right: 20px;
+    float: right;
     bottom: 18px;
     margin: 0;
     padding: 0;

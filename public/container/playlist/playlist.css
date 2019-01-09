@@ -1,6 +1,6 @@
+
 .back{
     margin-bottom: 25px !important;
-
 }
 
 
@@ -23,9 +23,7 @@
   
 }
 
-.play_text>p{
-    
-}
+
 
 .play_text>:first-child{
     text-decoration: underline;
@@ -38,3 +36,93 @@
 .playlist_text_box{
 
 }
+.track{
+
+ 
+}
+.play_button{
+    pointer-events: visibleStroke; /* 解決無法觸發click事件 */
+    background-color:#f0f2f5 !important;
+    padding: 5px !important;
+
+}
+.play_button:hover{
+    background-color: #cacbcd !important;
+
+}
+.track>p{
+ margin: 0;
+}
+.playlist_img{
+    position: absolute;
+
+    float: left;
+    max-height: 55px;
+
+    margin: auto 0;
+}
+.playlist_info{
+
+    position: relative;
+    left:10px;
+    padding-top: 8px ;
+    text-align: left;
+    
+}
+
+.playlist_info>p{
+    color:  rgba(0,0,0,.6) !important;
+    margin: 0px;
+
+    z-index: 1;
+    float: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+}
+.playlist_info>h4{
+    color:  rgba(0,0,0,.9) !important;
+    margin: 0px;
+    font-size: 1em ;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+/* .siderbar{
+ position: relative;
+bottom: 70px;
+} */
+
+
+@media screen  and (max-width: 450px) {
+   .playlist_info>h4 {
+    max-width: 200px;
+    }
+    .playlist_info>p {
+        max-width: 100px;
+        }
+}
+
+@media screen  and (max-width: 320px) {
+    .playlist_info>h4 {
+     max-width: 150px;
+     }
+     .playlist_info>p {
+         max-width: 140px;
+         }
+ }
+
+ .play_Icon{
+   
+     float: left;
+     top:16px;
+     padding-right: 5px;
+     margin: 4px;
+     pointer-events: visibleFill
+ }
+ 

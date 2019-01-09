@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { get_Featured_Playlists_Api } from '../../redux/box.redux'
 import './box.css'
 import { icon } from './box.img'
+import {modify_updated_at} from '../getKKboxAPI'
 
 function content(data) {
     return <div key={data.id} className='playlist'>
@@ -14,7 +15,7 @@ function content(data) {
                 </Image>
             </Link>
             <Link to={'/playlist/' + data.id} id={data.id}>
-                <Image className="icon" src={icon} bordered={true}></Image>
+                <Image  className="icon" src={icon} bordered={true}></Image>
             </Link>
             <div className='title'>
                 <a href={data.url}><h2>{data.title}</h2></a>
@@ -24,7 +25,7 @@ function content(data) {
             </div>
             <div className='text'>
                 <a href={data.owner.url}><p>{data.owner.name}</p></a>
-                <p>{data.updated_at}</p>
+                <p>{modify_updated_at(data.updated_at)}</p>
             </div>
         </Grid.Column>
     </div>

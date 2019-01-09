@@ -10,13 +10,14 @@ a{
     margin-left: 0px !important;
     margin-right: 0px !important; 
 
+
 }
 .header{
-    padding: 25px;
+    padding: 10px;
     background-color: #f0f2f5
 }
 .header>h1{
-
+    padding: 10px;
 }
 
 .ui.input {
