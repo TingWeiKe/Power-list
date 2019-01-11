@@ -44,7 +44,7 @@ export function get_Featured_Playlists_Api_ApiError() {
 
 export function get_Featured_Playlists_Api() {
     return dispatch => {
-        const url = 'https://api.kkbox.com//v1.1/featured-playlists?territory=TW'
+        const url = 'https://api.kkbox.com/v1.1/featured-playlists?territory=TW'
         let access_token;
         !getCookie('token') ? get_Access_Token()
             .then(data => {
@@ -72,12 +72,6 @@ export function get_Featured_Playlists_Api() {
                     }
                 })
 
-
-    }
-}
-
-export function get_Api(url) {
-    return dispatch => {
 
     }
 }

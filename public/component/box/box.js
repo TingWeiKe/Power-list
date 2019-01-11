@@ -15,7 +15,7 @@ function content(data) {
                 </Image>
             </Link>
             <Link to={'/playlist/' + data.id} id={data.id}>
-                <Image  className="icon" src={icon} bordered={true}></Image>
+                <Image  className="play_icon" src={icon} bordered={true}></Image>
             </Link>
             <div className='title'>
                 <a href={data.url}><h2>{data.title}</h2></a>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { get_Playlists_Id_Api, hadndle_Init_State } from '../../redux/playlist.redux'
+import { get_Playlists_Id_Api, hadndle_Init_State} from '../../redux/playlist.redux'
 import { Button, Loader } from 'semantic-ui-react'
 
 import Content from './Content'
@@ -27,7 +27,7 @@ class Playlist extends Component {
         <Button className='back' onClick={this.props.history.goBack}>
           <span herf='#'> 返回 </span>
         </Button>
-        <Loader active={bool} inline='centered' size='huge' disabled />
+        <Loader active={bool} inline='centered' size='huge' />
         {Object.keys(res).length ? <Content data={res}></Content> : null}
       </div>
 

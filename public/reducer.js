@@ -2,5 +2,5 @@
 import { combineReducers } from 'redux'
 import { box } from './redux/box.redux'
 import { playlist } from './redux/playlist.redux'
-
-export default combineReducers({box,playlist})
+import { playlist_category } from './redux/playlist_category.redux'
+export default combineReducers({ box, playlist, playlist_category })

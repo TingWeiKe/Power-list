@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { get_Playlists_Id_Api, hadndle_Init_State } from '../../redux/playlist.redux'
-import { Button, Grid, Image, Loader, Item, Icon } from 'semantic-ui-react'
+import { Button, Grid, Image, Icon } from 'semantic-ui-react'
 import { modify_updated_at } from '../../component/getKKboxAPI'
 import { play_Icon } from './playlist.img'
 export default class Content extends Component {
@@ -53,41 +50,25 @@ export default class Content extends Component {
                         {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
                             return <div key={data.id} className="track">
 
-                                
+                                    
                                     <Grid.Row>
-                                        
-                                        <Button style={{zIndex:'2'}}className='play_button' fluid onClick={() => this.handle_play_button(data.id)}>
+                                        <Button className='play_button' fluid onClick={() => this.handle_play_button(data.id)}>
                                         <Grid.Column width={3}>
-                                        
-                                        {this.state.key==data.id?<Image disabled={true} className='play_Icon' src={play_Icon}></Image>:null}
+                                        {this.state.key==data.id?<Image className='play_Icon' src={play_Icon}></Image>:null}
                                             <Image className='playlist_img' src={data.album.images[0].url}></Image>
-                                           
                                         </Grid.Column>
                                         <Grid.Column width={6}>
-
                                             <div className='playlist_info'>
-
                                                 <h4>{data.name}</h4>
                                                 <p>{data.album.artist.name}</p>
-
                                             </div>
-                                            
                                         </Grid.Column>
-                                        
                                         <Grid.Column width={4}>
-                                    
-                                                <Icon style={{zIndex:'10'}} name='sidebar' size='large' className='siderbar' onClick={(e)=>this.handle_option_button(e)}></Icon>
-                                           
-
+                                                <Icon name='sidebar' size='large' className='siderbar' onClick={(e)=>this.handle_option_button(e)}></Icon>
                                         </Grid.Column>
                                         </Button>
                                     </Grid.Row>
-
-
-
-                               
                             </div>
-
                         }) : null}
                     </Grid.Column>
                 </Grid>

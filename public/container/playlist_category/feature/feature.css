@@ -1,0 +1,45 @@
+.feature_box{
+    padding: 0 !important;
+    
+}
+
+.category_img{
+    width: 100px;
+    height: 100px;
+    display: inline-block !important;
+}
+
+.category_title{
+    margin: 0 20px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+.title_box{
+    max-width: 75%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@media only screen and (max-width: 767px)
+{
+    .ui.stackable.grid {
+        
+        margin-top: -1rem !important;
+        margin-bottom: -1rem !important;
+        margin-left: -1rem !important;
+        margin-right: -1rem !important;
+    }
+    .category_img{
+        width: 90px;
+        height: 90px;
+        display: inline-block !important;
+    }
+    .ui.stackable.grid>.column:not(.row){
+        padding: 5px 12px !important;
+    }
+}

@@ -1,79 +1,56 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import { Image } from 'semantic-ui-react'
-export default class feature extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-           data:[]
-        }
-    }
+import './feature.css'
+import { Grid, Image, Segment, } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
-    getUrlVars() {
-        let vars = {};
-        let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m, key, value) => {
-            vars[key] = value
-        })
-        return vars["code"] ? vars["code"] : null
-    }
+class feature extends Component {
 
-    async get_code_from_url() {
-        const urlPara = this.getUrlVars()
-        if (urlPara != null) {
-            const res = await axios.post('http://localhost:3000/post', { urlPara: urlPara })
-            try {
-                return res.data
-            } catch{
-                console.log('error')
-            }
-        }
-    }
+    render() {
+        console.log(this.props);
+
+        return (
+            <div>
+                <Grid columns={3} stackable>
+                    {this.props.data !== undefined ? this.props.data.map(data => {
+                        return <Grid.Column>
+                            <Link to={'/playlist/' + data.id}>
+                                <Segment className='feature_box'>
+                                    <Image className='category_img' src={data.images[0].url}></Image>
+                                    <div className='title_box'>
+                                        <h3 className="category_title">{data.title}</h3>
+                                    </div>
+                                </Segment>
+                            </Link>
+                        </Grid.Column>
 
 
-    async get_KKbox_API(access_token) {
-        let url = 'https://api.kkbox.com/v1.1/new-hits-playlists'
-        let config = {
-            method: "GET",
-            headers: { 'Authorization': 'Bearer ' + access_token }
-        }
-        try {
-            const res = await axios.get(url, config)
-            let data = res.data.data
-            return data
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-    componentDidMount() {
-        this.get_code_from_url()
-            .then(data => {
-                this.get_KKbox_API(data.access_token)
-                    .then(data => {
-                        this.setState({ data: data })
-                        data ? this.setState({ v: false }) : null
-                        console.log(this.state.data)
 
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            })
-   
+                    }) : null}
+                </Grid>
+            </div>
+        )
     }
-hot(){
-    return <h2>最新主打</h2>
+
 }
-  render() {
-      
-    return (
-      <div>
-          {this.state.data?this.hot():null}
-          {this.state.data.map(data=>{
-                    
-                    return <Image src={data.images[0].url}></Image>
-                })}
-      </div>
-    )
-  }
-}
+
+
+// {this.props.data!==undefined ?this.props.data.map(data=>{
+//     return  <Grid columns={3} doubling stackable>
+//         <Grid.Column>
+//         <Link to={'/playlist/' + data.id}>
+//             <Segment className='feature_box'>
+
+//                 <Image className='category_img' src={data.images[0].url}></Image>
+//                 <h3 className="category_title">{data.title}</h3>
+
+//             </Segment>
+//             </Link>
+//         </Grid.Column>
+
+//     </Grid>
+
+// }):null}
+
+
+
+export default feature

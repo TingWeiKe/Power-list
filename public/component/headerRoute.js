@@ -10,19 +10,20 @@ class HeaderRoute extends Component {
       activeItem: 'today'
     }
   }
+
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-
+  
   componentDidMount() {
     // default route
-    // this.props.location.pathname == '/today/' ? null : this.props.history.push('/today/')
+    // this.props.history.push('/today')
   }
   
   render() {
     const { activeItem } = this.state
     return (
       <div>
-        <Menu color="blue" size='large' borderless={true} >
+        <Menu color="blue" className='menu' style={{position:'fixed',top:'0px', width:'100%' ,zIndex:'99' , Bottom: '200px' }} size='large' borderless={true} >
           <Menu.Item
             as={Link}
             name='today'
