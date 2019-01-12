@@ -1,28 +1,41 @@
 .feature_box{
     padding: 0 !important;
-    
+    border: 1px solid #ccc !important;
+}
+.feature_box:hover{
+    background-color: #F0F0F0;
+    cursor: pointer;
+    filter: brightness(102%);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.3);
+    transition: all .1s;
+    color: #4183c4 !important;
 }
 
 .category_img{
     width: 100px;
     height: 100px;
     display: inline-block !important;
+    float: left;
+    border-right:  1px solid #ccc;
+
+
 }
 
 .category_title{
-    margin: 0 20px;
-
+    margin: auto 20px;
+    padding-top: 20px;
+    padding-left: 20px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     overflow: hidden;
+    vertical-align: middle;
     line-height: 1.5;
 }
 
 .title_box{
-    max-width: 75%;
-    display: inline-block;
-    vertical-align: middle;
+    
+    height: 100px;
 }
 
 @media only screen and (max-width: 767px)

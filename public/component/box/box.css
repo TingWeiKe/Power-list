@@ -1,68 +1,78 @@
-.img{
+.img {
     position: absolute;
-    background-size:cover;
-    border-bottom: 1.2px solid #666;
-    position:absolute;
+    background-size: cover;
+    border-bottom: 1px solid #ccc;
+    position: absolute;
     z-index: 3;
-   
+
 }
-@media screen  and (max-width: 700px) {
-   .playlist {
-    width: 350px !important;
+
+@media screen and (max-width: 700px) {
+    .playlist {
+        width: 350px !important;
     }
 }
-@media screen  and (min-width: 700px) {
-    .playlist {
-     max-width: 270px !important;
-     }
- }
 
-.playlist{
+@media screen and (min-width: 700px) {
+    .playlist {
+        max-width: 270px !important;
+    }
+}
+
+.playlist {
     z-index: 3;
-    border: 1.2px solid #666;
+    border: 1px solid #ccc;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
     background-color: #fff;
 }
-.playlist>a{
+
+.playlist>a {
     text-decoration: none;
-  
+
 }
 
-.playlist:hover{
-    background-color:#F0F0F0;
-    cursor:pointer;
-    filter:brightness(102%);
-    box-shadow:0px 0px 10px 4px rgba(0,0,0,0.3);
-    transition:all .1s
+.playlist:hover {
+    background-color: #F0F0F0;
+    cursor: pointer;
+    filter: brightness(102%);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.3);
+    transition: all .1s
 }
-.ui.grid>.row{
+
+.ui.grid>.row {
     margin: 0 30px;
 }
-.textbox{
+
+.textbox {
     height: 300px;
 }
-.title{
+
+.title {
     margin-top: 12px;
     height: 100%;
     padding-right: 65px;
     position: relative;
     padding-left: 10px;
-    
+
 }
-.title>a:hover{
-    
+
+.title>a:hover {
+
     color: #4183c4 !important;
 }
-.text{
-    padding:5px 10px 15px;
+
+.text {
+    padding: 5px 10px 15px;
+
 }
-.description
-{
-    padding:10px 10px;
+
+.description {
+    padding: 10px 10px;
 }
-.description>p{
+
+.description>p {
     font-size: 16px;
     line-height: 1.2;
     overflow: hidden;
@@ -71,7 +81,8 @@
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
-.text>p{
+
+.text>p {
     line-height: 1.2;
     overflow: hidden;
     display: -webkit-box;
@@ -80,16 +91,18 @@
     overflow: hidden;
 
 }
-.text>:first-child{
+
+.text>:first-child {
     text-decoration: underline;
-    font-weight:bold;
+    font-weight: bold;
 }
-.text>:first-child:hover{
+
+.text>:first-child:hover {
     color: #4183c4 !important;
 }
 
-.play_icon{
-   
+.play_icon {
+
     border-radius: 8px;
     right: 20px;
     float: right;
@@ -100,12 +113,13 @@
     height: 40px;
     z-index: 4;
     border: 1.2px solid white;
-    background-color:#F0F0F0 !important;
+    background-color: #F0F0F0 !important;
 }
-.play_icon:hover{
-    
-    cursor:pointer;
-    filter:brightness(101%);
-    box-shadow:0px 0px 10px 4px rgba(0,0,0,0.3);
-   
+
+.play_icon:hover {
+
+    cursor: pointer;
+    filter: brightness(101%);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.3);
+
 }

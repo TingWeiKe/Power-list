@@ -1,20 +1,16 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Box from '../../component/box/box'
 
-export default class Today extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  
-
+class Today extends PureComponent {
   render() {
-    return (
 
-      <div className="header">
-        <h1>今日精選</h1>
-        <Box />
+    return (
+      <div >
+        <Box/> 
       </div>
     )
   }
 }
+
+
+export default Today

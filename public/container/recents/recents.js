@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class recents extends Component {
+export default class recents extends PureComponent {
     render() {
         return (
             <div className="header">

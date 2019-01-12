@@ -64,22 +64,13 @@ export function getCookie(name) {
 }
 
 export function modify_updated_at(x) {
+    let k = new Date(x)
+    let kk = k.toLocaleDateString()
     let l = ['年', '月', '日']
-    let d = x.split('T')[0]
-      .split('-')
-      .map((a, i) => { return a + l[i] })
-      .join('')
-    let t = x.split('T')[1]
-      .split('+')[0].split(':')
-    let tt = parseInt(t[0]) + 8
-    let subt;
-    if (tt > 12) {
-      let y = parseInt(t[0]) + 4
-      subt = '下午' + y + '點'
-    }
-    else {
-      let y = parseInt(t[0]) - 4
-      subt = '上午' + y + '點'
-    }
-    return d+' '+subt+t[2]+'分'
-  }
+    let date = kk.split('/')
+        .map((d, i) => { return d + l[i] }).join('')
+
+    let time = k.toLocaleTimeString().split(':')
+
+    return date + ' ' + time[0] + '點' + time[1] + '分'
+}

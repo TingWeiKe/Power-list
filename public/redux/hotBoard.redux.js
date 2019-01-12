@@ -1,23 +1,23 @@
 
 import { get_KKbox_API, getCookie } from '../component/getKKboxAPI'
 
-const PLAY_CATEGORY_API_SUCCESS = 'PLAY_CATEGORY_API_SUCCESS'
-const PLAY_CATEGORY_API_ERROR_MSG = 'PLAY_CATEGORY_API_ERROR_MSG'
+const HOT_BOARD_API_SUCCESS = 'HOT_BOARD_API_SUCCESS'
+const HOT_BOARD_API_ERROR_MSG = 'HOT_BOARD_API_ERROR_MSG'
 // const INIT_STATE = 'INIT_STATE'
 // const INIT_MSG = 'INIT_MSG'
 
 const init = {
-    playlist_category_data: {},
+    hot_board_data: {},
     msg: '',
     bool: true,
 }
 
 
-export function playlist_category(state = init, action) {
+export function hot_board(state = init, action) {
     switch (action.type) {
-        case PLAY_CATEGORY_API_SUCCESS:
+        case HOT_BOARD_API_SUCCESS:
             return state = { ...state, bool: false, msg: "success", ...action.payload }
-        case PLAY_CATEGORY_API_ERROR_MSG:
+        case HOT_BOARD_API_ERROR_MSG:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
         default:
             return state
@@ -29,25 +29,25 @@ export function playlist_category(state = init, action) {
 // }
 
 
-function get_Playlist_category_Api_Success(data) {
-    return { type: PLAY_CATEGORY_API_SUCCESS, payload: data }
+function get_Hotboard_Api_Success(data) {
+    return { type: HOT_BOARD_API_SUCCESS, payload: data }
 }
 
-function get_Playlist_category_Api_ApiError() {
-    return { type: PLAY_CATEGORY_API_ERROR_MSG }
+function get_Hotboard_Api_ApiError() {
+    return { type: HOT_BOARD_API_ERROR_MSG }
 }
 
 
-export function get_Playlist_category_Api(url) {
+export function get_Hotboard_Api(url) {
     return dispatch => {
 
         get_KKbox_API(getCookie('token'), url)
             .then(res => {
                 if (res && res.status === 200) {
-                    dispatch(get_Playlist_category_Api_Success({ playlist_category_data: res.data }))
+                    dispatch(get_Hotboard_Api_Success({ hot_board_data: res.data }))
 
                 } else {
-                    dispatch(get_Playlist_category_Api_ApiError())
+                    dispatch(get_Hotboard_Api_ApiError())
                     console.log('err') 
                 }
             })

@@ -7,15 +7,15 @@ import {
 } from '../component/getKKboxAPI'
 
 const BOX_API_SUCCESS = 'BOX_API_SUCCESS'
-// const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const BOX_API_ERROR_MSG = 'BOX_API_ERROR_MSG'
-// const INIT_MSG = 'INIT_MSG'
+const INIT_STATE = 'INIT_STATE'
 
 const initState = {
-    box_data: [],
+    box_data: {},
     msg: '',
     bool: true,
-    access_token: ''
+    access_token: '',
+    title:'今日精選'
 }
 
 
@@ -25,6 +25,8 @@ export function box(state = initState, action) {
             return state = { ...state, bool: false, msg: "success", ...action.payload }
         case BOX_API_SUCCESS:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
+        case INIT_STATE:
+            return state= initState
         default:
             return state
     }
@@ -42,9 +44,10 @@ export function get_Featured_Playlists_Api_ApiError() {
 
 
 
-export function get_Featured_Playlists_Api() {
+export function get_Featured_Playlists_Api(url) {
+    console.log(url)
     return dispatch => {
-        const url = 'https://api.kkbox.com/v1.1/featured-playlists?territory=TW'
+        
         let access_token;
         !getCookie('token') ? get_Access_Token()
             .then(data => {
@@ -52,7 +55,9 @@ export function get_Featured_Playlists_Api() {
                 get_KKbox_API(data.access_token, url)
                     .then(res => {
                         if (res && res.status === 200) {
-                            dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data.data }))
+                            console.log(res);
+                            
+                            dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data }))
                             console.log('sucess')
                         } else {
                             dispatch(get_Featured_Playlists_Api_ApiError())
@@ -63,8 +68,9 @@ export function get_Featured_Playlists_Api() {
 
             get_KKbox_API(getCookie('token'), url)
                 .then(res => {
+                    console.log(res);
                     if (res && res.status === 200) {
-                        dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data.data }))
+                        dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data }))
                         console.log('sucess')
                     } else {
                         dispatch(get_Featured_Playlists_Api_ApiError())
@@ -76,5 +82,8 @@ export function get_Featured_Playlists_Api() {
     }
 }
 
+export function handle_Init_State(){
+    return {type:INIT_STATE}
+}
 
 

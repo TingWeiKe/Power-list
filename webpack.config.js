@@ -19,7 +19,15 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
               },
             { test: /\.(js|jsx)$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
-        
+            {
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                use: {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 100000,
+                  },
+                },
+              },
         ]
     },
     //增加一個給devserver的設定
