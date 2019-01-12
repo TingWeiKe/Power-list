@@ -45,9 +45,7 @@ export function get_Featured_Playlists_Api_ApiError() {
 
 
 export function get_Featured_Playlists_Api(url) {
-    console.log(url)
-    return dispatch => {
-        
+    return dispatch => { 
         let access_token;
         !getCookie('token') ? get_Access_Token()
             .then(data => {
@@ -55,10 +53,7 @@ export function get_Featured_Playlists_Api(url) {
                 get_KKbox_API(data.access_token, url)
                     .then(res => {
                         if (res && res.status === 200) {
-                            console.log(res);
-                            
                             dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data }))
-                            console.log('sucess')
                         } else {
                             dispatch(get_Featured_Playlists_Api_ApiError())
                             console.log('err')
@@ -68,10 +63,8 @@ export function get_Featured_Playlists_Api(url) {
 
             get_KKbox_API(getCookie('token'), url)
                 .then(res => {
-                    console.log(res);
                     if (res && res.status === 200) {
                         dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data }))
-                        console.log('sucess')
                     } else {
                         dispatch(get_Featured_Playlists_Api_ApiError())
                         console.log('err')

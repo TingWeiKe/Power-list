@@ -13,8 +13,8 @@ class Playlist extends Component {
 
   componentDidMount() {
     let playlist_id = this.props.location.pathname.replace('/playlist/', '')
-    let url = 'https://api.kkbox.com/v1.1/featured-playlists/' + playlist_id + '?territory=TW'
-    this.props.get_Playlists_Id_Api(playlist_id)
+    let url = 'https://api.kkbox.com/v1.1/featured-playlists/' + playlist_id + '?territory=' +this.props.data.setting.language
+    this.props.get_Playlists_Id_Api(url)
   }
   componentWillUnmount() {
     this.props.hadndle_Init_State()

@@ -42,9 +42,9 @@ function get_Playlists_Id_Api_Error() {
 }
 
 
-export function get_Playlists_Id_Api(id) {
+export function get_Playlists_Id_Api(url) {
     return dispatch => {
-        let url = 'https://api.kkbox.com/v1.1/featured-playlists/' + id + '?territory=TW'    
+
              get_KKbox_API(getCookie('token'), url)
                 .then(res => {
                     if (res && res.status === 200) {

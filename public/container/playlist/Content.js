@@ -3,13 +3,11 @@ import { Button, Grid, Image, Icon } from 'semantic-ui-react'
 import { modify_updated_at, handle_Storage } from '../../component/getKKboxAPI'
 import { play_Icon } from './playlist.img'
 export default class Content extends Component {
+
     handle_Storage(storage) {
-       
-        if (typeof (Storage) !== "undefined") {
-            if (localStorage.recent) {
-          
-                console.log(localStorage["recent"].search(storage.playlist_id))
-                if (localStorage["recent"].search(storage.playlist_id)==-1) {
+        if (typeof (Storage) !== "undefined") { // 瀏覽器是否支援Storage
+            if (localStorage.recent) { //瀏覽器是否已存Storage
+                if (localStorage["recent"].search(storage.playlist_id)==-1) { //存的Storage是否已經重複
                    let  s= JSON.parse(localStorage["recent"])
                     s.push(storage)
                     localStorage["recent"]= JSON.stringify(s)
@@ -21,7 +19,10 @@ export default class Content extends Component {
         }
     }
     handle_play_button(id,playlist) {
+        
         this.setState({ key: id })
+        console.log('play   '+id);
+        
         this.handle_Storage({ playlist_id: playlist.data.id, playlist_title: playlist.data.title, image_url: playlist.data.images[0] })
     }
     handle_option_button(e) {

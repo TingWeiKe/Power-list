@@ -11,15 +11,15 @@ import Category from './category/category'
 
 class Playlist_category extends Component {
     componentDidMount() {
-        const featureUrl = 'https://api.kkbox.com/v1.1/new-hits-playlists?territory=TW'
-        const hotBoardUrl = 'https://api.kkbox.com/v1.1/charts?territory=TW'
-        const categoryUrl = 'https://api.kkbox.com//v1.1/featured-playlist-categories?territory=TW'
+        let language = this.props.data.setting.language
+        const featureUrl = 'https://api.kkbox.com/v1.1/new-hits-playlists?territory='+language
+        const hotBoardUrl = 'https://api.kkbox.com/v1.1/charts?territory='+language
+        const categoryUrl = 'https://api.kkbox.com//v1.1/featured-playlist-categories?territory='+language
         this.props.get_Playlist_category_Api(featureUrl)
         this.props.get_Hotboard_Api(hotBoardUrl)
         this.props.get_Category_Api(categoryUrl)
     }
     render() {
-        console.log(this.props);
         return (
             <div className="header">
                  
@@ -33,7 +33,7 @@ class Playlist_category extends Component {
                         <h2 className='subheader'>排行榜</h2>
                         <HotBoard data={this.props.data.hot_board.hot_board_data.data} />
                         <h2 className='subheader'>歌單分類</h2>
-                        <Category data={this.props.data.category.category_data.data} />
+                        <Category data={this.props.data.category.category_data.data} language={this.props.data.setting.language} />
                     </div>}
 
 

@@ -10,8 +10,7 @@ import { withRouter } from 'react-router-dom'
 
 class Box extends Component {
     componentDidMount() {
-        let url = this.props.location.url ? this.props.location.url : 'https://api.kkbox.com/v1.1/featured-playlists?territory=TW'
-        console.log(url)
+        let url = this.props.location.url ? this.props.location.url : 'https://api.kkbox.com/v1.1/featured-playlists?territory='+this.props.data.setting.language
         this.props.get_Featured_Playlists_Api(url)
     }
 
