@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
 import { Button, Grid, Image, Icon } from 'semantic-ui-react'
-import { modify_updated_at } from '../../component/getKKboxAPI'
+import { modify_updated_at, handle_Storage } from '../../component/getKKboxAPI'
 import { play_Icon } from './playlist.img'
 export default class Content extends Component {
-
-    handle_play_button(id) {
-        console.log(id)
+    handle_Storage(storage) {
+       
+        if (typeof (Storage) !== "undefined") {
+            if (localStorage.recent) {
+          
+                console.log(localStorage["recent"].search(storage.playlist_id))
+                if (localStorage["recent"].search(storage.playlist_id)==-1) {
+                   let  s= JSON.parse(localStorage["recent"])
+                    s.push(storage)
+                    localStorage["recent"]= JSON.stringify(s)
+                }
+            } else {
+                let s = [storage]
+                localStorage["recent"] = JSON.stringify(s);
+            }
+        }
+    }
+    handle_play_button(id,playlist) {
         this.setState({ key: id })
+        this.handle_Storage({ playlist_id: playlist.data.id, playlist_title: playlist.data.title, image_url: playlist.data.images[0] })
     }
     handle_option_button(e) {
         console.log('option')
@@ -49,7 +65,7 @@ export default class Content extends Component {
                         {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
                             return <div key={data.id} className="track">
                                 <Grid.Row>
-                                    <Button className='play_button' fluid onClick={() => this.handle_play_button(data.id)}>
+                                    <Button className='play_button' fluid onClick={() => this.handle_play_button(data.id,this.props)}>
                                         <Grid.Column width={3}>
                                             {this.state.key == data.id ? <Image className='play_Icon' src={play_Icon}></Image> : null}
                                             <Image className='playlist_img' src={data.album.images[0].url}></Image>

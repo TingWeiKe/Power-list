@@ -15,7 +15,7 @@
     width: 100px;
     height: 100px;
     display: inline-block !important;
-    float: left;
+    float: left !important;
     border-right:  1px solid #ccc;
 
 

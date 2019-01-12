@@ -8,7 +8,6 @@ import './playlist_category.css'
 import Feature from './feature/feature'
 import HotBoard from './hotBoard/hotBoard'
 import Category from './category/category'
-import { Link,Route } from 'react-router-dom'
 
 class Playlist_category extends Component {
     componentDidMount() {
