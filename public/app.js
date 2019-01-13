@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css'
 import HeaderRoutre from './component/headerRoute'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import Box from './component/box/box'
 import Today from './container/today/today'
@@ -26,26 +26,25 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
 
-        <div>
-          <HeaderRoutre />
+      <div>
+        <HeaderRoutre />
+
+        <Switch>
+          <Route path='/today' component={Today} />
+          <Route path='/playlist' component={Playlist} />
+          <Route path='/playlist_category' component={Playlist_category} />
+          <Route path='/recents' component={Recent} />
+          <Route path='/setting' component={Setting} />
+          <Route paht='/category' component={Box}></Route>
+        </Switch>
+
         
-            <Switch>
-              <Route path='/today' component={Today} />
-              <Route path='/playlist' component={Playlist} />
-              <Route path='/playlist_category' component={Playlist_category} />
-              <Route path='/recents' component={Recent} />
-              <Route path='/setting' component={Setting} />
-              <Route paht='/category' component={Box}></Route>
-              {/* <Redirect exact paht='/' to='/today'></Redirect> */}
-            </Switch>
-        
-         
-        </div>
+      </div>
 
     </BrowserRouter>
   </Provider>
 
-  
+
   ,
   document.getElementById('app')
 );

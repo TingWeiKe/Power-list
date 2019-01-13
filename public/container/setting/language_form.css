@@ -1,0 +1,3 @@
+#app > div > div:nth-child(1) > div > div > div.text{
+    padding: 0 !important;
+}

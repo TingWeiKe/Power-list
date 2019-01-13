@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
-import { Link, Redirect, withRouter } from 'react-router-dom'
-
-import { Menu } from 'semantic-ui-react'
+import { Link,  withRouter } from 'react-router-dom'
+import Language_form from '../container/setting/language_form'
+import { Menu, Dropdown } from 'semantic-ui-react'
 
 class HeaderRoute extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeItem: 'today'
+      activeItem: this.props.location.pathname
     }
   }
 
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  componentDidMount() {
-    // default route
-    // this.props.history.push('/today')
-  }
 
   render() {
     const { activeItem } = this.state
@@ -26,35 +21,37 @@ class HeaderRoute extends Component {
         <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100%', zIndex: '99', Bottom: '200px' }} size='large' borderless={true} >
           <Menu.Item
             as={Link}
-            name='today'
-            active={activeItem === 'today'}
+            name='/today'
+            active={activeItem === '/today'}
             onClick={this.handleItemClick}
-            to={{ pathname: '/today/', search: this.props.location.search }}
+            to={{ pathname: '/today', search: this.props.location.search }}
           >
             今日精選
         </Menu.Item>
 
           <Menu.Item
             as={Link}
-            name='playlist_category'
-            active={activeItem === 'playlist_category'}
+            name='/playlist_category'
+            active={activeItem === '/playlist_category'}
             onClick={this.handleItemClick}
-            to={{ pathname: '/playlist_category/', search: this.props.location.search }}
+            to={{ pathname: '/playlist_category', search: this.props.location.search }}
           >
             歌單
         </Menu.Item>
 
           <Menu.Item
             as={Link}
-            name='recents'
-            active={activeItem === 'recents'}
+            name='/recents'
+            active={activeItem === '/recents'}
             onClick={this.handleItemClick}
             key={''}
-            to={{ pathname: '/recents/', search: this.props.location.search }}
+            to={{ pathname: '/recents', search: this.props.location.search }}
           >
             最近播放
         </Menu.Item>
-          <Menu.Item
+         
+          
+          {/* <Menu.Item
             as={Link}
             color={"blue"}
             name='setting'
@@ -63,9 +60,10 @@ class HeaderRoute extends Component {
             to={{ pathname: '/setting/', search: this.props.location.search }}
           >
             設定
-        </Menu.Item>
+        </Menu.Item> */}
+        <Language_form></Language_form>
         </Menu>
-
+        
       </div>
 
     )

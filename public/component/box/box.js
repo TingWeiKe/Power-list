@@ -17,8 +17,8 @@ class Box extends Component {
     componentWillUnmount() {
         this.props.handle_Init_State()
     }
-
     render() {
+        
         let data = 'playlists' in this.props.data.box.box_data ? this.props.data.box.box_data.playlists.data : this.props.data.box.box_data.data
         let title = 'playlists' in this.props.data.box.box_data ? this.props.data.box.box_data.title : this.props.data.box.title
         let bool = this.props.data.box.bool

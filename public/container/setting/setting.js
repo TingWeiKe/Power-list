@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
-import Language_form from './language_form'
-import { connect } from 'react-redux'
-
+import { Redirect , withRouter } from 'react-router-dom'
 
 
 class setting extends Component {
 
   
   render() {
+    console.log(this.props.history);
     
     return (
       <div className="header">
         <h1>設定</h1>
-        <Language_form></Language_form>
+        {this.props.history.goBack()}
       </div>
 
     )
@@ -20,4 +19,4 @@ class setting extends Component {
 }
 
 
-export default setting
+export default withRouter(setting)

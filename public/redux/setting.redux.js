@@ -8,7 +8,7 @@ const initState = {
 export function setting(state = initState, action) {
     switch (action.type) {
         case CHAGE_LANGUAGE:
-            return state = { ...state, ...action.payload }
+            return state = {...action.payload }
         default:
             return state
     }
