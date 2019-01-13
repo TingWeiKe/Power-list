@@ -10,7 +10,6 @@ class setting extends Component {
     
     return (
       <div className="header">
-        <h1>設定</h1>
         {this.props.history.goBack()}
       </div>
 

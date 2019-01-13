@@ -26,7 +26,7 @@ class language_form extends Component {
   render() {
     
     return (
-      <Dropdown item text='語言'>
+      <Dropdown item text={'地區：'+localStorage.getItem('language')}>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => { this.handleChange('TW') }}>台灣</Dropdown.Item>
         <Dropdown.Item onClick={() => { this.handleChange('HK') }}>香港</Dropdown.Item>

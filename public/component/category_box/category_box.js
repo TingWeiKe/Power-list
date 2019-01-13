@@ -1,32 +1,31 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Image, Grid, Loader } from 'semantic-ui-react'
-import './box.css'
-import { icon } from './box.img'
+
+import { icon } from './category.img'
 import { modify_updated_at } from '../getKKboxAPI'
 import { connect } from 'react-redux'
-import { get_Featured_Playlists_Api, handle_Init_State } from '../../redux/box.redux'
-import { withRouter,Redirect } from 'react-router-dom'
+import { get_Category_Box_api, handle_Init_State } from '../../redux/category_box.redux'
+import { withRouter,} from 'react-router-dom'
 
-class Box extends Component {
-    componentDidMount() {
+class Category_box extends Component {
+    componentWillMount() {
+        let url = this.props.location.url?  this.props.location.url:'https://api.kkbox.com/v1.1/featured-playlist-categories/' + this.props.location.pathname.split('/')[2] + '?territory='+localStorage.getItem('language')
+        this.props.get_Category_Box_api(url)
         
-        let url ='https://api.kkbox.com/v1.1/featured-playlists?territory='+this.props.data.setting.language
-        this.props.get_Featured_Playlists_Api(url)
-    }
-
-    componentWillUnmount() {
-        this.props.handle_Init_State()
     }
     render() {
-        
-        let data = this.props.data.box.box_data.data
-        let title = this.props.data.box.title
-        let bool = this.props.data.box.bool
+         console.log(this.props)
+         //rediret to playlist_category if category_box doesn't exist when chanage language
+        //  {this.props.data.category_box.msg =="伺服器錯誤"?  this.props.history.push('/playlist_category'):null}
+
+        let data = this.props.data.category_box.category_box_data.hasOwnProperty('playlists')?  this.props.data.category_box.category_box_data.playlists.data :null
+        let title = this.props.data.category_box.category_box_data.hasOwnProperty('title')?this.props.data.category_box.category_box_data.title :null
+        let bool = this.props.data.category_box.bool
+        console.log(data)
         return (
-            
+           
             <div className="header">
-             
                 <h1>{title}</h1>
                 <Loader active={bool} inline='centered' size='huge' disabled />
                 <Grid>
@@ -63,6 +62,6 @@ class Box extends Component {
 const mapStatetoProps = state => {
     return { data: state }
 }
-const actionCreate = { get_Featured_Playlists_Api, handle_Init_State }
-Box = connect(mapStatetoProps, actionCreate)(Box)
-export default withRouter(Box)
+const actionCreate = { get_Category_Box_api, handle_Init_State }
+Category_box = connect(mapStatetoProps, actionCreate)(Category_box)
+export default withRouter(Category_box)

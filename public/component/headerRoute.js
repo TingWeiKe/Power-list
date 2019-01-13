@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
-import { Link,  withRouter } from 'react-router-dom'
+import { Link,  withRouter, Redirect } from 'react-router-dom'
 import Language_form from '../container/setting/language_form'
-import { Menu, Dropdown } from 'semantic-ui-react'
+import { Menu} from 'semantic-ui-react'
 
 class HeaderRoute extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeItem: this.props.location.pathname
+      activeItem: '/today'
     }
   }
-
-
+  componentWillMount(){
+    //default route
+    // this.props.history.push('/today')
+    //default language
+    localStorage.getItem('language')==null? localStorage.setItem('language','TW'):null
+    
+  }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
     const { activeItem } = this.state
     return (
       <div>
+
         <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100%', zIndex: '99', Bottom: '200px' }} size='large' borderless={true} >
           <Menu.Item
             as={Link}

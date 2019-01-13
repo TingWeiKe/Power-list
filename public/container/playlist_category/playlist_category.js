@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Search, Loader } from 'semantic-ui-react'
+import {  Loader } from 'semantic-ui-react'
+import Search_input from '../../component/search_input/search_input'
 import { get_Playlist_category_Api } from '../../redux/playlist_category.redux'
 import { get_Hotboard_Api } from '../../redux/hotBoard.redux'
 import { get_Category_Api } from '../../redux/category.redux'
@@ -24,7 +25,7 @@ class Playlist_category extends Component {
             <div className="header">
                  
                 <h1>歌單</h1>
-                <Search open={false} style={{ display: 'block' }}></Search>
+                <Search_input></Search_input>
                 {this.props.data.playlist_category.bool != false ? <Loader active={true} inline='centered' size='huge' /> : null}
                 {this.props.data.playlist_category.bool && this.props.data.playlist_category.hot_board == true ? null :
                     <div style={this.props.data.playlist_category.bool && this.props.data.playlist_category.hot_board == true ? { display: 'none' } : { display: 'block' }}>
