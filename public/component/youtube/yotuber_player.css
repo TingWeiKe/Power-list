@@ -1,0 +1,61 @@
+#ytplayer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .75);
+    z-index: 99;
+    height: 60px;
+    margin: 0px;
+}
+
+.none {
+    color: #ccc;
+    height: 100%;
+    z-index: 999;
+}
+
+.movie {
+    z-index: 20;
+    float: left;
+    position: relative;
+    bottom: 26px;
+    left: 10px;
+    border: 1px solid #fff;
+    background-color: yellow;
+    max-width: 120px;
+    max-height: 76px;
+     transition: all .1s ease-in-out;
+    
+}
+.movie:hover{
+    max-width: 480px;
+    max-height: 270px;
+    bottom: 222px
+}
+
+.coverd{
+    -moz-background-size: cover;
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+  
+    left:0px;
+    bottom:60px;
+}
+
+.player-toggle-button{
+min-width: 80px;
+min-height: 20px;
+ position: fixed;
+ padding: 5px 0 !important;
+ bottom: 10px;
+ left: 140px
+}
+.player_title{
+    margin-top: 5px;
+    position: fixed;
+    left: 140px;
+    font: 800 !important;
+    font-size: 1em;
+    color: white;
+}

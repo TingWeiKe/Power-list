@@ -12,7 +12,7 @@ class HeaderRoute extends Component {
   }
   componentWillMount(){
     //default route
-    // this.props.history.push('/today')
+    this.props.history.push('/today')
     //default language
     localStorage.getItem('language')==null? localStorage.setItem('language','TW'):null
     

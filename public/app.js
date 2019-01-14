@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-// import 'semantic-ui-css/semantic.min.css'
 import HeaderRoutre from './component/headerRoute'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import Search from './container/search/search'
@@ -14,9 +13,9 @@ import Recent from './container/recents/recents'
 import Setting from './container/setting/setting'
 import Playlist from './component/playlist/playlist'
 import reducer from './reducer';
-import createBrowserHistory from 'history/createBrowserHistory'
+import Yotuber_player from './component/youtube/yotuber_player'
 
-const newHistory = createBrowserHistory();
+
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? compose(
   //處裡Async middleware
   applyMiddleware(thunk),
@@ -41,6 +40,7 @@ ReactDOM.render(
           <Route path='/setting' component={Setting} />
           <Route paht='/search' component={Search} />
         </Switch>
+        <Yotuber_player/>
       </div>
     </BrowserRouter>
   </Provider>

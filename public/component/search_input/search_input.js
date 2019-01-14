@@ -21,23 +21,14 @@ class Search_input extends Component {
             this.setState({bool:false , title:'“'+ value+ '“' + '：的搜尋結果'})
         })
         console.log(value);
-
     }
 
     render() {
         return (
-           
             <Form onSubmit={() => {this.handle_Seach(this.state.value) }}>
-                 
-                <Input
-                    placeholder='搜尋歌單...'
-                    onChange={(e, { value }) => {
-                        this.setState({ value: value })
-                    }}/>
-                    
+                <Input placeholder='搜尋歌單...' onChange={(e, { value }) => {this.setState({ value: value })}}/>
                     <Loader content='搜尋中...' className='loader' active={this.state.bool} inline='centered' size='huge' disabled />
                     <h1 style={{marginBottom:'40px'}}>{this.state.title}</h1>
-                    
             </Form>
         )
     }
