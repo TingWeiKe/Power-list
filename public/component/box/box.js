@@ -4,26 +4,14 @@ import { Image, Grid, Loader } from 'semantic-ui-react'
 import './box.css'
 import { icon } from './box.img'
 import { modify_updated_at } from '../getKKboxAPI'
-import { connect } from 'react-redux'
-import { get_Featured_Playlists_Api, handle_Init_State } from '../../redux/box.redux'
-import { withRouter } from 'react-router-dom'
 
 class Box extends Component {
-    componentDidMount() {
-        let url = this.props.location.url ? this.props.location.url : 'https://api.kkbox.com/v1.1/featured-playlists?territory='+this.props.data.setting.language
-        this.props.get_Featured_Playlists_Api(url)
-    }
 
-    componentWillUnmount() {
-        this.props.handle_Init_State()
-    }
     render() {
-        
-        let data = 'playlists' in this.props.data.box.box_data ? this.props.data.box.box_data.playlists.data : this.props.data.box.box_data.data
-        let title = 'playlists' in this.props.data.box.box_data ? this.props.data.box.box_data.title : this.props.data.box.title
-        let bool = this.props.data.box.bool
+        let data = this.props.data
+        let title = this.props.title
+        let bool = this.props.bool
         return (
-
             <div className="header">
                 <h1>{title}</h1>
                 <Loader active={bool} inline='centered' size='huge' disabled />
@@ -58,9 +46,5 @@ class Box extends Component {
         )
     }
 }
-const mapStatetoProps = state => {
-    return { data: state }
-}
-const actionCreate = { get_Featured_Playlists_Api, handle_Init_State }
-Box = connect(mapStatetoProps, actionCreate)(Box)
-export default withRouter(Box)
+
+export default Box

@@ -1,11 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { Component  } from 'react'
 import { Grid, Image, Segment, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-class hotboard extends PureComponent {
+class hotboard extends Component  {
 
   render() {
-      console.log(this.props)
     return (
       <Grid columns={4} doubling={true} stackable>
                 {this.props.data !== undefined ? this.props.data.map(data => {

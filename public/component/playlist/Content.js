@@ -78,7 +78,7 @@ export default class Content extends Component {
                                             </div>
                                         </Grid.Column>
                                         <Grid.Column width={4}>
-                                            <Icon name='sidebar' size='large' className='siderbar' onClick={(e) => this.handle_option_button(e)}></Icon>
+                                            <Image src={play_Icon} className='siderbar' onClick={(e) => this.handle_option_button(e)}></Image>
                                         </Grid.Column>
                                     </Button>
                                 </Grid.Row>
