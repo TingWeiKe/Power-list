@@ -16,12 +16,10 @@ import { Link } from 'react-router-dom'
 
         return (
             <div className="header">
-                <h1>歌單</h1>
-                
+                <h1>搜尋</h1>
                 <Search_input />
-                {this.props.location.state!==undefined? <h2 className='subheader'> 搜尋結果</h2> : null}
                 <Grid columns={4} doubling={true} stackable>
-                    {this.props.location.state!==undefined? this.props.location.state.playlists.data.map(data => {
+                    {this.props.location.state && this.props.location.state.hasOwnProperty('playlists')?  this.props.location.state.playlists.data.map(data => {
                         return <Grid.Column key={data.id}>
                             <div className='feature_content'>
                                 <Link to={'/playlist/' + data.id} id={data.id}>

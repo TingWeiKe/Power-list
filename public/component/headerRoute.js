@@ -22,11 +22,12 @@ class HeaderRoute extends Component {
     const { activeItem } = this.state
     return (
       <div>
-        
-        <Responsive as={Menu} minWidth={500} color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100%', zIndex: '99', Bottom: '200px' }} size='large' borderless={true} >
        
+        <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100%', zIndex: '99', Bottom: '200px' }} size='small' borderless={true} >
+   
           <Menu.Item
             as={Link}
+            style={{padding:'0px 10px'}} 
             name='/today'
             active={activeItem === '/today'}
             onClick={this.handleItemClick}
@@ -37,6 +38,7 @@ class HeaderRoute extends Component {
 
           <Menu.Item
             as={Link}
+            style={{padding:'0px 10px'}} 
             name='/playlist_category'
             active={activeItem === '/playlist_category'}
             onClick={this.handleItemClick}
@@ -47,6 +49,7 @@ class HeaderRoute extends Component {
 
           <Menu.Item
             as={Link}
+            style={{padding:'0px 10px'}} 
             name='/recents'
             active={activeItem === '/recents'}
             onClick={this.handleItemClick}
@@ -57,6 +60,7 @@ class HeaderRoute extends Component {
         </Menu.Item>
         <Menu.Item
             as={Link}
+            style={{padding:'0px 10px'}} 
             name='/search'
             active={activeItem === '/search'}
             onClick={this.handleItemClick}
@@ -67,6 +71,7 @@ class HeaderRoute extends Component {
           
           <Menu.Item
             as={Link}
+            style={{padding:'0px 10px'}} 
             color={"blue"}
             name='setting'
             active={activeItem === 'setting'}
@@ -76,8 +81,7 @@ class HeaderRoute extends Component {
             設定
         </Menu.Item>
         <Language_form></Language_form>
-        </Responsive>
-   
+        </Menu>
         
       </div>
 

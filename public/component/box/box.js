@@ -14,7 +14,7 @@ class Box extends Component {
         return (
             <div className="header">
                 <h1>{title}</h1>
-                <Loader active={bool} inline='centered' size='huge' disabled />
+                <Loader content='載入中...' className='loader' active={bool} inline='centered' size='huge' disabled />
                 <Grid>
                     <Grid.Row>
                         {data ? data.map(data => {
@@ -27,15 +27,17 @@ class Box extends Component {
                                     <Link to={'/playlist/' + data.id} id={data.id}>
                                         <Image className="play_icon" src={icon} bordered={true}></Image>
                                     </Link>
-                                    <div className='title'>
-                                        <a href={data.url}><h2>{data.title}</h2></a>
-                                    </div>
-                                    <div className='description'>
-                                        <p >{data.description}</p>
-                                    </div>
-                                    <div className='text'>
-                                        <a href={data.owner.url}><p>作者：{data.owner.name}</p></a>
-                                        <p>更新：{modify_updated_at(data.updated_at)}</p>
+                                    <div style={{ cursor: 'default' }}>
+                                        <div className='title'>
+                                            <a href={data.url}><h2>{data.title}</h2></a>
+                                        </div>
+                                        <div className='description'>
+                                            <p >{data.description}</p>
+                                        </div>
+                                        <div className='text'>
+                                            <a href={data.owner.url}><p>作者：{data.owner.name}</p></a>
+                                            <p>更新：{modify_updated_at(data.updated_at)}</p>
+                                        </div>
                                     </div>
                                 </Grid.Column>
                             </div>

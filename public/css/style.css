@@ -31,3 +31,6 @@ a{
     text-align: center;
     padding: 15px;
 }
+.loader{
+    margin-top: 100px !important;
+}
