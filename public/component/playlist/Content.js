@@ -2,44 +2,68 @@ import React, { Component } from 'react'
 import { Button, Grid, Image, Icon } from 'semantic-ui-react'
 import { modify_updated_at, handle_Storage } from '../../component/getKKboxAPI'
 import { play_Icon } from './playlist.img'
-export default class Content extends Component {
+import { get_Video_Name } from '../../redux/playlist.redux'
+import { connect } from 'react-redux'
+import { searchYouTube, searchYoutubeByUrl } from '../../redux/youtube.redux'
+
+
+class Content extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: '',
+        }
+    }
 
     handle_Storage(storage) {
         if (typeof (Storage) !== "undefined") { // 瀏覽器是否支援Storage
             if (localStorage.recent) { //瀏覽器是否已存Storage
-                if (localStorage["recent"].search(storage.playlist_id)==-1) { //存的Storage是否已經重複
-                   let  s= JSON.parse(localStorage["recent"])
+                if (localStorage["recent"].search(storage.playlist_id) == -1) { //存的Storage是否已經重複
+                    let s = JSON.parse(localStorage["recent"])
                     s.push(storage)
-                    localStorage["recent"]= JSON.stringify(s)
+                    localStorage["recent"] = JSON.stringify(s)
                 }
-            } else {
+            }
+            else {
                 let s = [storage]
                 localStorage["recent"] = JSON.stringify(s);
             }
         }
     }
-    handle_play_button(id,playlist) {
-        
-        this.setState({ key: id })
-        console.log('play   '+id);
-        
-        this.handle_Storage({ playlist_id: playlist.data.id, playlist_title: playlist.data.title, image_url: playlist.data.images[0] })
+
+    handle_play_button(name, data) {
+        this.setState({ name: name })
+        this.props.get_Video_Name(name)
+        this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
+
+        //和後端爬蟲拿 Video_ID
+        try {
+            this.props.searchYoutubeByUrl({ name: name.name + '  ' + name.album.artist.name })
+            console.log('From Node Web Scrab');
+            
+        }
+        catch{
+            const key = 'AIzaSyCispiRBBb7GxdlxZbzcFBcGvZ9aGoneC8'
+            //   發request 向Youtube拿Video_ID
+            this.props.searchYouTube({
+                key: key, 'maxResults': '1',
+                'part': 'snippet',
+                'q': name.name + '  ' + name.album.artist.name,
+                'type': '', maxResults: 1
+            })
+            alert('--------------------From Youtube DATA API v3--------------------')
+            
+        }
+
     }
     handle_option_button(e) {
         console.log('option')
         e.stopPropagation();
     }
-    constructor(props) {
-        super(props)
-        this.state = {
-            key: ''
-        }
-    }
     render() {
-        let data = this.props.data
+        let data = this.props.data.playlist_data
         return (
             <div>
-                {console.log()}
                 <Grid stackable={true} textAlign={"left"}>
                     <Grid.Column widescreen={8}>
                         <h1>{data.title}</h1>
@@ -66,9 +90,10 @@ export default class Content extends Component {
                         {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
                             return <div key={data.id} className="track">
                                 <Grid.Row>
-                                    <Button className='play_button' fluid onClick={() => this.handle_play_button(data.id,this.props)}>
+
+                                    <Button className='play_button' fluid onClick={() => this.handle_play_button(data, this.props.data)}>
                                         <Grid.Column width={3}>
-                                            {this.state.key == data.id ? <Image className='play_Icon' src={play_Icon}></Image> : null}
+                                            {this.state.name == data.name ? <Image className='play_Icon' src={play_Icon}></Image> : null}
                                             <Image className='playlist_img' src={data.album.images[0].url}></Image>
                                         </Grid.Column>
                                         <Grid.Column width={6}>
@@ -86,7 +111,15 @@ export default class Content extends Component {
                         }) : null}
                     </Grid.Column>
                 </Grid>
+
             </div>
         )
     }
 }
+const mapStatetoProps = state => {
+    return { data: state.playlist, youtube: state.youtube }
+}
+const actionCreate = { get_Video_Name, searchYouTube, searchYoutubeByUrl }
+Content = connect(mapStatetoProps, actionCreate)(Content)
+
+export default Content

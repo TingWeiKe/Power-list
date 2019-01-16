@@ -24,35 +24,37 @@
     background-color: yellow;
     max-width: 120px;
     max-height: 76px;
-     transition: all .1s ease-in-out;
-    
+    transition: all .1s ease-in-out;
+
 }
-.movie:hover{
+
+.movie:hover {
     max-width: 480px;
     max-height: 270px;
-    bottom: 222px
+    bottom: 220px
 }
 
-.coverd{
-    -moz-background-size: cover;
+.full_screen {
+    left: 0px;
+    bottom: 60px;
     position: fixed;
-    min-width: 100vw;
-    min-height: 100vh;
-  
-    left:0px;
-    bottom:60px;
+    max-width: 100vw;
+    width: 100vw;
+    min-height: 92vh;
 }
 
-.player-toggle-button{
-min-width: 80px;
-min-height: 20px;
- position: fixed;
- padding: 5px 0 !important;
- bottom: 10px;
- left: 140px
+.player-toggle-button {
+    min-width: 80px;
+    min-height: 20px;
+    position: fixed;
+    padding: 5px 0 !important;
+    bottom: 10px;
+    left: 140px
 }
-.player_title{
-    margin-top: 5px;
+
+.player_title {
+    /* margin-top: 5px; */
+    bottom: 40px;
     position: fixed;
     left: 140px;
     font: 800 !important;

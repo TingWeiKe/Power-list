@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import Box from '../../component/box/box'
 import { get_Featured_Playlists_Api, handle_Init_State } from '../../redux/box.redux'
 import { connect } from 'react-redux'
+import axios from 'axios'
 class Today extends Component {
 
   componentDidMount() {
     let url = 'https://api.kkbox.com/v1.1/featured-playlists?territory=' + this.props.data.setting.language
     this.props.get_Featured_Playlists_Api(url)
+  
   }
 
   componentWillUnmount() {

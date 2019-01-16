@@ -10,6 +10,9 @@ var http = require("https");
 var Qs = require('qs');
 
 
+
+
+
 router.post('/refresh', function (req, res, next) {
 
 
@@ -76,5 +79,26 @@ router.post('/', function (req, res, next) {
     }
     )
 });
+
+
+
+
+router.post('/youtube', function (req, res, next) {
+  console.log(req.body.name.name)
+  let string = req.body.name.name
+let url = "https://www.youtube.com/results?search_query=" + string
+console.log(url);
+  request(encodeURI(url), (e, r, body) => {
+    let x = body.split('href="/watch?v=')
+    let yy =(x[1]).split('"')[0]
+    res.json(yy)
+  console.log(yy)
+})
+
+
+
+
+});
+
 
 module.exports = router;

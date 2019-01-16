@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { get_Playlists_Id_Api, hadndle_Init_State} from '../../redux/playlist.redux'
+import { get_Playlists_Id_Api, hadndle_Init_State,get_Video_Name} from '../../redux/playlist.redux'
 import { Button, Loader } from 'semantic-ui-react'
 
 import Content from './Content'
@@ -39,7 +39,7 @@ class Playlist extends Component {
 const mapStatetoProps = state => {
   return { data: state }
 }
-const actionCreate = { get_Playlists_Id_Api, hadndle_Init_State }
+const actionCreate = { get_Playlists_Id_Api, hadndle_Init_State ,get_Video_Name}
 Playlist = connect(mapStatetoProps, actionCreate)(Playlist)
 
 export default withRouter(Playlist)

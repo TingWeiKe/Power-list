@@ -11,6 +11,7 @@ class Search_input extends Component {
             title: ''
         }
     }
+    
     handle_Seach(value) {
         this.setState({bool:true , title:''})
         this.props.history.push('/search',{})
@@ -20,7 +21,6 @@ class Search_input extends Component {
             this.props.history.push('/search',res.data)
             this.setState({bool:false , title:'“'+ value+ '“' + '：的搜尋結果'})
         })
-        console.log(value);
     }
 
     render() {

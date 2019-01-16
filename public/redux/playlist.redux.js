@@ -5,13 +5,13 @@ import { get_KKbox_API,getCookie } from '../component/getKKboxAPI'
 const PLAYLIST_API_SUCCESS = 'PLAYLIST_API_SUCCESS'
 const PLAYLIST_API_ERROR_MSG = 'PLAYLIST_API_SUCCESS'
 const INIT_STATE = 'INIT_STATE'
-// const INIT_MSG = 'INIT_MSG'
+const GET_NAME_SUCCESS = 'GET_NAME_SUCCESS'
 
 const init = {
     playlist_data: {},
     msg: '',
     bool: true,
-
+    name:''
 }
 
 
@@ -23,6 +23,8 @@ export function playlist(state = init, action) {
             return state = { ...state, msg: '伺服器錯誤', bool: false }
         case INIT_STATE:
             return state = init
+        case GET_NAME_SUCCESS:
+            return state= {...state, name:action.payload}
         default:
             return state
     }
@@ -40,7 +42,15 @@ function get_Playlists_Id_Api_Success(data) {
 function get_Playlists_Id_Api_Error() {
     return { type: PLAYLIST_API_ERROR_MSG }
 }
+function get_Video_Name_Success(video){
+    return { type: GET_NAME_SUCCESS,payload: video }
+}
 
+export function get_Video_Name(video){
+    return dispatch=>{
+        dispatch(get_Video_Name_Success(video))
+    }
+}
 
 export function get_Playlists_Id_Api(url) {
     return dispatch => {
