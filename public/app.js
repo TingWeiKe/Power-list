@@ -27,7 +27,7 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? compose
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-
+      
       <div>
         <HeaderRoutre />
         <Switch>
