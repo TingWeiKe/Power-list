@@ -4,7 +4,7 @@ import { modify_updated_at, handle_Storage } from '../../component/getKKboxAPI'
 import { play_Icon } from './playlist.img'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
-import { searchYouTube, searchYoutubeByUrl } from '../../redux/youtube.redux'
+import { searchYoutubeByUrl } from '../../redux/youtube.redux'
 
 
 class Content extends Component {
@@ -32,37 +32,19 @@ class Content extends Component {
     }
 
     handle_play_button(name, data) {
-      
+
         this.props.get_Video_Name(name)
         this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
         this.setState({ name: name.name })
-        //和後端爬蟲拿 Video_ID
-        try {
-            this.props.searchYoutubeByUrl({ name: name.name + '  ' + name.album.artist.name })
-            console.log('From Node Web Scrab');
-            
-            
-        }
-        catch{
-            const key = 'AIzaSyCispiRBBb7GxdlxZbzcFBcGvZ9aGoneC8'
-            //   發request 向Youtube拿Video_ID
-            this.props.searchYouTube({
-                key: key, 'maxResults': '1',
-                'part': 'snippet',
-                'q': name.name + '  ' + name.album.artist.name,
-                'type': '', maxResults: 1
-            })
-            alert('--------------------From Youtube DATA API v3--------------------')
-            
-        }
-
+       
+        this.props.searchYoutubeByUrl({ name: name.name + '  ' + name.album.artist.name })
     }
     handle_option_button(e) {
         console.log('option')
         e.stopPropagation();
     }
-    shouldComponentUpdate(){
-        return this.state.name !== this.props.data.playlist_data.name 
+    shouldComponentUpdate() {
+        return this.state.name !== this.props.data.playlist_data.name
     }
     render() {
         let data = this.props.data.playlist_data
@@ -97,8 +79,8 @@ class Content extends Component {
 
                                     <Button className='play_button' fluid onClick={() => this.handle_play_button(data, this.props.data)}>
                                         <Grid.Column width={3}>
-                                        {console.log(this.state.name)
-                                        }
+                                            {console.log(this.state.name)
+                                            }
                                             {this.state.name == data.name ? <Image className='play_Icon' src={play_Icon}></Image> : null}
                                             <Image className='playlist_img' src={data.album.images[0].url}></Image>
                                         </Grid.Column>
@@ -125,7 +107,7 @@ class Content extends Component {
 const mapStatetoProps = state => {
     return { data: state.playlist, youtube: state.youtube }
 }
-const actionCreate = { get_Video_Name, searchYouTube, searchYoutubeByUrl }
+const actionCreate = { get_Video_Name, searchYoutubeByUrl }
 Content = connect(mapStatetoProps, actionCreate)(Content)
 
 export default Content

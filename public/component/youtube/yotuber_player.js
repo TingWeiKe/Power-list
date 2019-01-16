@@ -24,8 +24,11 @@ class Yotuber_player extends Component {
     }
 
     render() {
+        console.log(this.props.data);
         let id = this.props.data.youtube_video.length > 0 ? this.props.data.youtube_video[0].id.videoId : this.props.data.youtube_url_id
-        let title = this.props.data.youtube_video.length > 0 ?this.props.data.youtube_video[0].snippet.title : '名稱還沒爬下來ＱＱ'
+        let title = this.props.data.youtube_video.length > 0 ?this.props.data.youtube_video[0].snippet.title : this.props.data.youtube_url_title
+     
+        
         return (
             <Grid id='ytplayer'>
                 <Grid.Row>
