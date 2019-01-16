@@ -48,13 +48,13 @@
     min-height: 20px;
     position: fixed;
     padding: 5px 0 !important;
-    bottom: 10px;
+    bottom: 8px;
     left: 140px
 }
 
 .player_title {
     /* margin-top: 5px; */
-    bottom: 37px;
+    bottom: 35px;
     position: fixed;
     left: 140px;
     font: 800 !important;

@@ -42,6 +42,7 @@ ReactDOM.render(
         </Switch>
         <Yotuber_player/>
       </div>
+      
     </BrowserRouter>
   </Provider>
 

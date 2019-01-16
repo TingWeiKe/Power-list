@@ -32,14 +32,15 @@ class Content extends Component {
     }
 
     handle_play_button(name, data) {
-        this.setState({ name: name })
+      
         this.props.get_Video_Name(name)
         this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
-
+        this.setState({ name: name.name })
         //和後端爬蟲拿 Video_ID
         try {
             this.props.searchYoutubeByUrl({ name: name.name + '  ' + name.album.artist.name })
             console.log('From Node Web Scrab');
+            
             
         }
         catch{
@@ -59,6 +60,9 @@ class Content extends Component {
     handle_option_button(e) {
         console.log('option')
         e.stopPropagation();
+    }
+    shouldComponentUpdate(){
+        return this.state.name !== this.props.data.playlist_data.name 
     }
     render() {
         let data = this.props.data.playlist_data
@@ -93,6 +97,8 @@ class Content extends Component {
 
                                     <Button className='play_button' fluid onClick={() => this.handle_play_button(data, this.props.data)}>
                                         <Grid.Column width={3}>
+                                        {console.log(this.state.name)
+                                        }
                                             {this.state.name == data.name ? <Image className='play_Icon' src={play_Icon}></Image> : null}
                                             <Image className='playlist_img' src={data.album.images[0].url}></Image>
                                         </Grid.Column>
