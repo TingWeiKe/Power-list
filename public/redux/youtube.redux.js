@@ -58,7 +58,7 @@ export function searchYoutubeByUrl(name) {
                 
                 alert('--------------------From Youtube DATA API v3--------------------')
                 //   發request 向Youtube拿Video_ID
-                searchYouTube(dispatch, name.name)
+                // searchYouTube(dispatch, name.name)
 
             })
     }

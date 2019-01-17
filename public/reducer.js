@@ -8,4 +8,5 @@ import { category } from './redux/category.redux';
 import { setting } from './redux/setting.redux'
 import { category_box } from './redux/category_box.redux'
 import { youtube } from './redux/youtube.redux'
-export default combineReducers({ box, playlist, playlist_category, hot_board, category, setting, category_box, youtube })
+import {mylist} from './redux/mylist_redux'
+export default combineReducers({ box, playlist, playlist_category, hot_board, category, setting, category_box, youtube,mylist })

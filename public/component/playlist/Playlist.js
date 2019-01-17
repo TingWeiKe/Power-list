@@ -3,10 +3,8 @@ import { withRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { get_Playlists_Id_Api, hadndle_Init_State,get_Video_Name} from '../../redux/playlist.redux'
 import { Button, Loader } from 'semantic-ui-react'
-
 import Content from './Content'
 import './playlist.css'
-
 
 class Playlist extends Component {
 
@@ -27,10 +25,9 @@ class Playlist extends Component {
         <Button className='back' onClick={this.props.history.goBack}>
           <span herf='#'> 返回 </span>
         </Button>
-        <Loader active={bool} inline='centered' size='huge' />
+        <Loader active={bool} inline='centered' size='huge' ></Loader>
         {Object.keys(res).length ? <Content data={res}></Content> : null}
       </div>
-
     )
 
   }

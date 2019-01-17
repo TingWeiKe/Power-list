@@ -4,7 +4,7 @@ let client_credentials = 'client_credentials'
 
 
 
-function getUrlVars() {
+export function getUrlVars() {
     let vars = {};
     let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m, key, value) => {
         vars[key] = value

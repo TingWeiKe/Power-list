@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Button, Grid, Image, Icon } from 'semantic-ui-react'
-import { modify_updated_at, handle_Storage } from '../../component/getKKboxAPI'
+import { modify_updated_at } from '../../component/getKKboxAPI'
+import Sidebar from './sidebar'
 import { play_Icon } from './playlist.img'
+
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
+
 
 
 class Content extends Component {
@@ -36,7 +39,6 @@ class Content extends Component {
         this.props.get_Video_Name(name)
         this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
         this.setState({ name: name.name })
-       
         this.props.searchYoutubeByUrl({ name: name.name + '  ' + name.album.artist.name })
     }
     handle_option_button(e) {
@@ -79,8 +81,6 @@ class Content extends Component {
 
                                     <Button className='play_button' fluid onClick={() => this.handle_play_button(data, this.props.data)}>
                                         <Grid.Column width={3}>
-                                            {console.log(this.state.name)
-                                            }
                                             {this.state.name == data.name ? <Image className='play_Icon' src={play_Icon}></Image> : null}
                                             <Image className='playlist_img' src={data.album.images[0].url}></Image>
                                         </Grid.Column>
@@ -91,13 +91,13 @@ class Content extends Component {
                                             </div>
                                         </Grid.Column>
                                         <Grid.Column width={4}>
-                                            <Image src={play_Icon} className='siderbar' onClick={(e) => this.handle_option_button(e)}></Image>
+                                            <Sidebar id={data.id}></Sidebar>
                                         </Grid.Column>
                                     </Button>
                                 </Grid.Row>
                             </div>
                         }) : null}
-                    </Grid.Column>
+                    </Grid.Column> 
                 </Grid>
 
             </div>

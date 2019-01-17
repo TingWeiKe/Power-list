@@ -15,13 +15,13 @@
 }
 
 .movie {
-    z-index: 20;
+    
     float: left;
     position: relative;
-    bottom: 26px;
+    bottom: 40px;
     left: 10px;
     border: 1px solid #fff;
-    background-color: yellow;
+    background-color: gray;
     max-width: 120px;
     max-height: 76px;
     transition: all .1s ease-in-out;
@@ -29,9 +29,10 @@
 }
 
 .movie:hover {
-    max-width: 480px;
-    max-height: 270px;
-    bottom: 220px
+    max-width: 600px;
+    max-height: 340px;
+    bottom: 304px;
+    z-index: 20;
 }
 
 .full_screen {
@@ -40,7 +41,7 @@
     position: fixed;
     max-width: 100vw;
     width: 100vw;
-    min-height: 92vh;
+    min-height: 95vh;
 }
 
 .player-toggle-button {
@@ -60,4 +61,23 @@
     font: 800 !important;
     font-size: 1em;
     color: white;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.movie_box{
+    z-index: 90;
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+    .movie:hover {
+        max-width: 64vw;
+        max-height: 268px;
+        bottom: 240px;
+        z-index: 20;
+    }
+    .player_title {
+        max-width: 50vw;
+    }
 }

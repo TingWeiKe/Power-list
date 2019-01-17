@@ -4,13 +4,16 @@ import { Redirect , withRouter } from 'react-router-dom'
 
 class setting extends Component {
 
-  
-  render() {
+  componentWillMount(){
     console.log(this.props.history);
+    this.props.history.goBack()
+  }
+  render() {
+    
     
     return (
       <div className="header">
-        {this.props.history.goBack()}
+       
       </div>
 
     )

@@ -34,13 +34,13 @@ class Yotuber_player extends Component {
                 <Grid.Row>
                     <Grid.Column style={{ padding: '0px' }} width={3}>
                         <div className={'movie_box'}>
-                            {id ? <iframe onKeyDown={(e) => this.handleKeyDown(e)} className={this.state.toggle == true ? 'full_screen' : "movie"} frameBorder="0" type="text/html" width="480" height="270"
+                            {id ? <iframe onKeyDown={(e) => this.handleKeyDown(e)} className={this.state.toggle == true ? 'full_screen' : "movie"} frameBorder="0" type="text/html" width="600" height="340"
                                 allow="accelerometer;encrypted-media;  autoplay;gyroscope; picture-in-picture"
                                 src={"https://www.youtube.com/embed/" + id + "?autoplay=1&disablekb=1&enablejsapi=1"}
                                 allowFullScreen>
                             </iframe> : null}
                             <div className='player_title'>{id  ? title : '尚未播放'}</div>
-                            <Button style={{ zIndex: '99' }} onClick={() => this.handle_Toggle()} inverted size='mini' className='player-toggle-button'>放大畫面</Button>
+                            <Button style={{ zIndex: '2' }} onClick={() => this.handle_Toggle()} inverted size='mini' className='player-toggle-button'>放大畫面</Button>
                         </div>
                     </Grid.Column>
                     <Grid.Column width={10}>

@@ -12,7 +12,7 @@ class HeaderRoute extends Component {
   }
   componentWillMount(){
     //default route
-    this.props.history.push('/today')
+    // this.props.history.push('/today')
     //default language
     localStorage.getItem('language')==null? localStorage.setItem('language','TW'):null
     
@@ -72,13 +72,12 @@ class HeaderRoute extends Component {
           <Menu.Item
             as={Link}
             style={{padding:'0px 10px'}} 
-            color={"blue"}
-            name='setting'
-            active={activeItem === 'setting'}
+            name='/mylist'
+            active={activeItem === '/mylist'}
             onClick={this.handleItemClick}
-            to={{ pathname: '/setting/', search: this.props.location.search }}
+            to={{ pathname: '/mylist', search: this.props.location.search }}
           >
-            設定
+            我的歌單
         </Menu.Item>
         <Language_form></Language_form>
         </Menu>

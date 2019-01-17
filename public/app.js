@@ -11,6 +11,7 @@ import Today from './container/today/today'
 import Playlist_category from './container/playlist_category/playlist_category'
 import Recent from './container/recents/recents'
 import Setting from './container/setting/setting'
+import Mylist from './container/mylist/mylist'
 import Playlist from './component/playlist/playlist'
 import reducer from './reducer';
 import Yotuber_player from './component/youtube/yotuber_player'
@@ -31,14 +32,16 @@ ReactDOM.render(
       <div>
         <HeaderRoutre />
         <Switch>
-          <Route exact path='/' component={Today}></Route>
-          <Route path='/today' component={Today} />
+]
+          <Route exact path='/today' component={Today} />
           <Route path='/recents' component={Recent} />
           <Route path='/playlist' component={Playlist} />
           <Route path='/playlist_category' component={Playlist_category} />
           <Route path='/category_box' component={Category_box} />
+          <Route path='/mylist' component={Mylist} />
           <Route path='/setting' component={Setting} />
-          <Route paht='/search' component={Search} />
+          <Route exact paht='/search' component={Search} />
+         
         </Switch>
         <Yotuber_player/>
       </div>

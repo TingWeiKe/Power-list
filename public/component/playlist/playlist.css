@@ -5,13 +5,10 @@
 
 
 .list_description>pre {
-
     font-size: 16px;
     line-height: 1.4;
     white-space: pre-wrap;
     /* 防止overflow */
-
-
 }
 
 .play {
@@ -46,7 +43,9 @@
     background-color: #cacbcd !important;
 
 }
-
+.track{
+    border-bottom:1px solid #ccc;
+}
 .track>p {
     margin: 0;
 }
@@ -56,12 +55,10 @@
     border: 1px solid #ccc;
     float: left;
     max-height: 55px;
-
     margin: auto 0;
 }
 
 .playlist_info {
-
     position: relative;
     left: 10px;
     padding-top: 8px;
@@ -80,33 +77,34 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-
 }
 
 .playlist_info>h4 {
     color: rgba(0, 0, 0, .9) !important;
     margin: 0px;
-
+    max-width: 88% !important;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
 }
 
-.siderbar {
+.siderbar_icon {
+    left: 12px;
     float: right;
     position: relative;
-    bottom: 12px;
+    bottom: 8px;
+    padding-right: 10px;
 }
 
 
 @media screen and (max-width: 450px) {
     .playlist_info>h4 {
-        max-width: 200px;
+        max-width: 220px;
     }
 
     .playlist_info>p {
-        max-width: 100px;
+        max-width: 220px;
     }
 
     .playlist_img {
@@ -156,7 +154,30 @@
 .play_Icon{
     float: left;
     top:16px;
-    padding-right: 5px;
-    margin: 4px;
+    padding-right: 3px;
+    margin: 3px;
     
+}
+
+.refresh_buton{
+    display: none !important;
+}
+
+/* .sidebar{
+    background-color: yellowgreen;
+
+    margin-left: 525px;
+    margin-bottom: 60px;
+    width: 200px;
+    height: 86px;
+    position: relative;
+} */
+
+.sidebar_button{
+    background-color: #4183c4;
+
+    width: 250px;
+    height: 120px;
+    left: 500px;
+    position: absolute;
 }
