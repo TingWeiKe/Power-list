@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { sidebar_icon } from './sidebar_icon'
+
 import { Image, Dropdown } from 'semantic-ui-react'
 
-const options = [{ key: 1, text: 'Choice 1', value: 1 }, { key: 2, text: 'Choice 2', value: 2 }]
+
+import { sidebar_icon } from './sidebar_icon'
 class Sidebar extends Component {
   constructor(props) {
     super(props)
@@ -18,12 +19,17 @@ class Sidebar extends Component {
     e.stopPropagation();
   }
 
-  render() {[]
+  render() {
+    []
     return (
       <div className="sidebar">
-
-        {/* <Image  onClick={(e) => this.handle_option_button(e)}></Image> */}
-        <Dropdown  src={sidebar_icon} onClick={(e) => this.handle_option_button(e)} className='siderbar_icon'  text='More' options={options} />
+        <div className="dropdown" style={{Float:'left'}}>
+        <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e)}></Image>
+          <div className="dropdown-content" style={{}}>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+          </div>
+        </div>
       </div>
     )
   }

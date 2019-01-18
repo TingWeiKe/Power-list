@@ -42,8 +42,6 @@ export function get_Featured_Playlists_Api_ApiError() {
     return { type: BOX_API_ERROR_MSG }
 }
 
-
-
 export function get_Featured_Playlists_Api(url) {
     return dispatch => { 
         let access_token;

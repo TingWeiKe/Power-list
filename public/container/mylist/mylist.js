@@ -39,10 +39,13 @@ class Mylist extends Component {
                 <Button disabled={!!this.props.data.my_info} >  <a href={url}>登入 ＫＫＢＯＸ</a>  </Button>
                 
                 <Grid stackable={true} textAlign={"left"}>
-                    <Grid.Column widescreen={7}>
+                    <Grid.Column widescreen={3}>
                         {/* <h1>{data.title}</h1> */}
-                        <Grid>
-                            <Grid.Column width={16}>
+                    </Grid.Column>
+                    <Loader content='載入中...' style={{bottom:'200px !important'}} active={this.props.data.mylist.data==undefined}  size='massive' /> 
+
+                    <Grid.Column widescreen={10}>
+                    <Grid.Row>
                                 <Image src={data?this.props.data.my_info.images[2].url:null} />
                                 <div className='playlist_text_box'>
                                     <div className='list_description'>
@@ -50,14 +53,8 @@ class Mylist extends Component {
                                     <div className="list_text">
                                         <a className="list_owner" href={data?this.props.data.my_info.url:null}><h2>{data?this.props.data.my_info.name:null}</h2></a>
                                     </div>
-
                                 </div>
-                            </Grid.Column>
-                        </Grid>
-                    </Grid.Column>
-
-                    <Loader content='載入中...' style={{bottom:'200px !important'}} active={this.props.data.mylist.data==undefined}  size='massive' /> 
-                    <Grid.Column widescreen={9}>
+                            </Grid.Row>
                     {this.props.data.mylist.data!=undefined? <Button onClick={()=>this.handle_Sort()}>排序</Button>:null}
                     {this.props.data.mylist.data!=undefined? <h3>{this.state.toggle?'最舊 ======> 最新' :'最新 ======> 最舊'}</h3>:null}
                         {this.props.data.mylist.data!=undefined? this.props.data.mylist.data.map(data => {
@@ -81,6 +78,13 @@ class Mylist extends Component {
                                 </Grid.Row>
                             </div>
                         }) : null}
+                    </Grid.Column>
+                    <Grid.Column widescreen={3}>
+                        {/* <h1>{data.title}</h1> */}
+                
+                            <Grid.Row>
+                            </Grid.Row>
+      
                     </Grid.Column>
                 </Grid>
 

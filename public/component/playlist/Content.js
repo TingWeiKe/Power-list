@@ -35,7 +35,6 @@ class Content extends Component {
     }
 
     handle_play_button(name, data) {
-
         this.props.get_Video_Name(name)
         this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
         this.setState({ name: name.name })
