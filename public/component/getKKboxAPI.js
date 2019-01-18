@@ -2,8 +2,6 @@ import axios from 'axios'
 let authorization_code = 'authorization_code'
 let client_credentials = 'client_credentials'
 
-
-
 export function getUrlVars() {
     let vars = {};
     let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m, key, value) => {
@@ -11,7 +9,6 @@ export function getUrlVars() {
     })
     return vars["code"] ? vars["code"] : null
 }
-
 
 
 export async function get_Access_Token_From_urlParam() {
@@ -71,6 +68,5 @@ export function modify_updated_at(x) {
         .map((d, i) => { return d + l[i] }).join('')
 
     let time = k.toLocaleTimeString().split(':')
-
     return date + ' ' + time[0] + '點' + time[1] + '分'
 }

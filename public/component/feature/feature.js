@@ -1,4 +1,4 @@
-import React, { Component  } from 'react'
+import React, { Component } from 'react'
 import './feature.css'
 import { Grid, Image, Segment, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
@@ -22,12 +22,9 @@ class feature extends Component {
                         </div>
                     </Grid.Column>
                 }) : null}
-
             </Grid>
-
         )
     }
-
 }
 
 

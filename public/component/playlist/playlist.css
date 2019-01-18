@@ -1,6 +1,14 @@
-
 .back {
-    margin-bottom: 25px !important;
+    margin-bottom: 20px !important;
+    color: #2185d0;
+    font: 900;
+    font-size: 16px;
+    ;
+
+}
+
+.back>span {
+    cursor: pointer;
 }
 
 
@@ -18,10 +26,7 @@
 .play_text {
     text-align: center;
     margin-top: 30px;
-
 }
-
-
 
 .play_text>:first-child {
     text-decoration: underline;
@@ -36,16 +41,16 @@
 .play_button {
     background-color: #f0f2f5 !important;
     padding: 5px !important;
-
 }
 
 .play_button:hover {
     background-color: #cacbcd !important;
+}
 
+.track {
+    border-bottom: 1px solid #ccc;
 }
-.track{
-    border-bottom:1px solid #ccc;
-}
+
 .track>p {
     margin: 0;
 }
@@ -151,23 +156,23 @@
 
 }
 
-.play_Icon{
+.play_Icon {
     float: left;
-    top:16px;
+    top: 16px;
     padding-right: 3px;
     margin: 3px;
-    
+
 }
 
-.refresh_buton{
+.refresh_buton {
     display: none !important;
 }
 
-.sidebar{
-float: right;
-position: relative;
-bottom: 7px;
-right: 10px;
+.sidebar {
+    float: right;
+    position: relative;
+    bottom: 7px;
+    right: 10px;
 }
 
 
@@ -178,41 +183,99 @@ right: 10px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
     padding-right: 10px;
     padding-left: 20px;
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     top: 10px;
-    right: 32px !important;
+    right: 25px !important;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  
+
     /* display: none; */
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
+    text-decoration: none;
     color: black;
-    padding: 12px 16px;
+    padding: 15px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #f1f1f1;}
-  
-  .dropdown:hover .dropdown-content {
+
+}
+
+.dropdown-content a:hover {
+    background-color: #2185d0;
+    color: white !important;
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-  
-  .dropdown:hover .dropbtn {
+}
+
+.dropdown:hover .dropbtn {
     background-color: #3e8e41;
-  }
+}
+
+.play {
+    background-color: #2185d0 !important;
+    color: white !important;
+    border-radius: 20px !important;
+}
+
+.play:hover {
+    color: white !important;
+    cursor: pointer !important;
+    filter: brightness(90%) !important;
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.loggin_box {
+    text-align: center;
+    float: left;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 220px;
+    width: 400px;
+    position: fixed;
+    margin: 5% auto;
+    /* Will not center vertically and won't work in IE6/7. */
+    left: 0;
+    right: 0;
+    top: 200px
+}
+
+.button_box {
+    position: relative;
+    top: 70px;
+}
+
+.button_box>h2 {
+    margin-bottom: 50px;
+}
+
+.login_button {
+
+    margin: 0 30px !important;
+}
+
+#dimmer {
+    bottom: 60px;
+    right: 0;
+    z-index: 10;
+    width: 150%;
+    height: 150%;
+    background-color: rgba(0, 0, 0, .6);
+    position: fixed;
+
+}

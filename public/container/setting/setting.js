@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect , withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 class setting extends Component {
@@ -8,14 +8,12 @@ class setting extends Component {
     console.log(this.props.history);
     this.props.history.goBack()
   }
+
+
   render() {
-    
-    
     return (
       <div className="header">
-       
       </div>
-
     )
   }
 }

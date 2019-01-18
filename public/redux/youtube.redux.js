@@ -4,7 +4,6 @@ const GET_YOUTUBE_API_SUCCESS = 'GET_YOUTUBE_API_SUCCESS'
 const GET_YOUTUBE_API_ERR = 'GET_YOUTUBE_API_ERR'
 const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search'
 const key = 'AIzaSyDsa1h_sYYPTJ3LwizuBkyHNBEht2qUSJQ'
-
 const init = {
     msg: '',
     youtube_video: {},
@@ -22,6 +21,8 @@ export function youtube(state = init, action) {
             return state
     }
 }
+
+
 function get_Youtube_API_Success(video) {
     return { type: GET_YOUTUBE_API_SUCCESS, youtube_video: video }
 }
@@ -44,9 +45,7 @@ export function searchYouTube(dispatch, name) {
             console.log(res)
             dispatch(get_Youtube_API_Success({ youtube_video: res.data.items }))
         })
-
-
-};
+}
 
 export function searchYoutubeByUrl(name) {
     return dispatch => {
@@ -55,11 +54,9 @@ export function searchYoutubeByUrl(name) {
             .then(res => {
                 dispatch(get_Youtube_API_Success({ youtube_url_id: res.data.id, youtube_url_title: res.data.title }))
             }).catch((error) => {
-                
-                alert('--------------------From Youtube DATA API v3--------------------')
                 //   發request 向Youtube拿Video_ID
-                // searchYouTube(dispatch, name.name)
-
+                alert('--------------------The Song is from Youtube DATA API v3--------------------')
+                searchYouTube(dispatch, name.name)
             })
     }
 }

@@ -13,7 +13,7 @@ class Box extends Component {
         let bool = this.props.bool
         return (
             <div className="header">
-             
+
                 <h1>{title}</h1>
                 <Loader content='載入中...' className='loader' active={bool} inline='centered' size='huge' disabled />
                 <Grid>

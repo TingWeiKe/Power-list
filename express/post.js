@@ -4,20 +4,14 @@ let axios = require('axios')
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 let grant_type = 'authorization_code'
 let code = ''
-var request = require("request");
-var qs = require("querystring");
-var http = require("https");
-var Qs = require('qs');
-
-
-
+let request = require("request");
+let Qs = require('qs');
 
 
 router.post('/refresh', function (req, res, next) {
 
 
   let code = req.body.code
-
   // POST access_token from KKbox
   async function get_refresh_access_data() {
     //FormData must be a String in order to fit in content-type: application/x-www-form-urlencoded
@@ -36,7 +30,6 @@ router.post('/refresh', function (req, res, next) {
       data: data
     }
     const res = await axios(config)
-
     return res.data
   }
 
@@ -80,6 +73,7 @@ router.post('/', function (req, res, next) {
     )
 });
 
+
 router.post('/youtube', function (req, res, next) {
   console.log(req.body.name.name.length > 80 );
   let string = req.body.name.name.length > 80 ? req.body.name.name.substring(0, req.body.name.name.length / 2) : req.body.name.name
@@ -102,6 +96,4 @@ router.post('/youtube', function (req, res, next) {
     }
   })
 });
-
-
 module.exports = router;

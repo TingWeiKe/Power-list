@@ -15,7 +15,7 @@ const initState = {
     msg: '',
     bool: true,
     access_token: '',
-    title:'今日精選'
+    title: '今日精選'
 }
 
 
@@ -26,7 +26,7 @@ export function box(state = initState, action) {
         case BOX_API_SUCCESS:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
         case INIT_STATE:
-            return state= initState
+            return state = initState
         default:
             return state
     }
@@ -43,7 +43,7 @@ export function get_Featured_Playlists_Api_ApiError() {
 }
 
 export function get_Featured_Playlists_Api(url) {
-    return dispatch => { 
+    return dispatch => {
         let access_token;
         !getCookie('token') ? get_Access_Token()
             .then(data => {
@@ -73,8 +73,8 @@ export function get_Featured_Playlists_Api(url) {
     }
 }
 
-export function handle_Init_State(){
-    return {type:INIT_STATE}
+export function handle_Init_State() {
+    return { type: INIT_STATE }
 }
 
 

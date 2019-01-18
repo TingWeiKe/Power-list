@@ -15,6 +15,7 @@ class Yotuber_player extends Component {
     }
 
     componentDidMount() {
+        
         //監聽Esc
         window.addEventListener('keydown', () => {
             if (event.keyCode === 27) {
@@ -33,7 +34,7 @@ class Yotuber_player extends Component {
             <Grid id='ytplayer'>
                 <Grid.Row>
                     <Grid.Column style={{ padding: '0px' }} width={3}>
-                        <div className={'movie_box'}>
+                        <div id='player' className={'movie_box'}>
                             {id ? <iframe onKeyDown={(e) => this.handleKeyDown(e)} className={this.state.toggle == true ? 'full_screen' : "movie"} frameBorder="0" type="text/html" width="600" height="340"
                                 allow="accelerometer;encrypted-media;  autoplay;gyroscope; picture-in-picture"
                                 src={"https://www.youtube.com/embed/" + id + "?autoplay=1&disablekb=1&enablejsapi=1"}
@@ -54,9 +55,7 @@ class Yotuber_player extends Component {
 }
 
 
-const mapStatetoProps = state => {
-    return { data: state.youtube }
-}
+const mapStatetoProps = state => {return { data: state.youtube }}
 const actionCreate = {}
 Yotuber_player = connect(mapStatetoProps, actionCreate)(Yotuber_player)
 export default Yotuber_player

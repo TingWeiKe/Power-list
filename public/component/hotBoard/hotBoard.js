@@ -1,12 +1,12 @@
-import React, { Component  } from 'react'
+import React, { Component } from 'react'
 import { Grid, Image, Segment, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-class hotboard extends Component  {
+class hotboard extends Component {
 
-  render() {
-    return (
-      <Grid columns={4} doubling={true} stackable>
+    render() {
+        return (
+            <Grid columns={4} doubling={true} stackable>
                 {this.props.data !== undefined ? this.props.data.map(data => {
                     return <Grid.Column key={data.id}>
                         <div className='feature_content'>
@@ -23,8 +23,8 @@ class hotboard extends Component  {
                 }) : null}
 
             </Grid>
-    )
-  }
+        )
+    }
 }
 
 export default hotboard

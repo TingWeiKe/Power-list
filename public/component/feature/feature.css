@@ -1,8 +1,9 @@
-.feature_box{
+.feature_box {
     padding: 0 !important;
     border: 1px solid #ccc !important;
 }
-.feature_box:hover{
+
+.feature_box:hover {
     background-color: #F0F0F0;
     cursor: pointer;
     filter: brightness(102%);
@@ -11,17 +12,17 @@
     color: #4183c4 !important;
 }
 
-.category_img{
+.category_img {
     width: 100px;
     height: 100px;
     display: inline-block !important;
     float: left !important;
-    border-right:  1px solid #ccc;
+    border-right: 1px solid #ccc;
 
 
 }
 
-.category_title{
+.category_title {
     margin: auto 20px;
     padding-top: 20px;
     padding-left: 20px;
@@ -33,26 +34,26 @@
     line-height: 1.5;
 }
 
-.title_box{
-    
+.title_box {
     height: 100px;
 }
 
-@media only screen and (max-width: 767px)
-{
+@media only screen and (max-width: 767px) {
     .ui.stackable.grid {
-        
+
         margin-top: -1rem !important;
         margin-bottom: -1rem !important;
         margin-left: -1rem !important;
         margin-right: -1rem !important;
     }
-    .category_img{
+
+    .category_img {
         width: 90px;
         height: 90px;
         display: inline-block !important;
     }
-    .ui.stackable.grid>.column:not(.row){
+
+    .ui.stackable.grid>.column:not(.row) {
         padding: 5px 12px !important;
     }
 }

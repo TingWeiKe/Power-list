@@ -5,6 +5,7 @@ const CHAGE_LANGUAGE = 'CHAGE_LANGUAGE'
 const initState = {
     language:window.localStorage.getItem('language')?window.localStorage.getItem('language'):"TW",
 }
+
 export function setting(state = initState, action) {
     switch (action.type) {
         case CHAGE_LANGUAGE:

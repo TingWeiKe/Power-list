@@ -35,3 +35,7 @@ a{
 .loader{
     margin-top: 100px !important;
 }
+
+.ui.button:hover{
+    color: #2185d0;
+}

@@ -31,35 +31,25 @@ function get_My_Info_Success(data) {
     return { type: GET_MY_INFO_SUCCESS, my_info: data }
 }
 
-
 function get_Mylist_API_Success(data) {
     return { type: GET_MYLIST_API_SUCCESS, mylist: data }
 }
 
-function get_Mylist_API_Err() {
-    return { type: GET_MYLIST_API_ERR }
-}
-
-export  function getMylist() {
-
+export function getMylist() {
     return dispatch => {
         const url = 'https://api.kkbox.com/v1.1/me'
         get_Access_Token_From_urlParam()
             .then(res => {
-
                 get_KKbox_API(res.access_token, url)
                 .then(res => {
                     dispatch(get_My_Info_Success({ my_info: res.data }))
-             
                 })
+
                 get_KKbox_API(res.access_token, url + '/favorite?limit=400')
                     .then(res => {
                         if (res.status === 200)
-                            dispatch(get_Mylist_API_Success({ mylist: res.data }))
-
-
+                                dispatch(get_Mylist_API_Success({ mylist: res.data }))
                     })
-              
             })
     }
 
