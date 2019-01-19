@@ -2,7 +2,7 @@
 
 import { get_KKbox_API,getCookie } from '../component/getKKboxAPI'
 const PLAYLIST_API_SUCCESS = 'PLAYLIST_API_SUCCESS'
-const PLAYLIST_API_ERROR_MSG = 'PLAYLIST_API_SUCCESS'
+const PLAYLIST_API_ERROR_MSG = 'PLAYLIST_API_ERROR_MSG'
 const INIT_STATE = 'INIT_STATE'
 const GET_NAME_SUCCESS = 'GET_NAME_SUCCESS'
 
@@ -60,8 +60,11 @@ export function get_Playlists_Id_Api(url) {
                     } 
                     else {
                         dispatch(get_Playlists_Id_Api_Error())
-                        console.log('err')
+                
                     }
+                })
+                .catch(res=>{
+                    dispatch(get_Playlists_Id_Api_Error())
                 })
     }
 }

@@ -36,10 +36,16 @@ class Content extends Component {
         }
     }
     handle_mylist_button(e) {
-        document.body.style.overflow = "hidden"
+        console.log(this.props.data.msg);
+        
         e.stopPropagation()
+        if(this.props.data.msg!=='success')
+        {document.body.style.overflow = "hidden"
         this.setState({ dimmer: true })
+       }else{
         console.log('QQ');
+       }
+
     }
 
     handle_Loggin() {

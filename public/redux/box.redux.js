@@ -23,7 +23,7 @@ export function box(state = initState, action) {
     switch (action.type) {
         case BOX_API_SUCCESS:
             return state = { ...state, bool: false, msg: "success", ...action.payload }
-        case BOX_API_SUCCESS:
+        case BOX_API_ERROR_MSG:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
         case INIT_STATE:
             return state = initState
@@ -47,7 +47,10 @@ export function get_Featured_Playlists_Api(url) {
         let access_token;
         !getCookie('token') ? get_Access_Token()
             .then(data => {
-                doCookieSetup('token', data.access_token, data.expires_in)
+
+                    doCookieSetup('token', data.access_token, data.expires_in)
+                    
+              
                 get_KKbox_API(data.access_token, url)
                     .then(res => {
                         if (res && res.status === 200) {
@@ -57,6 +60,9 @@ export function get_Featured_Playlists_Api(url) {
                             console.log('err')
                         }
                     })
+            }
+            ).catch(err=>{
+                dispatch(get_Featured_Playlists_Api_ApiError())
             }) :
 
             get_KKbox_API(getCookie('token'), url)

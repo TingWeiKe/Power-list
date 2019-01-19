@@ -2,6 +2,8 @@
 import {
     get_Access_Token_From_urlParam,
     get_KKbox_API,
+    doCookieSetup,
+    getCookie
 } from '../component/getKKboxAPI'
 
 const GET_MYLIST_API_SUCCESS = 'GET_MYLIST_API_SUCCESS'
@@ -40,6 +42,7 @@ export function getMylist() {
         const url = 'https://api.kkbox.com/v1.1/me'
         get_Access_Token_From_urlParam()
             .then(res => {
+                doCookieSetup('token', res.access_token, res.expires_in)
                 get_KKbox_API(res.access_token, url)
                 .then(res => {
                     dispatch(get_My_Info_Success({ my_info: res.data }))

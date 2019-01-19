@@ -19,8 +19,8 @@ router.post('/refresh', function (req, res, next) {
     let data = Qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: code,
-      client_id: 'b89dc89b34b7f4d2759580c9b53141ae',
-      client_secret: 'c47d5eebae5d6cf9da082e55447d4ec8'
+      client_id: 'b997488a13ddff79d7ee295d10302162',
+      client_secret: '798c0a432e2c77dfc590b933f676ccac'
     })
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
@@ -43,15 +43,12 @@ router.post('/refresh', function (req, res, next) {
     })
 });
 
-
-
-
 router.post('/', function (req, res, next) {
   /* POST access_token from KKbox */
   async function get_access_data() {
     //FormData must be a String in in content-type: application/x-www-form-urlencoded prevent Axios JSON it again.
     //Use raw String
-    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara + '&client_id=b89dc89b34b7f4d2759580c9b53141ae&client_secret=c47d5eebae5d6cf9da082e55447d4ec8'
+    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara + '&client_id=b997488a13ddff79d7ee295d10302162&client_secret=798c0a432e2c77dfc590b933f676ccac'
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
       headers: { 'host': 'account.kkbox.com', 'content-type': 'application/x-www-form-urlencoded' },

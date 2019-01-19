@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import HeaderRoutre from './component/headerRoute'
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Search from './container/search/search'
 import Category_box from './component/category_box/category_box'
 import Today from './container/today/today'
@@ -28,24 +28,24 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? compose
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      
+
       <div>
         <HeaderRoutre />
         <Switch>
-]
-          <Route exact path='/today' component={Today} />
+    
+          <Route path='/today' component={Today} />
           <Route path='/recents' component={Recent} />
           <Route path='/playlist' component={Playlist} />
           <Route path='/playlist_category' component={Playlist_category} />
           <Route path='/category_box' component={Category_box} />
           <Route path='/mylist' component={Mylist} />
           <Route path='/setting' component={Setting} />
-          <Route exact paht='/search' component={Search} />
-         
+          <Route paht='/search' component={Search} />
+
         </Switch>
-        <Yotuber_player/>
+        <Yotuber_player />
       </div>
-      
+
     </BrowserRouter>
   </Provider>
 

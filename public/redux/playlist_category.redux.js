@@ -3,6 +3,7 @@ import { get_KKbox_API, getCookie } from '../component/getKKboxAPI'
 
 const PLAY_CATEGORY_API_SUCCESS = 'PLAY_CATEGORY_API_SUCCESS'
 const PLAY_CATEGORY_API_ERROR_MSG = 'PLAY_CATEGORY_API_ERROR_MSG'
+const INIT_STATE = 'INIT_STATE'
 // const INIT_STATE = 'INIT_STATE'
 // const INIT_MSG = 'INIT_MSG'
 
@@ -19,14 +20,16 @@ export function playlist_category(state = init, action) {
             return state = { ...state, bool: false, msg: "success", ...action.payload }
         case PLAY_CATEGORY_API_ERROR_MSG:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
+            case INIT_STATE:
+            return state = init
         default:
             return state
     }
 }
 
-// export function handle_Init_State(){
-//     return {type:INIT_STATE}
-// }
+export function handle_Init_State(){
+    return {type:INIT_STATE}
+}
 
 
 function get_Playlist_category_Api_Success(data) {

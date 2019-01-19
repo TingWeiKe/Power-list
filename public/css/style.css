@@ -39,3 +39,17 @@ a{
 .ui.button:hover{
     color: #2185d0;
 }
+
+.refresh_button{
+    display: none ;
+    position: absolute;
+    top: 40vh;
+    left: 50vw;
+    margin-top: -100px !important;
+    margin-left: -60px !important;
+}
+.refresh_button >h2{
+    text-align: center;
+    color: red;
+
+}
