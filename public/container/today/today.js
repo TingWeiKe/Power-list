@@ -11,7 +11,6 @@ class Today extends Component {
   }
 
   handle_Refresh(){
-
     this.props.handle_Init_State()
     let url = 'https://api.kkbox.com/v1.1/featured-playlists?territory=' + this.props.data.setting.language
     this.props.data.box.box_data.hasOwnProperty('data') ? null : this.props.get_Featured_Playlists_Api(url)

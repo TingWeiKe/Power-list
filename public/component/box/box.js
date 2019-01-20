@@ -32,7 +32,7 @@ class Box extends Component {
                                     </Link>
                                     <div style={{ cursor: 'default' }}>
                                         <div className='title'>
-                                            <a href={data.url}><h2>{data.title}</h2></a>
+                                            <a href={'/playlist/' + data.id}><h2>{data.title}</h2></a>
                                         </div>
                                         <div className='description'>
                                             <p >{data.description}</p>
