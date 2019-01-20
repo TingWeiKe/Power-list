@@ -252,7 +252,7 @@
     /* Will not center vertically and won't work in IE6/7. */
     left: 0;
     right: 0;
-    top: 200px
+    top: 100px
 }
 
 .button_box {

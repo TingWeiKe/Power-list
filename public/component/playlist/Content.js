@@ -36,10 +36,10 @@ class Content extends Component {
         }
     }
     handle_mylist_button(e) {
-        console.log(this.props.data.msg);
+        console.log(this.props);
         
         e.stopPropagation()
-        if(this.props.data.msg!=='success')
+        if(this.props.data.msg!=='succdess')
         {document.body.style.overflow = "hidden"
         this.setState({ dimmer: true })
        }else{
@@ -49,6 +49,8 @@ class Content extends Component {
     }
 
     handle_Loggin() {
+
+        
         location.href = url
     }
 

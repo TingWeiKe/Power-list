@@ -7,20 +7,28 @@ class HeaderRoute extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeItem: '/today'
+      activeItem: this.props.location.pathname
     }
   }
   componentWillMount(){
-    // this.props.history.push('/today')
+
     localStorage.getItem('language')==null? localStorage.setItem('language','TW'):null
-    
+
+    //Router
+    const publicList = ['/today', '/playlist_category','/recents','/search','/mylist']
+    const pathName = this.props.location.pathname
+    if (publicList.indexOf(pathName) === -1 ) {
+      if(pathName.indexOf('/playlist/') === -1){
+        return this.props.history.push('/today')
+      }
+    }
   }
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
     const { activeItem } = this.state
     return (
       <div>
-       
         <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100%', zIndex: '99', Bottom: '200px' }} size='small' borderless={true} >
    
           <Menu.Item
@@ -79,9 +87,7 @@ class HeaderRoute extends Component {
         </Menu.Item>
         <Language_form></Language_form>
         </Menu>
-        
       </div>
-
     )
   }
 }

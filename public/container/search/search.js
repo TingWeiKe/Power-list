@@ -10,9 +10,8 @@ import { Link } from 'react-router-dom'
         }
     }
     render() {
-
-        console.log(this.props.location);
-        console.log(this.props.location.state!==undefined )
+        // console.log(this.props.location);
+        // console.log(this.props.location.state!==undefined )
 
         return (
             <div className="header">

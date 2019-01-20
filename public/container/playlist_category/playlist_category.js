@@ -47,11 +47,12 @@ class Playlist_category extends Component {
                 <Loader content='載入中...' className='loader' active={bool1==true && bool2==true} inline='centered' size='huge' /> 
                 {bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? null :
                     <div style={bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? { display: 'none' } : { display: 'block' }}>
-                        {bool1 && bool2 == false ? <h2 className='subheader'>最新主打</h2> : null}
+                        {console.log(bool1,bool2)}
+                        {bool1 == false ? <h2 className='subheader'>最新主打</h2> : null}
                         <Feature data={this.props.data.playlist_category.playlist_category_data.data} />
-                        {bool1 && bool2 == false ? <h2 className='subheader'>排行榜</h2> : null}
+                        {bool1  == false ? <h2 className='subheader'>排行榜</h2> : null}
                         <HotBoard data={this.props.data.hot_board.hot_board_data.data} />
-                        {bool1 && bool2 == false ? <h2 className='subheader'>歌單分類</h2> : null}
+                        {bool1 == false ? <h2 className='subheader'>歌單分類</h2> : null}
                         <Category data={this.props.data.category.category_data.data} language={this.props.data.setting.language} />
                     </div>}
             </div>

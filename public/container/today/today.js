@@ -20,7 +20,7 @@ class Today extends Component {
   render() {
     return (
       <div >
-        <Box msg={this.props.data.box.msg} data={this.props.data.box.box_data.data} title={this.props.data.box.title} bool={this.props.data.box.bool} />
+        <Box msg={this.props.data.box.msg} data={this.props.data.box.box_data.data} title={this.props.data.box.title} bool={this.props.data.box.bool}/>
         <div className='refresh_button'  style={!this.props.data.box.box_data.data && this.props.data.box.msg === '伺服器錯誤' ? {display:'block'}: null} >
         <Button  onClick={()=>this.handle_Refresh()} primary size='big' >重新整理</Button>
         </div>
