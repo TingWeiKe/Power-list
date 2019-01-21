@@ -1,10 +1,7 @@
 
 import { get_KKbox_API, getCookie } from '../component/getKKboxAPI'
-
 const HOT_BOARD_API_SUCCESS = 'HOT_BOARD_API_SUCCESS'
 const HOT_BOARD_API_ERROR_MSG = 'HOT_BOARD_API_ERROR_MSG'
-// const INIT_STATE = 'INIT_STATE'
-// const INIT_MSG = 'INIT_MSG'
 
 const init = {
     hot_board_data: {},
@@ -23,11 +20,6 @@ export function hot_board(state = init, action) {
             return state
     }
 }
-
-// export function handle_Init_State(){
-//     return {type:INIT_STATE}
-// }
-
 
 function get_Hotboard_Api_Success(data) {
     return { type: HOT_BOARD_API_SUCCESS, payload: data }
@@ -53,10 +45,4 @@ export function get_Hotboard_Api(url) {
             })
     }
 }
-
-// export function hadndle_Init_State(){
-//     return dispatch =>{
-//         dispatch(handle_Init_State())
-//     }
-// }
 

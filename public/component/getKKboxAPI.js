@@ -14,7 +14,7 @@ export function getUrlVars() {
 export async function get_Access_Token_From_urlParam() {
     let urlPara = getUrlVars()
     if (urlPara) {
-        const res = await axios.post('http://localhost:3000/post', { grant_type: authorization_code, urlPara: urlPara })
+        const res = await axios.post('/post', { grant_type: authorization_code, urlPara: urlPara })
         try {
             return res.data
         } catch{
@@ -25,7 +25,7 @@ export async function get_Access_Token_From_urlParam() {
 
 
 export async function get_Access_Token() {
-    const res = await axios.post('http://localhost:3000/post', { grant_type: client_credentials })
+    const res = await axios.post('/post', { grant_type: client_credentials })
     try {
         return res.data
     } catch{
@@ -69,4 +69,14 @@ export function modify_updated_at(x) {
 
     let time = k.toLocaleTimeString().split(':')
     return date + ' ' + time[0] + '點' + time[1] + '分'
+}
+
+export function push_Track(id){
+    axios.post('/post/push_tracks', { id: id })
+    .then(res=>{
+        console.log(res);
+        
+    })
+
+
 }

@@ -3,11 +3,11 @@ import { Button, Grid, Image, Dimmer } from 'semantic-ui-react'
 import { modify_updated_at } from '../../component/getKKboxAPI'
 import Sidebar from './sidebar'
 import { play_Icon } from './playlist.img'
-
+import{ push_Track} from '../getKKboxAPI'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
-const url = "https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b89dc89b34b7f4d2759580c9b53141ae&response_type=code&state=1111"
+const url = 'https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b997488a13ddff79d7ee295d10302162&response_type=code&state=1111'
 
 
 class Content extends Component {
@@ -35,22 +35,22 @@ class Content extends Component {
             }
         }
     }
-    handle_mylist_button(e) {
+    handle_mylist_button(e,id) {
         console.log(this.props);
-        
         e.stopPropagation()
-        if(this.props.data.msg!=='succdess')
-        {document.body.style.overflow = "hidden"
-        this.setState({ dimmer: true })
-       }else{
-        console.log('QQ');
-       }
-
+        // if not loggined
+        if (this.props.mylist.msg !== 'success') {
+            document.body.style.overflow = "hidden"
+            this.setState({ dimmer: true })
+        } else {
+            //push track to kkbox favorite list
+            console.log(id);
+            e.stopPropagation()
+            push_Track(id)
+        }
     }
 
     handle_Loggin() {
-
-        
         location.href = url
     }
 
@@ -63,7 +63,12 @@ class Content extends Component {
         this.props.get_Video_Name(name)
         this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
         this.setState({ name: name.name })
-        this.props.searchYoutubeByUrl({ name: name.album.artist.name + '  ' + name.name })
+
+        //prevent repeatly requrest
+        if (this.state.name != name.name) {
+            this.props.searchYoutubeByUrl({ name: name.album.artist.name + '  ' + name.name })
+        }
+
     }
 
 
@@ -118,7 +123,7 @@ class Content extends Component {
                                         </Grid.Column>
                                         <Grid.Column width={6}>
                                             <div className='playlist_info'>
-                                                <h4>{data.name}</h4>
+                                                <h3>{data.name}</h3>
                                                 <p>{data.album.artist.name}</p>
                                             </div>
                                         </Grid.Column>
@@ -137,7 +142,7 @@ class Content extends Component {
     }
 }
 const mapStatetoProps = state => {
-    return { data: state.playlist, youtube: state.youtube }
+    return { data: state.playlist, youtube: state.youtube,mylist:state.mylist}
 }
 const actionCreate = { get_Video_Name, searchYoutubeByUrl }
 Content = connect(mapStatetoProps, actionCreate)(Content)

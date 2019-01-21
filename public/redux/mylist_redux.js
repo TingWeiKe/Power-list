@@ -9,7 +9,7 @@ import {
 const GET_MYLIST_API_SUCCESS = 'GET_MYLIST_API_SUCCESS'
 const GET_MYLIST_API_ERR = 'GET_MYLIST_API_ERR'
 const GET_MY_INFO_SUCCESS = 'GET_MY_INFO_SUCCESS'
-const key = 'AIzaSyDsa1h_sYYPTJ3LwizuBkyHNBEht2qUSJQ'
+
 
 const init = {
     msg: '',
@@ -42,6 +42,8 @@ export function getMylist() {
         const url = 'https://api.kkbox.com/v1.1/me'
         get_Access_Token_From_urlParam()
             .then(res => {
+                console.log(res);
+                
                 doCookieSetup('token', res.access_token, res.expires_in)
                 get_KKbox_API(res.access_token, url)
                 .then(res => {
@@ -57,4 +59,5 @@ export function getMylist() {
     }
 
 }
+
 

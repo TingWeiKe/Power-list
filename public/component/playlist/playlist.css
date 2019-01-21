@@ -68,10 +68,11 @@
     left: 10px;
     padding-top: 8px;
     text-align: left;
-
+    font: 800 !important;
 }
 
-.playlist_info>h4 {
+.playlist_info>h3 {
+ 
     color: rgba(0, 0, 0, .9) !important;
     margin: 0px;
     max-width: 66% !important;
@@ -104,7 +105,7 @@
 
 
 @media screen and (max-width: 760px) {
-    .playlist_info>h4 {
+    .playlist_info>h3 {
         max-width: 60vw !important;
     }
 
@@ -120,6 +121,10 @@
         min-width: 45px;
         min-height: 45px;
 
+    }
+
+    .sidebar {
+        bottom: 10px !important;
     }
 
 }
@@ -172,7 +177,7 @@
     float: right;
     position: relative;
     bottom: 7px;
-    right: 10px;
+    right: 5px;
 }
 
 
@@ -186,7 +191,7 @@
 }
 
 .dropdown {
-    padding-right: 10px;
+
     padding-left: 20px;
     position: relative;
     display: inline-block;
@@ -195,8 +200,8 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    top: 10px;
-    right: 25px !important;
+    top: 15px;
+    right: 20px !important;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -277,5 +282,8 @@
     height: 150%;
     background-color: rgba(0, 0, 0, .6);
     position: fixed;
+}
 
+.sidebar_icon{
+    max-width: 18px !important;
 }

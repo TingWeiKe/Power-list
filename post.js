@@ -45,13 +45,18 @@ router.post('/refresh', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   /* POST access_token from KKbox */
+  let client_id='b997488a13ddff79d7ee295d10302162'
+  let client_secret='798c0a432e2c77dfc590b933f676ccac'
+  console.log( (new Buffer(client_id + ':' + client_secret).toString('base64')));
+  
   async function get_access_data() {
     //FormData must be a String in in content-type: application/x-www-form-urlencoded prevent Axios JSON it again.
     //Use raw String
-    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara + '&client_id=b997488a13ddff79d7ee295d10302162&client_secret=798c0a432e2c77dfc590b933f676ccac'
+    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara 
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
-      headers: { 'host': 'account.kkbox.com', 'content-type': 'application/x-www-form-urlencoded' },
+      headers: {  'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')), 
+      'content-type': 'application/x-www-form-urlencoded' },
       // FormData FormData must be a String /
       data: formData
     }
@@ -73,6 +78,7 @@ router.post('/', function (req, res, next) {
 
 router.post('/youtube', function (req, res, next) {
   let string = req.body.name.name.length > 80 ? req.body.name.name.substring(0, req.body.name.name.length / 2) : req.body.name.name
+  console.log(string)
   let url = "https://www.youtube.com/results?search_query=" + string
   request(encodeURI(url), (err, r, body) => {
     if (r.statusCode === 200) {
@@ -91,4 +97,29 @@ router.post('/youtube', function (req, res, next) {
     }
   })
 });
+
+router.post('/push_tracks', function (req, res, next) {
+
+ 
+    let id = (req.body.id).toString()
+    let access_token = 'sHS2ey0UVYzICN6zcr5g6w=='
+ 
+
+    request.post('https://api.kkbox.com/v1.1/me/favorite', {
+      headers: {
+          'Authorization': 'Bearer ' + access_token,
+          'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+          "track_id": id
+      })
+  }, (error, response, body) => {
+      console.log(`statusCode: ${res.statusCode}`);
+      console.log(body);
+
+      res.send(body)
+  })
+  
+});
+
 module.exports = router;

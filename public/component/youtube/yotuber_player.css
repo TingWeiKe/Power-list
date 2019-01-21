@@ -4,7 +4,7 @@
     width: 100%;
     background-color: rgba(0, 0, 0, .75);
     z-index: 99;
-    height: 60px;
+    height: 65px;
     margin: 0px;
 }
 
@@ -15,10 +15,10 @@
 }
 
 .movie {
-    
+    z-index: 99 !important;
     float: left;
     position: relative;
-    bottom: 40px;
+    bottom: 25px;
     left: 10px;
     border: 1px solid #fff;
     background-color: gray;
@@ -32,7 +32,7 @@
     max-width: 600px;
     max-height: 340px;
     bottom: 304px;
-    z-index: 20;
+    z-index: 99 !important;
 }
 
 .full_screen {
@@ -49,13 +49,14 @@
     min-height: 20px;
     position: fixed;
     padding: 5px 0 !important;
-    bottom: 8px;
+    bottom: 14px;
     left: 140px
 }
 
 .player_title {
     /* margin-top: 5px; */
-    bottom: 35px;
+ 
+    bottom: 40px;
     position: fixed;
     left: 140px;
     font: 800 !important;
@@ -72,10 +73,10 @@
 }
 @media screen and (max-width: 768px) {
     .movie:hover {
-        max-width: 64vw;
-        max-height: 268px;
-        bottom: 240px;
-        z-index: 20;
+        max-width: 120px;
+        max-height: 76px;
+        bottom: 25px;
+        z-index: 99 !important;
     }
     .player_title {
         max-width: 50vw;

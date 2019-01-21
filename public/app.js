@@ -32,7 +32,7 @@ ReactDOM.render(
       <div>
         <HeaderRoutre />
         <Switch>
-    
+        <Route exact path='/' component={Today} />
           <Route path='/today' component={Today} />
           <Route path='/recents' component={Recent} />
           <Route path='/playlist' component={Playlist} />

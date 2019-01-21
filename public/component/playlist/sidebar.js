@@ -11,6 +11,8 @@ class Sidebar extends Component {
   }
   
   handle_option_button(e) {
+    console.log(this.props.id);
+    
     this.setState({ id: this.props.id })
     e.stopPropagation();
   }
@@ -21,7 +23,7 @@ class Sidebar extends Component {
         <div className="dropdown" style={{ Float: 'left' }}>
           <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e)}></Image>
           <div className="dropdown-content" style={{}}>
-            <a onClick={(e) => this.props.handle_mylist_button(e)}>匯入至我的歌單</a>
+            <a onClick={(e) => this.props.handle_mylist_button(e ,this.props.id )}>匯入至我的歌單</a>
             <a href={this.props.tracks_url}>在KKBOX上播放</a>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter, Route } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { get_Playlists_Id_Api, hadndle_Init_State, get_Video_Name } from '../../redux/playlist.redux'
 import { Button, Loader } from 'semantic-ui-react'
@@ -18,16 +18,12 @@ class Playlist extends Component {
   }
 
   componentDidMount() {
+    this.props.hadndle_Init_State()
     this.get_Data()
     
   }
 
-
-  componentWillUnmount() {
-    this.props.hadndle_Init_State()
-  }
   handle_Refresh(){
-    console.log(this.props)
     this.props.hadndle_Init_State()
     get_Access_Token()
     .then(res=>{

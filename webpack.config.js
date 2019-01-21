@@ -35,8 +35,11 @@ module.exports = {
         historyApiFallback: true,
         port: 9000,
         compress:true,
-   
+        proxy: {
+            '/post': 'http://localhost:3000'
+        }
         
     },
+    
 
 };

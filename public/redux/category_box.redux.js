@@ -8,7 +8,7 @@ import {
 
 const CATEGORY_BOX_API_SUCCESS = 'CATEGORY_BOX_API_SUCCESS'
 const CATEGORY_BOX_API_ERROR_MSG = 'CATEGORY_BOX_API_ERROR_MSG'
-const INIT_STATE = 'INIT_STATE'
+const INIT_CATEGORY_STATE = 'INIT_CATEGORY_STATE'
 
 const initState = {
     category_box_data: {},
@@ -25,7 +25,7 @@ export function category_box(state = initState, action) {
             return state = { ...state, bool: false, msg: "success", ...action.payload }
         case CATEGORY_BOX_API_ERROR_MSG:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
-        case INIT_STATE:
+        case INIT_CATEGORY_STATE:
             return state= initState
         default:
             return state
@@ -42,6 +42,9 @@ export function get_Category_Box_api_Api_Error() {
     return { type: CATEGORY_BOX_API_ERROR_MSG }
 }
 
+function handle_Init_State_Success(){
+    return {type:INIT_CATEGORY_STATE}
+}
 
 
 export function get_Category_Box_api(url) {
@@ -75,7 +78,7 @@ export function get_Category_Box_api(url) {
 }
 
 export function handle_Init_State(){
-    return {type:INIT_STATE}
+    return dispatch=> dispatch(handle_Init_State_Success()) 
+
+
 }
-
-

@@ -3,7 +3,7 @@
 import { get_KKbox_API,getCookie } from '../component/getKKboxAPI'
 const PLAYLIST_API_SUCCESS = 'PLAYLIST_API_SUCCESS'
 const PLAYLIST_API_ERROR_MSG = 'PLAYLIST_API_ERROR_MSG'
-const INIT_STATE = 'INIT_STATE'
+const INIT_PLAYLIST_STATE = 'INIT_PLAYLIST_STATE'
 const GET_NAME_SUCCESS = 'GET_NAME_SUCCESS'
 
 const init = {
@@ -20,7 +20,7 @@ export function playlist(state = init, action) {
             return state = { ...state, bool: false, msg: "success", ...action.payload }
         case PLAYLIST_API_ERROR_MSG:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
-        case INIT_STATE:
+        case INIT_PLAYLIST_STATE:
             return state = init
         case GET_NAME_SUCCESS:
             return state= {...state, name:action.payload}
@@ -30,7 +30,7 @@ export function playlist(state = init, action) {
 }
 
 export function handle_Init_State(){
-    return {type:INIT_STATE}
+    return {type:INIT_PLAYLIST_STATE}
 }
 
 

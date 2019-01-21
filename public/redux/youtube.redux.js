@@ -31,32 +31,31 @@ function get_Youtube_API_Err() {
     return { type: GET_YOUTUBE_API_ERR }
 }
 
-export function searchYouTube(dispatch, name) {
+// export function searchYouTube(dispatch, name) {
 
-    axios.get(ROOT_URL, {
-        params: {
-            key: key, 'maxResults': '1',
-            'part': 'snippet',
-            'q': name,
-            'type': '', maxResults: 1
-        }
-    })
-        .then(function (res) {
-            console.log(res)
-            dispatch(get_Youtube_API_Success({ youtube_video: res.data.items }))
-        })
-}
+//     axios.get(ROOT_URL, {
+//         params: {
+//             key: key, 'maxResults': '1',
+//             'part': 'snippet',
+//             'q': name,
+//             'type': '', maxResults: 1
+//         }
+//     })
+//         .then(function (res) {
+//             console.log(res)
+//             dispatch(get_Youtube_API_Success({ youtube_video: res.data.items }))
+//         })
+// }
 
 export function searchYoutubeByUrl(name) {
     return dispatch => {
         //和後端爬蟲拿 Video_ID
-        axios.post('http://localhost:3000/post/youtube', { name: name })
+        axios.post('/post/youtube', { name: name })
             .then(res => {
                 dispatch(get_Youtube_API_Success({ youtube_url_id: res.data.id, youtube_url_title: res.data.title }))
-            }).catch((error) => {
-                //   發request 向Youtube拿Video_ID
-                alert('--------------------The Song is from Youtube DATA API v3--------------------')
-                searchYouTube(dispatch, name.name)
+            })
+            .catch((error) => {
+                return
             })
     }
 }

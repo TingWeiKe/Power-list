@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getMylist } from '../../redux/mylist_redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
-const url = 'https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b997488a13ddff79d7ee295d10302162&response_type=code&state=1111'
+const url = 'https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b997488a13ddff79d7ee295d10302162&response_type=code&state=123'
 class Mylist extends Component {
     constructor(props) {
         super(props)

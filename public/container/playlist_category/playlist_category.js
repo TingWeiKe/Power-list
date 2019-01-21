@@ -22,7 +22,10 @@ class Playlist_category extends Component {
         this.props.get_Category_Api(categoryUrl)
     }
     componentDidMount() {
-        this.get_Data()
+        console.log(this.props);
+        
+        this.props.data.playlist_category.playlist_category_data.hasOwnProperty('data')&&
+        this.props.data.hot_board.hot_board_data.hasOwnProperty('data') ? null : this.get_Data()
     }
 
     handle_Refresh() {
@@ -51,11 +54,11 @@ class Playlist_category extends Component {
                 {bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? null :
                     <div style={bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? { display: 'none' } : { display: 'block' }}>
                         {console.log(bool1, bool2)}
-                        {bool1 == false ? <h2 className='subheader'>最新主打</h2> : null}
+                        {bool1&&bool2 == false ? <h2 className='subheader'>最新主打</h2> : null}
                         <Feature data={this.props.data.playlist_category.playlist_category_data.data} />
-                        {bool1 == false ? <h2 className='subheader'>排行榜</h2> : null}
+                        {bool1&&bool2 == false ? <h2 className='subheader'>排行榜</h2> : null}
                         <HotBoard data={this.props.data.hot_board.hot_board_data.data} />
-                        {bool1 == false ? <h2 className='subheader'>歌單分類</h2> : null}
+                        {bool1&&bool2 == false ? <h2 className='subheader'>歌單分類</h2> : null}
                         <Category data={this.props.data.category.category_data.data} language={this.props.data.setting.language} />
                     </div>}
             </div>

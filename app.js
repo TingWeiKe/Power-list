@@ -1,14 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser')
-var postRouter = require('./post');
-var app = express();
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const bodyParser = require('body-parser')
+const postRouter = require('./post');
+const rateLimit = require("express-rate-limit");
+const app = express();
 
-// view engine setup
+app.enable("trust proxy");
+const limiter = rateLimit({
+  windowMs: 10000, // 10 second
+  max: 3 // limit each IP to 3 requests 5 second
+});
 
+app.use(limiter);
+
+ 
 //设置允许跨域访问该服务.
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -25,7 +33,7 @@ app.use(express.json());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, './/public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.use('/post', postRouter);
