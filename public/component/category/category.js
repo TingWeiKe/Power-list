@@ -11,7 +11,7 @@ class category extends Component {
                 {this.props.data.category.category_data.data !== undefined ? this.props.data.category.category_data.data.map(data => {
                     return <Grid.Column key={data.id}>
                         <div className='feature_content'>
-                            <Link to={{ pathname: '/category_box/' + data.id, url: 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + data.id + '?territory=' + this.props.language }}>
+                            <Link className='link' to={{ pathname: '/category_box/' + data.id, url: 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + data.id + '?territory=' + this.props.language }}>
                                 <Segment className='feature_box'>
                                     <Image className='category_img' src={data.images[0].url}></Image>
                                     <div className='title_box'>

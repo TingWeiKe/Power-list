@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Grid, Image, Dimmer } from 'semantic-ui-react'
+import { Button, Grid, Image } from 'semantic-ui-react'
 import { modify_updated_at } from '../../component/getKKboxAPI'
 import Sidebar from './sidebar'
 import { play_Icon } from './playlist.img'
@@ -80,7 +80,7 @@ class Content extends Component {
     render() {
         let data = this.props.data.playlist_data
         return (
-            <div>
+            <div >
                 {this.state.dimmer ? <div id='dimmer'></div> : null}
                 {this.state.dimmer ? <div className="loggin_box">
                     <div className='button_box'>
@@ -91,7 +91,7 @@ class Content extends Component {
                 </div> : null}
 
                 <Grid stackable={true} textAlign={"left"}>
-                    <Grid.Column widescreen={8}>
+                    <Grid.Column  widescreen={8}>
                         <h1>{data.title}</h1>
                         <Button className='play' fluid onClick={() => this.handle_play_button(this.props.data.playlist_data.tracks.data[0], this.props.data)}>開始播放</Button>
                         <Grid>
@@ -102,7 +102,7 @@ class Content extends Component {
                                         <pre>{data.description}</pre>
                                     </div>
                                     <div className="list_text">
-                                        <a className="list_owner" href={data.owner.url}><p>作者：{data.owner.name}</p></a>
+                                        <a className="list_owner link" href={data.owner.url}><p>作者：{data.owner.name}</p></a>
                                         <p>更新：{modify_updated_at(data.updated_at)}</p>
                                     </div>
 
@@ -112,7 +112,7 @@ class Content extends Component {
                     </Grid.Column>
 
 
-                    <Grid.Column widescreen={8}>
+                    <Grid.Column style={{  maxHeight: '100vh' ,overflow: 'scroll'}}  widescreen={8}>
                         {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
                             return <div key={data.id} className="track">
                                 <Grid.Row>
@@ -134,6 +134,7 @@ class Content extends Component {
                                 </Grid.Row>
                             </div>
                         }) : null}
+                        <div style={{paddingTop:'300px'}}></div>
                     </Grid.Column>
                 </Grid>
 

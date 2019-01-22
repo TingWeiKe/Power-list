@@ -23,22 +23,22 @@ class Box extends Component {
                         {data ? data.map(data => {
                             return <div key={data.id} className='playlist'>
                                 <Grid.Column>
-                                    <Link to={'/playlist/' + data.id} id={data.id}>
+                                    <Link className='link' to={'/playlist/' + data.id} id={data.id}>
                                         <Image style={{ width: ' 100%' }} centered={true} className='img' src={data.images[0].url}>
                                         </Image>
                                     </Link>
-                                    <Link to={'/playlist/' + data.id} id={data.id}>
+                                    <Link className='link' to={'/playlist/' + data.id} id={data.id}>
                                         <Image className="play_icon" src={icon} bordered={true}></Image>
                                     </Link>
                                     <div style={{ cursor: 'default' }}>
                                         <div className='title'>
-                                            <a href={'/playlist/' + data.id}><h2>{data.title}</h2></a>
+                                            <a className='link'  href={'/playlist/' + data.id}><h2>{data.title}</h2></a>
                                         </div>
                                         <div className='description'>
                                             <p >{data.description}</p>
                                         </div>
                                         <div className='text'>
-                                            <a href={data.owner.url}><p>作者：{data.owner.name}</p></a>
+                                            <a className='link' href={data.owner.url}><p>作者：{data.owner.name}</p></a>
                                             <p>更新：{modify_updated_at(data.updated_at)}</p>
                                         </div>
                                     </div>

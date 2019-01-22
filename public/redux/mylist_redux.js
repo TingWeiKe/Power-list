@@ -49,7 +49,6 @@ export function getMylist() {
                 .then(res => {
                     dispatch(get_My_Info_Success({ my_info: res.data }))
                 })
-
                 get_KKbox_API(res.access_token, url + '/favorite?limit=400')
                     .then(res => {
                         if (res.status === 200)

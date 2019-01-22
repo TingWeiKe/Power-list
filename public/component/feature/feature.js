@@ -11,7 +11,7 @@ class feature extends Component {
                 {this.props.data !== undefined ? this.props.data.map(data => {
                     return <Grid.Column key={data.id}>
                         <div className='feature_content'>
-                            <Link to={'/playlist/' + data.id}>
+                            <Link className='link' to={'/playlist/' + data.id}>
                                 <Segment className='feature_box'>
                                     <Image className='category_img' src={data.images[0].url}></Image>
                                     <div className='title_box'>

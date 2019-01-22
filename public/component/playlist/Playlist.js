@@ -27,8 +27,10 @@ class Playlist extends Component {
     this.props.hadndle_Init_State()
     get_Access_Token()
     .then(res=>{
-      doCookieSetup('token',res.access_token,res.expires_in)
-      this.get_Data()
+      if(res.access_token!==undefined){
+        doCookieSetup('token',res.access_token,res.expires_in)
+        this.get_Data()
+      }
     }).catch(()=>{
       this.get_Data()
     })

@@ -21,7 +21,7 @@ export default class recents extends Component {
                     {this.state.storage ? JSON.parse(this.state.storage).reverse().map(data => {
                         return <Grid.Column key={data.playlist_id}>
                             <div className='feature_content'>
-                                <Link to={'/playlist/' + data.playlist_id} id={data.playlist_id}>
+                                <Link className='link' to={'/playlist/' + data.playlist_id} id={data.playlist_id}>
                                     <Segment className='feature_box'>
                                         <Image className='category_img' src={data.image_url.url}></Image>
                                         <div className='title_box'>

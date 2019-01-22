@@ -47,8 +47,10 @@ export function get_Featured_Playlists_Api(url) {
         let access_token;
         !getCookie('token') ? get_Access_Token()
             .then(data => {
-
-                    doCookieSetup('token', data.access_token, data.expires_in)
+                    if(data.access_token!== undefined){
+                        doCookieSetup('token', data.access_token, data.expires_in)
+                    }
+                    
                     
               
                 get_KKbox_API(data.access_token, url)

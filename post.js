@@ -9,8 +9,6 @@ let Qs = require('qs');
 
 
 router.post('/refresh', function (req, res, next) {
-
-
   let code = req.body.code
   // POST access_token from KKbox
   async function get_refresh_access_data() {
@@ -19,8 +17,8 @@ router.post('/refresh', function (req, res, next) {
     let data = Qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: code,
-      client_id: 'b997488a13ddff79d7ee295d10302162',
-      client_secret: '798c0a432e2c77dfc590b933f676ccac'
+      client_id: 'b89dc89b34b7f4d2759580c9b53141ae',
+      client_secret: 'c47d5eebae5d6cf9da082e55447d4ec8'
     })
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
@@ -43,20 +41,23 @@ router.post('/refresh', function (req, res, next) {
     })
 });
 
+
 router.post('/', function (req, res, next) {
   /* POST access_token from KKbox */
-  let client_id='b997488a13ddff79d7ee295d10302162'
-  let client_secret='798c0a432e2c77dfc590b933f676ccac'
-  console.log( (new Buffer(client_id + ':' + client_secret).toString('base64')));
-  
+  let client_id = 'b89dc89b34b7f4d2759580c9b53141ae'
+  let client_secret = 'c47d5eebae5d6cf9da082e55447d4ec8'
+  console.log((new Buffer(client_id + ':' + client_secret).toString('base64')));
+
   async function get_access_data() {
     //FormData must be a String in in content-type: application/x-www-form-urlencoded prevent Axios JSON it again.
     //Use raw String
-    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara 
+    let formData = 'grant_type=' + req.body.grant_type + '&code=' + req.body.urlPara
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
-      headers: {  'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')), 
-      'content-type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')),
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       // FormData FormData must be a String /
       data: formData
     }
@@ -83,7 +84,7 @@ router.post('/youtube', function (req, res, next) {
   request(encodeURI(url), (err, r, body) => {
     if (r.statusCode === 200) {
       let x = body.split('href="/watch?v=')
-      let id = (x[1]).substring(0,11)
+      let id = (x[1]).substring(0, 11)
       let title = (x[2]).split('title="')[1].split('" ')[0]
       if (id.length !== 11) {
         throw ('Error Video_Id')
@@ -92,34 +93,65 @@ router.post('/youtube', function (req, res, next) {
       console.log(id, title);
 
     } else {
-      
+
       res.status(400).json(new Error(err))
     }
   })
 });
 
-router.post('/push_tracks', function (req, res, next) {
+// router.post('/push_tracks', function (req, res, next) {
+//   let id = (req.body.id).toString()
+//   let access_token = 'sHS2ey0UVYzICN6zcr5g6w=='
 
- 
-    let id = (req.body.id).toString()
-    let access_token = 'sHS2ey0UVYzICN6zcr5g6w=='
- 
+//   request.post('https://api.kkbox.com/v1.1/me/favorite', {
+//     headers: {
+//       'Authorization': 'Bearer ' + access_token,
+//       'content-type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       "track_id": id
+//     })
+//   }, (error, response, body) => {
+//     res.send(body)
+//   })
 
-    request.post('https://api.kkbox.com/v1.1/me/favorite', {
-      headers: {
-          'Authorization': 'Bearer ' + access_token,
-          'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-          "track_id": id
-      })
-  }, (error, response, body) => {
-      console.log(`statusCode: ${res.statusCode}`);
-      console.log(body);
+// })
 
-      res.send(body)
+
+router.get('/loggin_spotify', (req, res) => {
+  let sp_my_client_id = '3d6feac295e24ced8496590335a261ef'
+  let scopes = 'user-read-private user-read-email user-library-read';
+  res.redirect('https://accounts.spotify.com/authorize' +
+    '?response_type=code' +
+    '&client_id=' + sp_my_client_id +
+    (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+    '&redirect_uri=' + encodeURIComponent('http://localhost:9000/mylist'));
+})
+
+router.post('/loggin_spotify_callback', (req, res) => {
+  let code = req.body.code
+  let url = 'https://accounts.spotify.com/api/token'
+  let data = Qs.stringify({
+      code: code,
+      redirect_uri: 'http://localhost:9000/mylist',
+      grant_type: 'authorization_code',
+      client_id: '3d6feac295e24ced8496590335a261ef',
+      client_secret: 'f2f58350880048699c74dcf8775b1eb1'
   })
+  console.log(data);
   
-});
+  const config = {
+    method: 'post', url: url, data:data}
+
+  axios(config)
+    .then(data => {
+      res.send(data.data)
+      console.log(data.data);
+    })
+    .catch(err => {
+      console.log(err);
+
+    })
+})
 
 module.exports = router;
