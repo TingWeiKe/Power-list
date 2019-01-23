@@ -31,7 +31,7 @@
 .movie:hover {
     max-width: 600px;
     max-height: 340px;
-    bottom: 304px;
+    bottom: 285px;
     z-index: 99 !important;
 }
 
@@ -41,7 +41,7 @@
     position: fixed;
     max-width: 100vw;
     width: 100vw;
-    min-height: 95vh;
+    min-height: 93vh;
 }
 
 .player-toggle-button {

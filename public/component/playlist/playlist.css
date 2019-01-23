@@ -75,7 +75,7 @@
  
     color: rgba(0, 0, 0, .9) !important;
     margin: 0px;
-    max-width: 66% !important;
+    max-width: 78% !important;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -85,7 +85,7 @@
 .playlist_info>p {
     color: rgba(0, 0, 0, .6) !important;
     margin: 0px;
-    max-width: 66% !important;
+    max-width: 78% !important;
     z-index: 1;
     float: left;
     overflow: hidden;
@@ -286,4 +286,9 @@
 
 .sidebar_icon{
     max-width: 18px !important;
+}
+
+.list_box{
+    max-height: 90vh !important;
+    overflow: scroll !important;
 }

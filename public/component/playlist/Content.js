@@ -91,7 +91,7 @@ class Content extends Component {
                 </div> : null}
 
                 <Grid stackable={true} textAlign={"left"}>
-                    <Grid.Column  widescreen={8}>
+                    <Grid.Column  widescreen={7}>
                         <h1>{data.title}</h1>
                         <Button className='play' fluid onClick={() => this.handle_play_button(this.props.data.playlist_data.tracks.data[0], this.props.data)}>開始播放</Button>
                         <Grid>
@@ -112,7 +112,8 @@ class Content extends Component {
                     </Grid.Column>
 
 
-                    <Grid.Column style={{  maxHeight: '100vh' ,overflow: 'scroll'}}  widescreen={8}>
+                    <Grid.Column  widescreen={9}>
+                    <div className='list_box' >
                         {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
                             return <div key={data.id} className="track">
                                 <Grid.Row>
@@ -134,8 +135,12 @@ class Content extends Component {
                                 </Grid.Row>
                             </div>
                         }) : null}
-                        <div style={{paddingTop:'300px'}}></div>
+                              <div style={{marginTop:'200px'}}></div>
+                        </div>
+                  
+
                     </Grid.Column>
+                    
                 </Grid>
 
             </div>
