@@ -16,10 +16,10 @@
 }
 
 .spotify_box:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     color: white !important;
     cursor: pointer !important;
-    transition-duration: 0.3s
+    transition-duration: 0.2s
 }
 
 .sp_title_box {

@@ -13,7 +13,7 @@ const GET_MY_INFO_SUCCESS = 'GET_MY_INFO_SUCCESS'
 
 const init = {
     msg: '',
-    bool: 'true',
+    bool: true,
     mylist: {}
 }
 

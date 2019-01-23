@@ -3,10 +3,12 @@ import { get_Spotify_API } from '../../redux/spotify.redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
 import './spotify_list.css'
 import {music_icon} from './music_icon'
-import { Button, Grid, Image } from 'semantic-ui-react'
+import {  Grid, Image } from 'semantic-ui-react'
 import { play_Icon } from '../../component/playlist/playlist.img'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
+
+
 class spotify_list extends Component {
 
     constructor(props) {
@@ -16,16 +18,12 @@ class spotify_list extends Component {
         }
     }
     componentDidMount() {
-
-
         if (getUrlVars()) {
             this.props.get_Spotify_API()
         }
 
     }
     handle_play_button(data) {
-        console.log(data , this.state);
-        
         this.setState({ id: data.id })
 
         // //prevent repeatly requrest
@@ -43,12 +41,11 @@ class spotify_list extends Component {
 
     render() {
         let data = this.props.data.data ? this.props.data.data.items : null
-        console.log(data);
 
         return (
             <div>
-                <Grid style={{ zIndex: '99' }}>
-                    {data ? <div id='spotify'></div> : null}
+              {data ?  <Grid style={{ zIndex: '99' }}>
+                    {/* {data ? <div id='spotify'></div> : null} */}
                     <Grid.Column widescreen={16}>
                         {data ? data.map(data => {
                             return <div className='spotify_box' key={data.track.id} >
@@ -70,7 +67,7 @@ class spotify_list extends Component {
                         }) : null}
                         <div style={{ paddingTop: '300px' }}></div>
                     </Grid.Column>
-                </Grid>
+                </Grid>: null}
             </div>
         )
     }

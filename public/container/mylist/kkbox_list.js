@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { play_Icon } from '../../component/playlist/playlist.img'
-import { Button, Grid, Image } from 'semantic-ui-react'
+import { Button, Grid, Image, Loader } from 'semantic-ui-react'
 import { getMylist } from '../../redux/mylist_redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
@@ -19,11 +19,9 @@ class kkboxlist extends Component {
         }
     }
     componentDidMount() {
-
-        // console.log(getUrlVars());
-        // if (getUrlVars()) {
-        //     this.props.getMylist()
-        // }
+        if (getUrlVars()) {
+            this.props.getMylist()
+        }
     }
     handle_play_button(name, artist) {
         this.setState({ name: name })
@@ -37,22 +35,21 @@ class kkboxlist extends Component {
   render() {
     let data = this.props.data.my_info ? this.props.data.my_info : null
     return (
-        <Grid stackable={true} textAlign={"left"}>
+        <div>
+        {this.props.data.mylist.data != undefined ?<Grid stackable={true} textAlign={"left"}>
         <Grid.Column widescreen={6}>
-            {this.props.data.mylist.data != undefined ? <Grid.Row>
-                <Image src={data ? this.props.data.my_info.images[2].url : null} />
-                <div className='playlist_text_box'>
-                    <div className='list_description'>
-                    </div>
-                    <div className="list_text">
+             <Grid.Row>
+                <Image rounded centered circular src={data ? this.props.data.my_info.images[2].url : null} />
+         
+                    <div  style={{textAlign:'center'}}  className="list_text">
                         <a className="list_owner" href={data ? this.props.data.my_info.url : null}><h2>{data ? this.props.data.my_info.name : null}</h2></a>
                     </div>
-                </div>
-            </Grid.Row> : null}
+            </Grid.Row> 
         </Grid.Column>
 
 
-        <Grid.Column widescreen={10}>
+        <Grid.Column style={{position:'relative', bottom:'52px' }} widescreen={10}>
+        <div className='list_box'>
             {this.props.data.mylist.data != undefined ? <Button onClick={() => this.handle_Sort()}>排序</Button> : null}
             {this.props.data.mylist.data != undefined ? <h3>{this.state.toggle ? '最舊 ======> 最新' : '最新 ======> 最舊'}</h3> : null}
             {this.props.data.mylist.data != undefined ? this.props.data.mylist.data.map(data => {
@@ -75,8 +72,12 @@ class kkboxlist extends Component {
                     </Grid.Row>
                 </div>
             }) : null}
+            </div>
         </Grid.Column>
-    </Grid>
+        
+    </Grid>: null}
+    
+    </div>
     )
   }
 }

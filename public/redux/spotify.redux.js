@@ -6,6 +6,7 @@ import { getUrlVars } from '../component/getKKboxAPI'
 const init = {
     msg: '',
     data: {},
+    bool: true
 }
 
 export function spotify(state = init, action) {
