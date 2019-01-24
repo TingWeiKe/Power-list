@@ -67,8 +67,6 @@ router.post('/', function (req, res, next) {
 
   get_access_data(grant_type, code)
     .then(data => {
-      console.log(data)
-      console.log(req.body)
       data.access_token ? res.json(data) : res.json('No access_token')
     }).catch(error => {
       res.json('error')
@@ -138,19 +136,48 @@ router.post('/loggin_spotify_callback', (req, res) => {
       client_id: '3d6feac295e24ced8496590335a261ef',
       client_secret: 'f2f58350880048699c74dcf8775b1eb1'
   })
-  console.log(data);
-  
+
   const config = {
     method: 'post', url: url, data:data}
 
   axios(config)
     .then(data => {
-      res.send(data.data)
       console.log(data.data);
+      
+      res.send(data.data)
     })
     .catch(err => {
-      console.log(err);
+      res.send(err)
+    })
+})
 
+
+router.post('/refresh_spotify', (req, res) => {
+  console.log(req.body);
+  
+let  client_id=  '3d6feac295e24ced8496590335a261ef'
+let client_secret= 'f2f58350880048699c74dcf8775b1eb1'
+  let url = 'https://accounts.spotify.com/api/token'
+  let data = Qs.stringify({
+      grant_type: 'refresh_token',
+      refresh_token:req.body.refresh_token
+  })
+  
+
+  const config = {
+    headers: {'content-type':'application/x-www-form-urlencoded','Authorization':'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))},
+    method: 'post', 
+    url: url, 
+    data:data}
+  axios(config)
+    .then(data => {
+      res.json(data.data)
+      
+
+    })
+    .catch(err => {
+      res.json(err)
+      
     })
 })
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { get_Spotify_API } from '../../redux/spotify.redux'
+import { get_Spotify_API, get_Spotify_Next } from '../../redux/spotify.redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
 import './spotify_list.css'
 import { music_icon } from './music_icon'
@@ -7,7 +7,7 @@ import { Grid, Image, Loader } from 'semantic-ui-react'
 import { play_Icon } from '../../component/playlist/playlist.img'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
-
+import InfiniteScroll from 'react-infinite-scroller';
 
 class spotify_list extends Component {
 
@@ -18,8 +18,9 @@ class spotify_list extends Component {
         }
     }
     componentDidMount() {
-        if (getUrlVars() && getUrlVars().length > 150) {
-            this.props.get_Spotify_API()
+        const url  = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=40&market=TW'
+        if (getUrlVars() && getUrlVars().length > 150 ) {
+            this.props.get_Spotify_API(url)
         }
 
     }
@@ -60,12 +61,20 @@ class spotify_list extends Component {
                                             </div>
 
                                             {/* <Sidebar id={data.track.id} tracks_url={data.url} handle_mylist_button={this.handle_mylist_button}></Sidebar> */}
-
+                                      
                                         </div>
                                     </Grid.Row>
                                 </div>
-                            }) : null}
+                            }) : null} <InfiniteScroll
+                            pageStart={0}
+                            loadMore={()=>this.props.get_Spotify_Next(this.props.data.data.next)}
+                            hasMore={true }
+                            loader={<div className="loader" key={0}>Loading ...</div>}
+                            >
+                  
+                           </InfiniteScroll>
                             <div style={{ paddingTop: '300px' }}></div>
+                           
                         </Grid.Column>
                     </Grid> : null}
             </div>
@@ -74,7 +83,7 @@ class spotify_list extends Component {
 }
 
 const mapStatetoProps = state => { return { data: state.spotify } }
-const actionCreate = { get_Spotify_API, searchYoutubeByUrl }
+const actionCreate = { get_Spotify_API, searchYoutubeByUrl,get_Spotify_Next }
 spotify_list = connect(mapStatetoProps, actionCreate)(spotify_list)
 
 

@@ -1,8 +1,11 @@
 
 import axios from 'axios'
+import { getUrlVars, doCookieSetup, getCookie } from '../component/getKKboxAPI'
 const GET_SPOTIFY_API_SUCCESS = 'GET_SPOTIFY_API_SUCCESS'
 const GET_SPOTIFY_API_ERR = 'GET_SPOTIFY_API_ERR'
-import { getUrlVars } from '../component/getKKboxAPI'
+const GET_SPOTIFY_NEXT = 'GET_SPOTIFY_NEXT'
+
+
 const init = {
     msg: '',
     data: {},
@@ -15,6 +18,12 @@ export function spotify(state = init, action) {
             return state = { ...state, bool: false, msg: "success", ...action.data }
         case GET_SPOTIFY_API_ERR:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
+        case GET_SPOTIFY_NEXT:
+            action.data.data.items.map(i => {
+                state.data.items.push(i)
+            })
+            state.data.next=action.data.data.next
+            return state =  {...state }
         default:
             return state
     }
@@ -23,6 +32,10 @@ export function spotify(state = init, action) {
 
 function get_Spotify_API_Success(data) {
     return { type: GET_SPOTIFY_API_SUCCESS, data: data }
+}
+
+function get_Spotify_Next_Success(data) {
+    return { type: GET_SPOTIFY_NEXT, data: data }
 }
 
 function get_Spotify_API_Err() {
@@ -34,17 +47,20 @@ export function get_Spotify_API() {
     return dispatch => {
         axios.post('/post/loggin_spotify_callback', { code: getUrlVars() })
             .then(res => {
-                console.log(res.data.access_token);
+                console.log(res.data);
+
+                doCookieSetup('sp_refresh_token', res.data.refresh_token)
+
                 let access_token = res.data.access_token
                 let config = {
                     method: "GET",
                     market: 'TW',
                     headers: { 'Authorization': 'Bearer ' + access_token }
                 }
-                axios.get('	https://api.spotify.com/v1/me/tracks?offset=0&limit=40&market=TW', config)
+                axios.get('	https://api.spotify.com/v1/me/tracks?offset=0&limit=10&market=TW', config)
                     .then(res => {
-                        if(res.status===200){
-                            dispatch(get_Spotify_API_Success({data:res.data}))
+                        if (res.status === 200) {
+                            dispatch(get_Spotify_API_Success({ data: res.data }))
                         }
                     })
                     .catch(err => {
@@ -54,3 +70,34 @@ export function get_Spotify_API() {
     }
 }
 
+export function get_Spotify_Next(url) {
+    return dispatch => {
+        if (url) {
+            axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
+                .then(res => {
+                    console.log(res.data);
+                    let access_token = res.data.access_token
+                    let config = {
+                        method: "GET",
+                        market: 'TW',
+                        headers: { 'Authorization': 'Bearer ' + access_token }
+                    }
+                    axios.get(url, config)
+                        .then(res => {
+                            if (res.status === 200) {
+                                console.log(res.data);
+
+                                dispatch(get_Spotify_Next_Success({ data: res.data }))
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                })
+                .catch(err => {
+
+                })
+
+        }
+    }
+}

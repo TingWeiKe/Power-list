@@ -12,7 +12,7 @@ let sp_url = 'https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + sp_my_client_id +
     (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-    '&redirect_uri=' + encodeURIComponent('https://kkboxoauth2.herokuapp.com/mylist')
+    '&redirect_uri=' + encodeURIComponent('http://localhost:9000/mylist')//https://kkboxoauth2.herokuapp.com/mylist
 const url = 'https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b89dc89b34b7f4d2759580c9b53141ae&response_type=code&state=123'
 class Mylist extends Component {
 

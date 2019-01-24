@@ -42,8 +42,8 @@ export function getMylist() {
         const url = 'https://api.kkbox.com/v1.1/me'
         get_Access_Token_From_urlParam()
             .then(res => {
-                console.log(res);
-                
+                if(res.access_token!=undefined){
+                    console.log(res);
                 doCookieSetup('token', res.access_token, res.expires_in)
                 get_KKbox_API(res.access_token, url)
                 .then(res => {
@@ -54,6 +54,9 @@ export function getMylist() {
                         if (res.status === 200)
                                 dispatch(get_Mylist_API_Success({ mylist: res.data }))
                     })
+                }
+              
+               
             })
     }
 
