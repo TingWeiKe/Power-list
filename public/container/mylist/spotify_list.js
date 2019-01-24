@@ -18,8 +18,8 @@ class spotify_list extends Component {
         }
     }
     componentDidMount() {
-        const url  = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=40&market=TW'
-        if (getUrlVars() && getUrlVars().length > 150 ) {
+        const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=40&market=TW'
+        if (getUrlVars() && getUrlVars().length > 150) {
             this.props.get_Spotify_API(url)
         }
 
@@ -61,20 +61,21 @@ class spotify_list extends Component {
                                             </div>
 
                                             {/* <Sidebar id={data.track.id} tracks_url={data.url} handle_mylist_button={this.handle_mylist_button}></Sidebar> */}
-                                      
+
                                         </div>
                                     </Grid.Row>
                                 </div>
-                            }) : null} <InfiniteScroll
-                            pageStart={0}
-                            loadMore={()=>this.props.get_Spotify_Next(this.props.data.data.next)}
-                            hasMore={true }
-                            loader={<div className="loader" key={0}>Loading ...</div>}
+                            }) : null}
+                            <InfiniteScroll
+                                pageStart={0}
+                                loadMore={() => this.props.get_Spotify_Next(this.props.data.data.next)}
+                                hasMore={true}
+                                loader={<Loader style={{color:'white'}} active={!!this.props.data.data.next} content='載入中...' inline={'centered'} size='large' />}
                             >
-                  
-                           </InfiniteScroll>
-                            <div style={{ paddingTop: '300px' }}></div>
-                           
+
+                            </InfiniteScroll>
+                            <div style={{ paddingTop: '200px' }}></div>
+
                         </Grid.Column>
                     </Grid> : null}
             </div>
@@ -83,7 +84,7 @@ class spotify_list extends Component {
 }
 
 const mapStatetoProps = state => { return { data: state.spotify } }
-const actionCreate = { get_Spotify_API, searchYoutubeByUrl,get_Spotify_Next }
+const actionCreate = { get_Spotify_API, searchYoutubeByUrl, get_Spotify_Next }
 spotify_list = connect(mapStatetoProps, actionCreate)(spotify_list)
 
 

@@ -5,7 +5,7 @@ import { getMylist } from '../../redux/mylist_redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
-
+import InfiniteScroll from 'react-infinite-scroller';
 import './mylist.css'
 
 
@@ -19,10 +19,11 @@ class kkboxlist extends Component {
         }
     }
     componentDidMount() {
+        const url = 'https://api.kkbox.com/v1.1/me'
         console.log(getUrlVars());
 
         if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
-            this.props.getMylist()
+            this.props.getMylist(url)
         }
     }
     handle_play_button(name, artist) {
@@ -75,8 +76,19 @@ class kkboxlist extends Component {
                                     </Grid.Row>
                                 </div>
                             }) : null}
-                            <div style={{ paddingTop: '300px' }}></div>
+
+                        <InfiniteScroll
+                                pageStart={0}
+                                loadMore={()=>{console.log('QQ')}}
+                                hasMore={true}
+                                useWindow={false}
+                                >
+                                <h1>QQ</h1>
+                            </InfiniteScroll>
+
+                           <div style={{ paddingTop: '200px' }}></div>
                         </div>
+                        
                     </Grid.Column>
 
                 </Grid> : null}

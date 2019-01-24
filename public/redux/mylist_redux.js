@@ -37,29 +37,26 @@ function get_Mylist_API_Success(data) {
     return { type: GET_MYLIST_API_SUCCESS, mylist: data }
 }
 
-export function getMylist() {
+export function getMylist(url) {
     return dispatch => {
-        const url = 'https://api.kkbox.com/v1.1/me'
+
         get_Access_Token_From_urlParam()
             .then(res => {
-                if(res.access_token!=undefined){
+                if (res.access_token != undefined) {
                     console.log(res);
-                doCookieSetup('token', res.access_token, res.expires_in)
-                get_KKbox_API(res.access_token, url)
-                .then(res => {
-                    dispatch(get_My_Info_Success({ my_info: res.data }))
-                })
-                get_KKbox_API(res.access_token, url + '/favorite?limit=400')
-                    .then(res => {
-                        if (res.status === 200)
+                    doCookieSetup('token', res.access_token, res.expires_in)
+                    get_KKbox_API(res.access_token, url)
+                        .then(res => {
+                            dispatch(get_My_Info_Success({ my_info: res.data }))
+                        })
+                    get_KKbox_API(res.access_token, url + '/favorite?limit=40')
+                        .then(res => {
+                            if (res.status === 200)
                                 dispatch(get_Mylist_API_Success({ mylist: res.data }))
-                    })
+                        })
                 }
-              
-               
             })
     }
-
 }
 
 

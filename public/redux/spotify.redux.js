@@ -57,7 +57,7 @@ export function get_Spotify_API() {
                     market: 'TW',
                     headers: { 'Authorization': 'Bearer ' + access_token }
                 }
-                axios.get('	https://api.spotify.com/v1/me/tracks?offset=0&limit=10&market=TW', config)
+                axios.get('	https://api.spotify.com/v1/me/tracks?offset=0&limit=20&market=TW', config)
                     .then(res => {
                         if (res.status === 200) {
                             dispatch(get_Spotify_API_Success({ data: res.data }))
