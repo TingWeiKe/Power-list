@@ -12,7 +12,7 @@ let sp_url = 'https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + sp_my_client_id +
     (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-    '&redirect_uri=' + encodeURIComponent('http://localhost:9000/mylist')
+    '&redirect_uri=' + encodeURIComponent('https://kkboxoauth2.herokuapp.com/mylist')
 const url = 'https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b89dc89b34b7f4d2759580c9b53141ae&response_type=code&state=123'
 class Mylist extends Component {
 
@@ -37,10 +37,7 @@ class Mylist extends Component {
                     {sp_bool == true && kk_bool === true ? <Button disabled={!!this.props.mylist.my_info} secondary>
                         <a href={sp_url}>登入ＳＰＯＴＩＦＹ</a>
                     </Button> : null}
-                    {/* <Loader content='載入中...' active={this.props.data.mylist.data == undefined && getUrlVars() != null} inline={'centered'} size='massive' /> */}
                 </div>
-                 {/* <Loader content='載入中...' active={sp_bool == true && kk_bool === true  && getUrlVars() != null} inline={'centered'} size='massive' />  */}
-                {sp_bool==false ? <div id='spotify'></div> : null}
                 <Kkboxlist></Kkboxlist>
                 <Spotify_list></Spotify_list> 
                 

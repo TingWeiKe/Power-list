@@ -2,8 +2,8 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    height: 120vh;
-    width: 120vw;
+    height: 100vh;
+    width: 110vw;
     background-color: #282828;
     background-image: linear-gradient(to right bottom, rgba(45, 70, 140,.7), rgb(0, 0, 0)), linear-gradient(transparent, rgb(0, 0, 0) 70%);
 }
@@ -23,7 +23,7 @@
 }
 
 .sp_title_box {
-   
+    max-width:94%;
     position: relative;
     bottom: 55px;
     left: 130px;
@@ -60,7 +60,7 @@
 .duration_ms{
     position: relative;
     bottom: 56px;
-    right: 200px;
+    right: 100px;
     text-align: right;
 }
 .green{
@@ -74,14 +74,14 @@
         left: 36px;
     }
     .sp_play_Icon{
-        left: 10px;
+        left: 4px;
     }
     .sp_img{
         visibility: hidden;
     }
     .sp_title_box{
-        left: 40px;
-        
+        left: 37px;
+        max-width: 94%;
     }
     .sp_title_box >h3{
         max-width: 82%;
@@ -91,9 +91,13 @@
         max-width: 82%;
         
     }
-
+ 
 }
 
 @media screen and (max-width: 320px) {
    
+}
+
+.sp_column{
+
 }

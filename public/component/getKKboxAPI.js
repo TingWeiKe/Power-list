@@ -7,7 +7,7 @@ export function getUrlVars() {
     let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m, key, value) => {
         vars[key] = value
     })
-    return vars["code"] ? vars["code"] : null
+    return vars["code"] ? vars["code"] : ''
 }
 
 
