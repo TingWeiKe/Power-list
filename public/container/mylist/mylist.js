@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { Button ,Loader} from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getUrlVars } from '../../component/getKKboxAPI'
-
 import './mylist.css'
 import Kkboxlist from './kkbox_list'
 import Spotify_list from './spotify_list'
 let sp_my_client_id = '3d6feac295e24ced8496590335a261ef'
-let scopes = 'user-read-private user-read-email user-library-read';
+let scopes = 'user-read-private user-read-email user-library-read user-library-modify';
 let sp_url = 'https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + sp_my_client_id +
@@ -29,7 +27,6 @@ class Mylist extends Component {
             <div className="header">
                 <h1>我的歌單</h1>
                 <div className='login_button'>
-                 
                     {sp_bool == true && kk_bool === true ?
                         <Button style={kk_data.data != undefined ? { display: 'none' } : {}} primary disabled={!!this.props.mylist.my_info} >
                             <a href={url}>登入 ＫＫＢＯＸ</a>

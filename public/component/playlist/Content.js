@@ -3,11 +3,17 @@ import { Button, Grid, Image } from 'semantic-ui-react'
 import { modify_updated_at } from '../../component/getKKboxAPI'
 import Sidebar from './sidebar'
 import { play_Icon } from './playlist.img'
-import{ push_Track} from '../getKKboxAPI'
+import { sidebar_icon } from './sidebar_icon'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
-const url = 'https://account.kkbox.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fmylist&client_id=b997488a13ddff79d7ee295d10302162&response_type=code&state=1111'
+import { search_Spotify_Track_and_Put,refresh_Spotify_List} from '../../redux/spotify.redux'
+
+let sp_url = 'https://accounts.spotify.com/authorize' +
+    '?response_type=code' +
+    '&client_id=' + '3d6feac295e24ced8496590335a261ef' +
+    ('user-read-private user-read-email user-library-read' ? '&scope=' + encodeURIComponent('user-read-private user-read-email user-library-read') : '') +
+    '&redirect_uri=' + encodeURIComponent('http://localhost:9000/mylist')//https://kkboxoauth2.herokuapp.com/mylist
 
 
 class Content extends Component {
@@ -18,6 +24,15 @@ class Content extends Component {
             name: '',
             dimmer: false
         }
+    }
+
+    handle_option_button(e) {
+
+        let name = this.props.name.name
+        console.log(name);
+        this.props.handle_mylist_button(e, name)
+        this.setState({ id: this.props.id })
+        e.stopPropagation();
     }
 
     handle_Storage(storage) {
@@ -35,23 +50,24 @@ class Content extends Component {
             }
         }
     }
-    handle_mylist_button(e,id) {
-        console.log(this.props);
+
+
+    handle_mylist_button(e, name) {
         e.stopPropagation()
         // if not loggined
-        if (this.props.mylist.msg !== 'success') {
+        if (this.props.spotify.msg !== 'success') {
             document.body.style.overflow = "hidden"
             this.setState({ dimmer: true })
-        } else {
-            //push track to kkbox favorite list
-            console.log(id);
-            e.stopPropagation()
-            push_Track(id)
+        } 
+         else{
+            // push track to kkbox favorite list
+            console.log(name.album.artist.name + '  ' + name.name );
+            search_Spotify_Track_and_Put(name.album.artist.name + '  ' + name.name )
         }
     }
 
     handle_Loggin() {
-        location.href = url
+        location.href = sp_url
     }
 
     handle_Cancle() {
@@ -84,14 +100,14 @@ class Content extends Component {
                 {this.state.dimmer ? <div id='dimmer'></div> : null}
                 {this.state.dimmer ? <div className="loggin_box">
                     <div className='button_box'>
-                        <h2>要登入KKBOX嗎？</h2>
-                        <Button className='login_button' onClick={() => this.handle_Loggin()} primary>登入KKBOX</Button>
+                        <h2>要登入Spotify嗎？</h2>
+                        <Button className='login_button' onClick={() => this.handle_Loggin()} primary>登入Spotify</Button>
                         <Button className='login_button' onClick={(e) => this.handle_Cancle(e)} secondary>取消</Button>
                     </div>
                 </div> : null}
 
                 <Grid stackable={true} textAlign={"left"}>
-                    <Grid.Column  widescreen={7}>
+                    <Grid.Column widescreen={7}>
                         <h1>{data.title}</h1>
                         <Button className='play' fluid onClick={() => this.handle_play_button(this.props.data.playlist_data.tracks.data[0], this.props.data)}>開始播放</Button>
                         <Grid>
@@ -112,35 +128,44 @@ class Content extends Component {
                     </Grid.Column>
 
 
-                    <Grid.Column  widescreen={9}>
-                    <div className='list_box' >
-                        {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
-                            return <div key={data.id} className="track">
-                                <Grid.Row>
-                                    <Button className='play_button' fluid onClick={() => this.handle_play_button(data, this.props.data)}>
-                                        <Grid.Column width={3}>
-                                            {this.state.name == data.name ? <Image className='play_Icon' src={play_Icon}></Image> : null}
-                                            <Image className='playlist_img' src={data.album.images[0].url}></Image>
-                                        </Grid.Column>
-                                        <Grid.Column width={6}>
-                                            <div className='playlist_info'>
-                                                <h3>{data.name}</h3>
-                                                <p>{data.album.artist.name}</p>
-                                            </div>
-                                        </Grid.Column>
-                                        <Grid.Column width={4}>
-                                            <Sidebar id={data.id} tracks_url={data.url} handle_mylist_button={this.handle_mylist_button}></Sidebar>
-                                        </Grid.Column>
-                                    </Button>
-                                </Grid.Row>
-                            </div>
-                        }) : null}
-                              <div style={{marginTop:'200px'}}></div>
+                    <Grid.Column widescreen={9}>
+                        <div className='list_box' >
+                            {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
+                                return <div key={data.id} className="track">
+                                    <Grid.Row>
+                                        <Button className='play_button' fluid onClick={() => this.handle_play_button(data, this.props.data)}>
+                                            <Grid.Column width={3}>
+                                                {this.state.name == data.name ? <Image className='play_Icon' src={play_Icon}></Image> : null}
+                                                <Image className='playlist_img' src={data.album.images[0].url}></Image>
+                                            </Grid.Column>
+                                            <Grid.Column width={6}>
+                                                <div className='playlist_info'>
+                                                    <h3>{data.name}</h3>
+                                                    <p>{data.album.artist.name}</p>
+                                                </div>
+                                            </Grid.Column>
+                                            <Grid.Column width={4}>
+                                                {/* <Sidebar name={data} tracks_url={data.url} handle_mylist_button={this.handle_mylist_button}></Sidebar> */}
+                                                <div className="sidebar">
+                                                    <div className="dropdown" style={{ Float: 'left' }}>
+                                                        <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e)}></Image>
+                                                        <div className="dropdown-content" style={{}}>
+                                                            <a onClick={e => this.handle_mylist_button(e,data)}>匯入至SPOTIFY歌單</a>
+                                                            <a onClick={e => { e.stopPropagation() }} href={data.url}>在KKBOX上播放</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Grid.Column>
+                                        </Button>
+                                    </Grid.Row>
+                                </div>
+                            }) : null}
+                            <div style={{ marginTop: '200px' }}></div>
                         </div>
-                  
+
 
                     </Grid.Column>
-                    
+
                 </Grid>
 
             </div>
@@ -148,9 +173,9 @@ class Content extends Component {
     }
 }
 const mapStatetoProps = state => {
-    return { data: state.playlist, youtube: state.youtube,mylist:state.mylist}
+    return { data: state.playlist, youtube: state.youtube, mylist: state.mylist, spotify: state.spotify }
 }
-const actionCreate = { get_Video_Name, searchYoutubeByUrl }
+const actionCreate = { get_Video_Name, searchYoutubeByUrl,refresh_Spotify_List }
 Content = connect(mapStatetoProps, actionCreate)(Content)
 
 export default Content

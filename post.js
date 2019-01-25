@@ -8,6 +8,7 @@ let request = require("request");
 let Qs = require('qs');
 
 
+
 router.post('/refresh', function (req, res, next) {
   let code = req.body.code
   // POST access_token from KKbox
@@ -153,7 +154,6 @@ router.post('/loggin_spotify_callback', (req, res) => {
 
 
 router.post('/refresh_spotify', (req, res) => {
-  console.log(req.body);
   
 let  client_id=  '3d6feac295e24ced8496590335a261ef'
 let client_secret= 'f2f58350880048699c74dcf8775b1eb1'
@@ -172,6 +172,7 @@ let client_secret= 'f2f58350880048699c74dcf8775b1eb1'
   axios(config)
     .then(data => {
       res.json(data.data)
+      console.log(data.data);
       
 
     })
@@ -179,6 +180,29 @@ let client_secret= 'f2f58350880048699c74dcf8775b1eb1'
       res.json(err)
       
     })
+})
+
+router.post('/put_spotify_track',(req,res)=>{
+ 
+  console.log(req.body.access_token);
+  let id =  req.body.id
+  let access_token = req.body.access_token
+  var options = { method: 'PUT',
+  url: 'https://api.spotify.com/v1/me/tracks',
+  qs: { ids: id },
+  headers: 
+   { 
+     'cache-control': 'no-cache',
+     accept: 'application/json',
+     authorization: 'Bearer '+ access_token ,
+     'content-type': 'application/json' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+  
 })
 
 module.exports = router;

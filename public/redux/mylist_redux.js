@@ -9,7 +9,7 @@ import {
 const GET_MYLIST_API_SUCCESS = 'GET_MYLIST_API_SUCCESS'
 const GET_MYLIST_API_ERR = 'GET_MYLIST_API_ERR'
 const GET_MY_INFO_SUCCESS = 'GET_MY_INFO_SUCCESS'
-
+const GET_KKBOX_NEXT_SUCCESS = 'GET_KKBOX_NEXT_SUCCESS'
 
 const init = {
     msg: '',
@@ -25,6 +25,13 @@ export function mylist(state = init, action) {
             return state = { ...state, msg: '伺服器錯誤', bool: false }
         case GET_MY_INFO_SUCCESS:
             return state = { ...state, ...action.my_info }
+        case GET_KKBOX_NEXT_SUCCESS:
+            console.log(action.mylist ,state);
+            state.mylist.paging.next = action.mylist.paging.next
+            action.mylist.data.map(i=>{
+                state.mylist.data.push(i)
+            })
+            return state =  {...state }
         default:
             return state
     }
@@ -35,6 +42,10 @@ function get_My_Info_Success(data) {
 
 function get_Mylist_API_Success(data) {
     return { type: GET_MYLIST_API_SUCCESS, mylist: data }
+}
+
+function get_Kkbox_Next_Success(data) {
+    return { type: GET_KKBOX_NEXT_SUCCESS, mylist: data }
 }
 
 export function getMylist(url) {
@@ -49,7 +60,7 @@ export function getMylist(url) {
                         .then(res => {
                             dispatch(get_My_Info_Success({ my_info: res.data }))
                         })
-                    get_KKbox_API(res.access_token, url + '/favorite?limit=40')
+                    get_KKbox_API(res.access_token, url + '/favorite?limit=60')
                         .then(res => {
                             if (res.status === 200)
                                 dispatch(get_Mylist_API_Success({ mylist: res.data }))
@@ -60,3 +71,21 @@ export function getMylist(url) {
 }
 
 
+export function get_Kkbox_Next(url) {
+    return dispatch => {
+        if (url) {
+            get_KKbox_API(getCookie('token'), url)
+                .then(res => {
+                    if(res.status===200){
+                        dispatch(get_Kkbox_Next_Success(res.data))
+                    }
+                    console.log(res);
+
+                })
+        }
+
+        // dispatch(get_Kkbox_Next_Success('qwert'))
+
+
+    }
+}

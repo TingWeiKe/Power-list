@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom'
                     {this.props.location.state && this.props.location.state.hasOwnProperty('playlists')?  this.props.location.state.playlists.data.map(data => {
                         return <Grid.Column key={data.id}>
                             <div className='feature_content'>
-                                <Link to={'/playlist/' + data.id} id={data.id}>
+                                <Link className='link' to={'/playlist/' + data.id} id={data.id}>
                                     <Segment className='feature_box'>
                                         <Image className='category_img' src={data.images[0].url}></Image>
                                         <div className='title_box'>

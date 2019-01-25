@@ -1,3 +1,15 @@
 .login_button a{
     color: white !important;
 }
+.kkbox_list{
+    margin: auto;
+    max-width: 70vw;
+}
+
+@media screen and (max-width: 760px) {
+    .kkbox_list{
+        margin: auto;
+        max-width: none;
+    }
+
+}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { get_Spotify_API, get_Spotify_Next } from '../../redux/spotify.redux'
+import { get_Spotify_API, get_Spotify_Next ,refresh_Spotify_List } from '../../redux/spotify.redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
 import './spotify_list.css'
 import { music_icon } from './music_icon'
-import { Grid, Image, Loader } from 'semantic-ui-react'
+import { Grid, Image, Loader,Button } from 'semantic-ui-react'
 import { play_Icon } from '../../component/playlist/playlist.img'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
@@ -39,15 +39,24 @@ class spotify_list extends Component {
         return m + ":" + (s < 10 ? '0' : '') + s;
     }
 
+    try(){
+
+        this.props.refresh_Spotify_List()
+    }
+
     render() {
         let data = this.props.data.data ? this.props.data.data.items : null
         return (
             <div>
+                           
                 {data ?
                     <Grid style={{ zIndex: '99' }}>
+                    
                         <div id='spotify'></div>
+                        
                         {/* {data ? <div id='spotify'></div> : null} */}
                         <Grid.Column className='sp_column' widescreen={16}>
+                        <Button onClick={()=>this.try()} secondary>TRY</Button>
                             {data ? data.map(data => {
                                 return <div className='spotify_box' key={data.track.id} >
                                     <Grid.Row>
@@ -70,9 +79,9 @@ class spotify_list extends Component {
                                 pageStart={0}
                                 loadMore={() => this.props.get_Spotify_Next(this.props.data.data.next)}
                                 hasMore={true}
-                                loader={<Loader style={{color:'white'}} active={!!this.props.data.data.next} content='載入中...' inline={'centered'} size='large' />}
+                                loader={<Loader key='loader' style={{color:'white'}} active={!!this.props.data.data.next} content='載入中...' inline={'centered'} size='large' />}
                             >
-
+                                    {null}
                             </InfiniteScroll>
                             <div style={{ paddingTop: '200px' }}></div>
 
@@ -84,7 +93,7 @@ class spotify_list extends Component {
 }
 
 const mapStatetoProps = state => { return { data: state.spotify } }
-const actionCreate = { get_Spotify_API, searchYoutubeByUrl, get_Spotify_Next }
+const actionCreate = { get_Spotify_API, searchYoutubeByUrl, get_Spotify_Next ,refresh_Spotify_List  }
 spotify_list = connect(mapStatetoProps, actionCreate)(spotify_list)
 
 
