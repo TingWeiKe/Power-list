@@ -41,11 +41,9 @@ ReactDOM.render(
           <Route path='/mylist' component={Mylist} />
           <Route path='/setting' component={Setting} />
           <Route paht='/search' component={Search} />
-
         </Switch>
         <Yotuber_player />
       </div>
-
     </BrowserRouter>
   </Provider>
 

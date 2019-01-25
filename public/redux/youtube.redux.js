@@ -11,6 +11,7 @@ const init = {
     youtube_url_title: '',
 }
 
+
 export function youtube(state = init, action) {
     switch (action.type) {
         case GET_YOUTUBE_API_SUCCESS:
@@ -54,8 +55,9 @@ export function searchYoutubeByUrl(name) {
             .then(res => {
                 dispatch(get_Youtube_API_Success({ youtube_url_id: res.data.id, youtube_url_title: res.data.title }))
             })
-            .catch((error) => {
-                return
+            .catch(error => {
+                console.log(error)
+
             })
     }
 }

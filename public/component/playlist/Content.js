@@ -7,7 +7,7 @@ import { sidebar_icon } from './sidebar_icon'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
-import { search_Spotify_Track_and_Put,refresh_Spotify_List} from '../../redux/spotify.redux'
+import { search_Spotify_Track_and_Put, refresh_Spotify_List } from '../../redux/spotify.redux'
 
 let sp_url = 'https://accounts.spotify.com/authorize' +
     '?response_type=code' +
@@ -58,11 +58,11 @@ class Content extends Component {
         if (this.props.spotify.msg !== 'success') {
             document.body.style.overflow = "hidden"
             this.setState({ dimmer: true })
-        } 
-         else{
+        }
+        else {
             // push track to kkbox favorite list
-            console.log(name.album.artist.name + '  ' + name.name );
-            search_Spotify_Track_and_Put(name.album.artist.name + '  ' + name.name )
+            console.log(name.album.artist.name + '  ' + name.name);
+            search_Spotify_Track_and_Put(name.album.artist.name + '  ' + name.name)
         }
     }
 
@@ -84,7 +84,7 @@ class Content extends Component {
         if (this.state.name != name.name) {
             this.props.searchYoutubeByUrl({ name: name.album.artist.name + '  ' + name.name })
         }
-
+        // TODO: fuck the tracks
     }
 
 
@@ -150,7 +150,7 @@ class Content extends Component {
                                                     <div className="dropdown" style={{ Float: 'left' }}>
                                                         <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e)}></Image>
                                                         <div className="dropdown-content" style={{}}>
-                                                            <a onClick={e => this.handle_mylist_button(e,data)}>匯入至SPOTIFY歌單</a>
+                                                            <a onClick={e => this.handle_mylist_button(e, data)}>匯入至SPOTIFY歌單</a>
                                                             <a onClick={e => { e.stopPropagation() }} href={data.url}>在KKBOX上播放</a>
                                                         </div>
                                                     </div>
@@ -175,7 +175,7 @@ class Content extends Component {
 const mapStatetoProps = state => {
     return { data: state.playlist, youtube: state.youtube, mylist: state.mylist, spotify: state.spotify }
 }
-const actionCreate = { get_Video_Name, searchYoutubeByUrl,refresh_Spotify_List }
+const actionCreate = { get_Video_Name, searchYoutubeByUrl, refresh_Spotify_List }
 Content = connect(mapStatetoProps, actionCreate)(Content)
 
 export default Content

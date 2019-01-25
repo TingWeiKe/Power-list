@@ -7,7 +7,14 @@ let code = ''
 let request = require("request");
 let Qs = require('qs');
 
+const kkbox_client_id = 'b89dc89b34b7f4d2759580c9b53141ae'
+const kkbox_client_secret = 'c47d5eebae5d6cf9da082e55447d4ec8'
 
+const spotify_client_id = '3d6feac295e24ced8496590335a261ef'
+const spotify_client_secret = 'f2f58350880048699c74dcf8775b1eb1'
+const mylist_redirect_url = 'http://localhost:9000/mylist'
+//  Local http://localhost:9000/mylist
+//  Production https://kkboxoauth2.herokuapp.com/mylist
 
 router.post('/refresh', function (req, res, next) {
   let code = req.body.code
@@ -18,8 +25,8 @@ router.post('/refresh', function (req, res, next) {
     let data = Qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: code,
-      client_id: 'b89dc89b34b7f4d2759580c9b53141ae',
-      client_secret: 'c47d5eebae5d6cf9da082e55447d4ec8'
+      client_id: kkbox_client_id,
+      client_secret: kkbox_client_secret
     })
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
@@ -31,8 +38,6 @@ router.post('/refresh', function (req, res, next) {
     const res = await axios(config)
     return res.data
   }
-
-
   get_refresh_access_data()
     .then(data => {
       console.log(data)
@@ -43,12 +48,9 @@ router.post('/refresh', function (req, res, next) {
 });
 
 
-router.post('/', function (req, res, next) {
-  /* POST access_token from KKbox */
-  let client_id = 'b89dc89b34b7f4d2759580c9b53141ae'
-  let client_secret = 'c47d5eebae5d6cf9da082e55447d4ec8'
-  console.log((new Buffer(client_id + ':' + client_secret).toString('base64')));
 
+
+router.post('/', function (req, res, next) {
   async function get_access_data() {
     //FormData must be a String in in content-type: application/x-www-form-urlencoded prevent Axios JSON it again.
     //Use raw String
@@ -56,7 +58,7 @@ router.post('/', function (req, res, next) {
     let config = {
       method: 'post', url: 'https://account.kkbox.com/oauth2/token',
       headers: {
-        'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')),
+        'Authorization': 'Basic ' + (new Buffer(kkbox_client_id + ':' + kkbox_client_secret).toString('base64')),
         'content-type': 'application/x-www-form-urlencoded'
       },
       // FormData FormData must be a String /
@@ -68,6 +70,7 @@ router.post('/', function (req, res, next) {
 
   get_access_data(grant_type, code)
     .then(data => {
+      console.log(data);
       data.access_token ? res.json(data) : res.json('No access_token')
     }).catch(error => {
       res.json('error')
@@ -90,9 +93,7 @@ router.post('/youtube', function (req, res, next) {
       }
       res.json({ id, title })
       console.log(id, title);
-
     } else {
-
       res.status(400).json(new Error(err))
     }
   })
@@ -116,93 +117,106 @@ router.post('/youtube', function (req, res, next) {
 
 // })
 
+router.post('/loggin_kkbox', (req, res) => {
+  let rd_url = 'http://localhost:9000/mylist'
 
-router.get('/loggin_spotify', (req, res) => {
+  res.json('https://account.kkbox.com/oauth2/authorize?redirect_uri='+encodeURIComponent(mylist_redirect_url)+
+  '&client_id='+kkbox_client_id +'&response_type=code&state=123'
+  )
+})
+
+
+
+router.post('/loggin_spotify', (req, res) => {
   let sp_my_client_id = '3d6feac295e24ced8496590335a261ef'
   let scopes = 'user-read-private user-read-email user-library-read';
-  res.redirect('https://accounts.spotify.com/authorize' +
+  res.json('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + sp_my_client_id +
     (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-    '&redirect_uri=' + encodeURIComponent('http://localhost:9000/mylist'));
+    '&redirect_uri=' + encodeURIComponent(mylist_redirect_url));
 })
 
 router.post('/loggin_spotify_callback', (req, res) => {
   let code = req.body.code
   let url = 'https://accounts.spotify.com/api/token'
   let data = Qs.stringify({
-      code: code,
-      redirect_uri: 'http://localhost:9000/mylist',
-      grant_type: 'authorization_code',
-      client_id: '3d6feac295e24ced8496590335a261ef',
-      client_secret: 'f2f58350880048699c74dcf8775b1eb1'
+    code: code,
+    redirect_uri: mylist_redirect_url,
+    grant_type: 'authorization_code',
+    client_id: '3d6feac295e24ced8496590335a261ef',
+    client_secret: 'f2f58350880048699c74dcf8775b1eb1'
   })
 
   const config = {
-    method: 'post', url: url, data:data}
+    method: 'post', url: url, data: data
+  }
 
   axios(config)
     .then(data => {
       console.log(data.data);
-      
+
       res.send(data.data)
     })
     .catch(err => {
-      res.send(err)
+      console.log(err)
     })
 })
 
 
 router.post('/refresh_spotify', (req, res) => {
-  
-let  client_id=  '3d6feac295e24ced8496590335a261ef'
-let client_secret= 'f2f58350880048699c74dcf8775b1eb1'
+
+
   let url = 'https://accounts.spotify.com/api/token'
   let data = Qs.stringify({
-      grant_type: 'refresh_token',
-      refresh_token:req.body.refresh_token
+    grant_type: 'refresh_token',
+    refresh_token: req.body.refresh_token
   })
-  
+
 
   const config = {
-    headers: {'content-type':'application/x-www-form-urlencoded','Authorization':'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))},
-    method: 'post', 
-    url: url, 
-    data:data}
+    headers: { 'content-type': 'application/x-www-form-urlencoded', 'Authorization': 'Basic ' + (new Buffer(spotify_client_id + ':' + spotify_client_secret).toString('base64')) },
+    method: 'post',
+    url: url,
+    data: data
+  }
   axios(config)
     .then(data => {
       res.json(data.data)
       console.log(data.data);
-      
+
 
     })
     .catch(err => {
       res.json(err)
-      
+
     })
 })
 
-router.post('/put_spotify_track',(req,res)=>{
- 
+router.post('/put_spotify_track', (req, res) => {
+
   console.log(req.body.access_token);
-  let id =  req.body.id
+  let id = req.body.id
   let access_token = req.body.access_token
-  var options = { method: 'PUT',
-  url: 'https://api.spotify.com/v1/me/tracks',
-  qs: { ids: id },
-  headers: 
-   { 
-     'cache-control': 'no-cache',
-     accept: 'application/json',
-     authorization: 'Bearer '+ access_token ,
-     'content-type': 'application/json' } };
+  var options = {
+    method: 'PUT',
+    url: 'https://api.spotify.com/v1/me/tracks',
+    qs: { ids: id },
+    headers:
+    {
+      'cache-control': 'no-cache',
+      accept: 'application/json',
+      authorization: 'Bearer ' + access_token,
+      'content-type': 'application/json'
+    }
+  };
 
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
 
-  console.log(body);
-});
-  
+    console.log(body);
+  });
+
 })
 
 module.exports = router;

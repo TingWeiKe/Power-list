@@ -51,12 +51,10 @@ class spotify_list extends Component {
                            
                 {data ?
                     <Grid style={{ zIndex: '99' }}>
-                    
                         <div id='spotify'></div>
-                        
                         {/* {data ? <div id='spotify'></div> : null} */}
                         <Grid.Column className='sp_column' widescreen={16}>
-                        <Button onClick={()=>this.try()} secondary>TRY</Button>
+                        <Button style={{margin:'10px'}} onClick={()=>this.try()} secondary>重新整理</Button>
                             {data ? data.map(data => {
                                 return <div className='spotify_box' key={data.track.id} >
                                     <Grid.Row>

@@ -15,7 +15,7 @@ class HeaderRoute extends Component {
     localStorage.getItem('language')==null? localStorage.setItem('language','TW'):null
 
     //Route
-    const publicList = ['/today', '/playlist_category','/recents','/search','/mylist']
+    const publicList = ['/today', '/playlist_category','/recents','/search','/mylist','/post']
     const pathName = this.props.location.pathname
     if (publicList.indexOf(pathName) === -1 ) {
       if(pathName.indexOf('/playlist/') === -1){
