@@ -126,7 +126,10 @@
     .sidebar {
         bottom: 10px !important;
     }
-
+    .list_box{
+        max-height: none !important;
+        overflow: none !important;
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -228,9 +231,7 @@
     display: block;
 }
 
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
+
 
 .play {
     background-color: #2185d0 !important;
@@ -290,7 +291,6 @@
 }
 
 .list_box{
-
-    max-height: 150vh !important;
-    overflow: auto !important;
+    max-height: 150vh ;
+    overflow: auto ;
 }

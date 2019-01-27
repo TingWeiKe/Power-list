@@ -25,11 +25,8 @@ class Yotuber_player extends Component {
     }
 
     render() {
-        console.log(this.props.data);
         let id = this.props.data.youtube_video.length > 0 ? this.props.data.youtube_video[0].id.videoId : this.props.data.youtube_url_id
         let title = this.props.data.youtube_video.length > 0 ? this.props.data.youtube_video[0].snippet.title : this.props.data.youtube_url_title
-
-
         return (
             <div id='ytplayer'>
                 {id ? <iframe onKeyDown={(e) => this.handleKeyDown(e)} className={this.state.toggle == true ? 'full_screen' : "movie"} frameBorder="0" type="text/html" width="600" height="340"
@@ -40,10 +37,6 @@ class Yotuber_player extends Component {
                 </iframe> : null}
                 <div className='player_title'>{id ? title : '尚未播放'}</div>
                 <Button style={{ zIndex: '2' }} onClick={() => this.handle_Toggle()} inverted size='mini' className='player-toggle-button'>放大畫面</Button>
-
-
-
-
             </div>
         )
     }

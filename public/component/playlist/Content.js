@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
 import { Button, Grid, Image } from 'semantic-ui-react'
 import { modify_updated_at } from '../../component/getKKboxAPI'
-import Sidebar from './sidebar'
 import { play_Icon } from './playlist.img'
 import { sidebar_icon } from './sidebar_icon'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { searchYoutubeByUrl } from '../../redux/youtube.redux'
 import { search_Spotify_Track_and_Put, refresh_Spotify_List } from '../../redux/spotify.redux'
-
-let sp_url = 'https://accounts.spotify.com/authorize' +
-    '?response_type=code' +
-    '&client_id=' + '3d6feac295e24ced8496590335a261ef' +
-    ('user-read-private user-read-email user-library-read' ? '&scope=' + encodeURIComponent('user-read-private user-read-email user-library-read') : '') +
-    '&redirect_uri=' + encodeURIComponent('http://localhost:9000/mylist')//https://kkboxoauth2.herokuapp.com/mylist
+import Axios from 'axios'
 
 
 class Content extends Component {
@@ -27,11 +21,6 @@ class Content extends Component {
     }
 
     handle_option_button(e) {
-
-        let name = this.props.name.name
-        console.log(name);
-        this.props.handle_mylist_button(e, name)
-        this.setState({ id: this.props.id })
         e.stopPropagation();
     }
 
@@ -61,13 +50,17 @@ class Content extends Component {
         }
         else {
             // push track to kkbox favorite list
-            console.log(name.album.artist.name + '  ' + name.name);
-            search_Spotify_Track_and_Put(name.album.artist.name + '  ' + name.name)
+
+            search_Spotify_Track_and_Put(name.album.artist.name + '|| ' + name.name)
         }
     }
 
     handle_Loggin() {
-        location.href = sp_url
+        Axios.post('/post/loggin_spotify')
+        .then(res=>{
+           window.location.href = res.data
+            
+        })
     }
 
     handle_Cancle() {
@@ -148,7 +141,7 @@ class Content extends Component {
                                                 {/* <Sidebar name={data} tracks_url={data.url} handle_mylist_button={this.handle_mylist_button}></Sidebar> */}
                                                 <div className="sidebar">
                                                     <div className="dropdown" style={{ Float: 'left' }}>
-                                                        <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e)}></Image>
+                                                        <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e, data)}></Image>
                                                         <div className="dropdown-content" style={{}}>
                                                             <a onClick={e => this.handle_mylist_button(e, data)}>匯入至SPOTIFY歌單</a>
                                                             <a onClick={e => { e.stopPropagation() }} href={data.url}>在KKBOX上播放</a>

@@ -16,7 +16,7 @@ export default class recents extends Component {
         return (
             <div className="header">
                 <h1>最近播放</h1>
-                <Button onClick={() => this.init_State()}>清除</Button>
+                <Button secondary style={{marginBottom:'20px'}} onClick={() => this.init_State()}>清除</Button>
                 <Grid columns={4} doubling={true} stackable>
                     {this.state.storage ? JSON.parse(this.state.storage).reverse().map(data => {
                         return <Grid.Column key={data.playlist_id}>
@@ -34,6 +34,7 @@ export default class recents extends Component {
 
                     }) : null}
                 </Grid>
+                <div style={{ marginTop: '100px' }}></div>
             </div>
         )
     }

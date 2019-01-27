@@ -45,7 +45,8 @@
     color: #b3b3b3;
 }
 .sp_img{
-    /* rad */
+    width: 64px;
+    height: 64px;
 }
 
 .sp_play_Icon{

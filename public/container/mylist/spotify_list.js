@@ -39,8 +39,7 @@ class spotify_list extends Component {
         return m + ":" + (s < 10 ? '0' : '') + s;
     }
 
-    try(){
-
+    hanlde_Refresh(){
         this.props.refresh_Spotify_List()
     }
 
@@ -54,7 +53,7 @@ class spotify_list extends Component {
                         <div id='spotify'></div>
                         {/* {data ? <div id='spotify'></div> : null} */}
                         <Grid.Column className='sp_column' widescreen={16}>
-                        <Button style={{margin:'10px'}} onClick={()=>this.try()} secondary>重新整理</Button>
+                        <Button size='large' style={{margin:'10px'}} onClick={()=>this.hanlde_Refresh()} secondary>重新整理</Button>
                             {data ? data.map(data => {
                                 return <div className='spotify_box' key={data.track.id} >
                                     <Grid.Row>

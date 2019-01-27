@@ -18,7 +18,6 @@ const mylist_redirect_url = 'http://localhost:9000/mylist'
 
 router.post('/refresh', function (req, res, next) {
   let code = req.body.code
-  // POST access_token from KKbox
   async function get_refresh_access_data() {
     //FormData must be a String in order to fit in content-type: application/x-www-form-urlencoded
     //Use Qs.stringify

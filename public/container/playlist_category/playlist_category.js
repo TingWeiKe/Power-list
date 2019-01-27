@@ -62,6 +62,7 @@ class Playlist_category extends Component {
                         {hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>歌單分類</h2> : null}
                         <Category data={this.props.data.category.category_data.data} language={this.props.data.setting.language} />
                     </div>}
+                    <div style={{ marginTop: '100px' }}></div>
             </div>
         )
     }

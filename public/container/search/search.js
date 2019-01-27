@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom'
     render() {
         // console.log(this.props.location);
         // console.log(this.props.location.state!==undefined )
-
         return (
             <div className="header">
                 <h1>搜尋</h1>
@@ -31,10 +30,9 @@ import { Link } from 'react-router-dom'
                                 </Link>
                             </div>
                         </Grid.Column>
-
                     }) :  null}
-              
                 </Grid>
+                <div style={{ marginTop: '100px' }}></div>
             </div>
         )
     }

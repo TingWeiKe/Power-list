@@ -100,10 +100,19 @@ export function get_Spotify_Next(url) {
 }
 
 
-export function search_Spotify_Track_and_Put(name) {
-
+export function search_Spotify_Track_and_Put(track) {
     axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
         .then(res => {
+            // Regular Expression
+            let name =  track
+            console.log(name);
+            if (name.length<15){
+               name =  name.replace('||', '').replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'').replace(/(:).*/g,'')
+            }
+            else{
+                name = name.split('||')[1].replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'').replace(/(:).*/g,'')
+            }
+            console.log(name);
             let url = 'https://api.spotify.com/v1/search?q=' + name + '&type=track&market=TW&limit=2'
             let access_token = res.data.access_token
             let config = {
@@ -112,9 +121,10 @@ export function search_Spotify_Track_and_Put(name) {
             axios.get(url, config)
                 .then(res => {
                     let id = res.data.tracks.items[0].id
-                    if (res.status === 200) {
+                    if (res.status === 200 &&res.data.tracks.total>0) {
                         axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
                             .then(res => {
+                                
                                 axios.post('/post/put_spotify_track', { access_token: access_token, id: id })
                                     .then(res => {
                                         console.log(res);
@@ -122,6 +132,9 @@ export function search_Spotify_Track_and_Put(name) {
                                     })
                             })
 
+                    }else{
+                        console.log('找不到歌曲');
+                        
                     }
                 })
         })
