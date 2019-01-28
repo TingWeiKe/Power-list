@@ -12,7 +12,7 @@ app.enable("trust proxy");
 
 const limiter = rateLimit({
   windowMs: 10000, // 10 second
-  max: 20 // limit each IP to 3 requests 5 second
+  max: 10 // limit each IP to 3 requests 5 second
 });
 
 app.use(limiter);

@@ -46,7 +46,7 @@ class Playlist_category extends Component {
         let hb_msg = this.props.data.hot_board.msg
         let pc_msg = this.props.data.playlist_category.msg
         return (
-            <div className="header">
+            <div className="container_header">
                 <h1>歌單</h1>
                 <div className='refresh_button' style={hb_msg && pc_msg == '伺服器錯誤' ? { display: 'block' } : null}>
                     <Button onClick={() => this.handle_Refresh()} primary size='big' >重新整理</Button>

@@ -14,7 +14,7 @@ class Box extends Component {
 
         
         return (
-            <div className="header">
+            <div className="container_header">
                 <h1>{title}</h1>
               
                 <Loader content='載入中...' className='loader' active={bool} inline='centered' size='huge' disabled />

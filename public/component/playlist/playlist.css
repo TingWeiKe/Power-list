@@ -228,7 +228,7 @@
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+    display: block !important;
 }
 
 
@@ -293,4 +293,15 @@
 .list_box{
     max-height: 150vh ;
     overflow: auto ;
+}
+
+.putting_box{
+    margin: 5% auto !important;
+    position: fixed !important;
+    z-index: 99;
+    top: 200px;
+    left: 0;
+    right: 0;
+    width: 80vw !important;
+    height: 80px !important;
 }

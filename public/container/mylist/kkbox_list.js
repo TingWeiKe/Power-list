@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { play_Icon } from '../../component/playlist/playlist.img'
+import { play_Icon } from '../../component/icon'
 import { Button, Grid, Image, Loader } from 'semantic-ui-react'
 import { getMylist, get_Kkbox_Next } from '../../redux/mylist_redux'
-import { searchYoutubeByUrl } from '../../redux/youtube.redux'
+import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
 import InfiniteScroll from 'react-infinite-scroller';
@@ -21,7 +21,6 @@ class kkboxlist extends Component {
     componentDidMount() {
         const url = 'https://api.kkbox.com/v1.1/me'
         console.log(getUrlVars());
-
         if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
             this.props.getMylist(url)
         }
@@ -91,7 +90,7 @@ class kkboxlist extends Component {
 
 const mapStatetoProps = state => { return { data: state.mylist } }
 
-const actionCreate = { getMylist, searchYoutubeByUrl, get_Kkbox_Next }
+const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next }
 kkboxlist = connect(mapStatetoProps, actionCreate)(kkboxlist)
 
 export default kkboxlist

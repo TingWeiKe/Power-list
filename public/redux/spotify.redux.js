@@ -4,9 +4,13 @@ import { getUrlVars, doCookieSetup, getCookie } from '../component/getKKboxAPI'
 const GET_SPOTIFY_API_SUCCESS = 'GET_SPOTIFY_API_SUCCESS'
 const GET_SPOTIFY_API_ERR = 'GET_SPOTIFY_API_ERR'
 const GET_SPOTIFY_NEXT = 'GET_SPOTIFY_NEXT'
-
-
+const PUT_TRACK_SUCCESS= 'PUT_TRACK_SUCCESS'
+const PUT_TRACK_FAIL= 'PUT_TRACK_FAIL'
+const INIT_PUT_TRACK = 'INIT_PUT_TRACK'
 const init = {
+    put_track_negative:false,
+    put_track_success:false,
+    put_track_msg:'載入中．．．',
     msg: '',
     data: {},
     bool: true
@@ -18,6 +22,12 @@ export function spotify(state = init, action) {
             return state = { ...state, bool: false, msg: "success", ...action.data }
         case GET_SPOTIFY_API_ERR:
             return state = { ...state, msg: '伺服器錯誤', bool: false }
+        case PUT_TRACK_SUCCESS:
+            return state= {...state, put_track_msg:'匯入歌曲成功',put_track_success:true }
+        case PUT_TRACK_FAIL:
+            return state = {...state ,put_track_msg:'Spotify上找不到歌曲' ,put_track_negative:true}
+        case INIT_PUT_TRACK:
+            return state = {...state , put_track_msg:'載入中．．．',put_track_success:false ,put_track_negative:false}
         case GET_SPOTIFY_NEXT:
             action.data.data.items.map(i => {
                 state.data.items.push(i)
@@ -101,16 +111,16 @@ export function get_Spotify_Next(url) {
 
 
 export function search_Spotify_Track_and_Put(track) {
-    axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
+   return dispatch=>{ axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
         .then(res => {
             // Regular Expression
             let name =  track
             console.log(name);
-            if (name.length<15){
-               name =  name.replace('||', '').replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'').replace(/(:).*/g,'')
+            if (name.length<35){
+               name =  name.replace('||', '').replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'')
             }
             else{
-                name = name.split('||')[1].replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'').replace(/(:).*/g,'')
+                name = name.split('||')[1].replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'')
             }
             console.log(name);
             let url = 'https://api.spotify.com/v1/search?q=' + name + '&type=track&market=TW&limit=2'
@@ -120,24 +130,24 @@ export function search_Spotify_Track_and_Put(track) {
             }
             axios.get(url, config)
                 .then(res => {
-                    let id = res.data.tracks.items[0].id
                     if (res.status === 200 &&res.data.tracks.total>0) {
+                        let id = res.data.tracks.items[0].id
                         axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
                             .then(res => {
-                                
                                 axios.post('/post/put_spotify_track', { access_token: access_token, id: id })
                                     .then(res => {
-                                        console.log(res);
-                                        refresh_Spotify_List()
+                                        dispatch({ type: PUT_TRACK_SUCCESS })
+                                        
                                     })
                             })
 
                     }else{
+                        dispatch({ type: PUT_TRACK_FAIL })
                         console.log('找不到歌曲');
                         
                     }
                 })
-        })
+        })}
 }
 
 
@@ -164,4 +174,11 @@ export function refresh_Spotify_List() {
             })
     }
 
+}
+
+
+export function init_Put_Track(){
+    return dispatch=>{
+        dispatch({ type: INIT_PUT_TRACK })
+    }
 }

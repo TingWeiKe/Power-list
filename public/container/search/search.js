@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
         // console.log(this.props.location);
         // console.log(this.props.location.state!==undefined )
         return (
-            <div className="header">
+            <div className="container_header">
                 <h1>搜尋</h1>
                 <Search_input />
                 <Grid columns={4} doubling={true} stackable>

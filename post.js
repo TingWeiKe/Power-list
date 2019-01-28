@@ -211,8 +211,11 @@ router.post('/put_spotify_track', (req, res) => {
   };
 
   request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-
+    if (error){
+     throw(error)
+    }
+    res.send(body)
+    console.log('success');
     console.log(body);
   });
 

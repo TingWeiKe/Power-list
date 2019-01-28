@@ -43,7 +43,7 @@ class Playlist extends Component {
     let res = this.props.data.playlist.playlist_data
     const bool = this.props.data.playlist.bool;
     return (
-      <div className='header'>
+      <div className='container_header'>
         <div className='back' onClick={this.props.history.goBack}>
           <span herf='#' >{'< 返回'}</span>
         </div>

@@ -30,7 +30,7 @@ class Mylist extends Component {
         let sp_data = this.props.spotify.data ? this.props.spotify.data : null
         let kk_data = this.props.mylist.mylist ? this.props.mylist.mylist : null
         return (
-            <div className="header">
+            <div className="container_header">
                 <h1>我的歌單</h1>
                 <div className='login_button'>
                     {sp_bool == true && kk_bool === true ?

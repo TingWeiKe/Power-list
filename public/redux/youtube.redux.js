@@ -48,7 +48,7 @@ function get_Youtube_API_Err() {
 //         })
 // }
 
-export function searchYoutubeByUrl(name) {
+export function search_Youtube_By_Scraping(name) {
     return dispatch => {
         //和後端爬蟲拿 Video_ID
         axios.post('/post/youtube', { name: name })

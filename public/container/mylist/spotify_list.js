@@ -4,9 +4,9 @@ import { getUrlVars } from '../../component/getKKboxAPI'
 import './spotify_list.css'
 import { music_icon } from './music_icon'
 import { Grid, Image, Loader,Button } from 'semantic-ui-react'
-import { play_Icon } from '../../component/playlist/playlist.img'
+import { play_Icon } from '../../component/icon'
 import { connect } from 'react-redux'
-import { searchYoutubeByUrl } from '../../redux/youtube.redux'
+import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import InfiniteScroll from 'react-infinite-scroller';
 
 class spotify_list extends Component {
@@ -90,7 +90,7 @@ class spotify_list extends Component {
 }
 
 const mapStatetoProps = state => { return { data: state.spotify } }
-const actionCreate = { get_Spotify_API, searchYoutubeByUrl, get_Spotify_Next ,refresh_Spotify_List  }
+const actionCreate = { get_Spotify_API, search_Youtube_By_Scraping, get_Spotify_Next ,refresh_Spotify_List  }
 spotify_list = connect(mapStatetoProps, actionCreate)(spotify_list)
 
 

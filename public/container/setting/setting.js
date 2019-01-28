@@ -12,7 +12,7 @@ class setting extends Component {
 
   render() {
     return (
-      <div className="header">
+      <div className="container_header">
       </div>
     )
   }

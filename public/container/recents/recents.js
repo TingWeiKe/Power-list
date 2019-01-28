@@ -14,7 +14,7 @@ export default class recents extends Component {
     }
     render() {
         return (
-            <div className="header">
+            <div className="container_header">
                 <h1>最近播放</h1>
                 <Button secondary style={{marginBottom:'20px'}} onClick={() => this.init_State()}>清除</Button>
                 <Grid columns={4} doubling={true} stackable>
