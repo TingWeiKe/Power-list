@@ -228,9 +228,11 @@
 }
 
 .dropdown:hover .dropdown-content {
-    display: block !important;
+    display: block ;
 }
-
+.display_none{
+    display: none !important; 
+}
 
 
 .play {

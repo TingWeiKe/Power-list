@@ -27,7 +27,7 @@ class kkboxlist extends Component {
     }
     handle_play_button(name, artist) {
         this.setState({ name: name })
-        this.props.searchYoutubeByUrl({ name: name + '  ' + artist })
+        this.props.search_Youtube_By_Scraping({ name: name + '  ' + artist })
     }
 
     handle_Sort() {

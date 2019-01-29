@@ -164,14 +164,11 @@ router.post('/loggin_spotify_callback', (req, res) => {
 
 
 router.post('/refresh_spotify', (req, res) => {
-
-
   let url = 'https://accounts.spotify.com/api/token'
   let data = Qs.stringify({
     grant_type: 'refresh_token',
     refresh_token: req.body.refresh_token
   })
-
 
   const config = {
     headers: { 'content-type': 'application/x-www-form-urlencoded', 'Authorization': 'Basic ' + (new Buffer(spotify_client_id + ':' + spotify_client_secret).toString('base64')) },
@@ -179,15 +176,13 @@ router.post('/refresh_spotify', (req, res) => {
     url: url,
     data: data
   }
+
   axios(config)
     .then(data => {
       res.json(data.data)
-      console.log(data.data);
-
-
     })
     .catch(err => {
-      res.json(err)
+      throw (err)
 
     })
 })

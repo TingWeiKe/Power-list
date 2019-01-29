@@ -10,4 +10,6 @@ import { category_box } from './redux/category_box.redux'
 import { youtube } from './redux/youtube.redux'
 import {mylist} from './redux/mylist_redux'
 import {spotify} from './redux/spotify.redux'
-export default combineReducers({ box, playlist, playlist_category, hot_board, category, setting, category_box, youtube,mylist ,spotify})
+import  {search} from './redux/search.redux'
+
+export default combineReducers({ box, playlist, playlist_category, hot_board, category, setting, category_box, youtube,mylist ,spotify,search})

@@ -14,6 +14,7 @@ class Content extends Component {
         super(props)
         this.handle_mylist_button = this.handle_mylist_button.bind(this)
         this.state = {
+            bool:false,
             name: '',
             dimmer: false,
             putting: false,
@@ -44,11 +45,13 @@ class Content extends Component {
 
 
     handle_mylist_button(e, name) {
+        this.setState({bool:true})
         e.stopPropagation()
         // if not loggined
         if (this.props.spotify.msg !== 'success') {
             document.body.style.overflow = "hidden"
-            this.setState({ putting: true })
+            this.style={display:'none'}
+            this.setState({ dimmer: true ,})
         }
         else {
             // push track to spotify favorite list
@@ -56,12 +59,18 @@ class Content extends Component {
             // undisplay Dropdown content
             document.body.style.overflow = "hidden"
             this.setState({ putting: true })
-            setTimeout(()=>{
-                document.body.style.overflow = "unset"
-                this.setState({ putting: false })
-                this.props.init_Put_Track()
-            },2800)
+            
         }
+
+    }
+    handle_Animation(){
+    
+        setTimeout(()=>{
+            this.props.init_Put_Track()
+            this.props.refresh_Spotify_List()
+            document.body.style.overflow = "unset"
+            this.setState({ putting: false, bool:false })
+        },2000)
     }
 
     handle_Loggin() {
@@ -74,7 +83,7 @@ class Content extends Component {
 
     handle_Cancle() {
         document.body.style.overflow = "unset"
-        this.setState({ dimmer: false, putting: false })
+        this.setState({ dimmer: false, putting: false , bool:false})
         this.props.init_Put_Track()
     }
 
@@ -102,8 +111,8 @@ class Content extends Component {
                     <div onClick={() => this.handle_Cancle()} id='dimmer'></div>
                     <Message icon className='putting_box' size={'large'} positive={this.props.spotify.put_track_success} negative={this.props.spotify.put_track_negative}>
                        {!this.props.spotify.put_track_success&&!this.props.spotify.put_track_negative? <Icon name='circle notched' loading />:null}
-                        {this.props.spotify.put_track_success? <Image style={{margin:'0', height:'50px',paddingRight:'15px'}} src={checked_icon}/>:null}
-                        {this.props.spotify.put_track_negative?  <Image style={{margin:'0', height:'50px',paddingRight:'15px'}} src={x_icon}/>:null}
+                        {this.props.spotify.put_track_success? <Image onLoad={this.handle_Animation()} style={{margin:'0', height:'50px',paddingRight:'15px'}} src={checked_icon}/>:null}
+                        {this.props.spotify.put_track_negative?  <Image onLoad={this.handle_Animation()} style={{margin:'0', height:'50px',paddingRight:'15px'}} src={x_icon}/>:null}
                         <Message.Header>{this.props.spotify.put_track_msg}</Message.Header>
                     </Message>
                 </div> : null}
@@ -158,9 +167,9 @@ class Content extends Component {
                                             <Grid.Column width={4}>
                                                 {/* <Sidebar name={data} tracks_url={data.url} handle_mylist_button={this.handle_mylist_button}></Sidebar> */}
                                                 <div className="sidebar">
-                                                    <div className="dropdown" style={{ Float: 'left' }}>
+                                                    <div className="dropdown" style={this.state.bool?{ Float: 'left',display:'none'}:{ Float: 'left' }}>
                                                         <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e, data)}></Image>
-                                                        <div className="dropdown-content" style={{}}>
+                                                        <div style={this.state.bool?{ display:'none'}:null} className="dropdown-content">
                                                             <a onClick={e => this.handle_mylist_button(e, data)}>匯入SPOTIFY歌單</a>
                                                             <a onClick={e => { e.stopPropagation() }} href={data.url}>在KKBOX上播放</a>
                                                         </div>

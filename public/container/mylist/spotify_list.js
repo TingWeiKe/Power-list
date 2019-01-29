@@ -29,7 +29,7 @@ class spotify_list extends Component {
 
         // //prevent repeatly requrest
         if (this.state.id != data.id) {
-            this.props.searchYoutubeByUrl({ name: data.artists[0].name + '  ' + data.name })
+            this.props.search_Youtube_By_Scraping({ name: data.artists[0].name + '  ' + data.name })
         }
 
     }

@@ -10,7 +10,7 @@ const INIT_PUT_TRACK = 'INIT_PUT_TRACK'
 const init = {
     put_track_negative:false,
     put_track_success:false,
-    put_track_msg:'載入中．．．',
+    put_track_msg:'歌曲搜尋中．．．',
     msg: '',
     data: {},
     bool: true
@@ -27,7 +27,7 @@ export function spotify(state = init, action) {
         case PUT_TRACK_FAIL:
             return state = {...state ,put_track_msg:'Spotify上找不到歌曲' ,put_track_negative:true}
         case INIT_PUT_TRACK:
-            return state = {...state , put_track_msg:'載入中．．．',put_track_success:false ,put_track_negative:false}
+            return state = {...state , put_track_msg:'歌曲搜尋中．．．',put_track_success:false ,put_track_negative:false}
         case GET_SPOTIFY_NEXT:
             action.data.data.items.map(i => {
                 state.data.items.push(i)
