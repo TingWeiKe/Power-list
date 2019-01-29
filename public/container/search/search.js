@@ -68,7 +68,7 @@ class Search extends Component {
                     pageStart={0}
                     loadMore={() => this.hanlde_Next()}
                     hasMore={true}
-                    loader={<Loader key='loader' style={{ color: 'white' }} active={false} content='載入中...' inline={'centered'} size='large' />}
+                    loader={<Loader key='loader' active={!!this.props.search.data.paging.next} content='載入中...' inline={'centered'} size='large' />}
                 >
                     {null}
                 </InfiniteScroll>:null}

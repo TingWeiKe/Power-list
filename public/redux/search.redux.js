@@ -15,8 +15,10 @@ export function search(state = initState, action) {
             action.payload.playlists.data.map(i=>{
                 state.data.playlists.data.push(i)
             })
-        return state
-            
+            state.data.paging.next = action.payload.paging.next
+            console.log(action.payload,state);
+        return state = {...state}
+
             
         default:
             return state
