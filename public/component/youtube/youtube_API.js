@@ -17,8 +17,13 @@ export function onYouTubeIframeAPIReady() {
         }
     });
 }
-function onPlayerReady() {
+function onPlayerReady(event) {
+    console.log(event);
+    
     iframe = $('#player')
+    document.getElementById('play_button').src = white_play_icon
+    document.getElementById('play_button').removeEventListener('click', pause)
+    document.getElementById('play_button').addEventListener('click', play);
 }
 
 function pause() {
