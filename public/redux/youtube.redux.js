@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+import { onYouTubeIframeAPIReady } from '../component/youtube/youtube_API'
 const GET_YOUTUBE_API_SUCCESS = 'GET_YOUTUBE_API_SUCCESS'
 const GET_YOUTUBE_API_ERR = 'GET_YOUTUBE_API_ERR'
 const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search'
@@ -54,6 +55,7 @@ export function search_Youtube_By_Scraping(name) {
         axios.post('/post/youtube', { name: name })
             .then(res => {
                 dispatch(get_Youtube_API_Success({ youtube_url_id: res.data.id, youtube_url_title: res.data.title }))
+                onYouTubeIframeAPIReady(res.data.id)
             })
             .catch(error => {
                 console.log(error)
@@ -61,4 +63,5 @@ export function search_Youtube_By_Scraping(name) {
             })
     }
 }
+
 

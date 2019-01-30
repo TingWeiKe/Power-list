@@ -82,3 +82,10 @@
         max-width: 50vw;
     }
 }
+
+#play_button{
+    top: 8px;
+    float: right;
+    right: 3vw;
+    cursor: pointer;
+}

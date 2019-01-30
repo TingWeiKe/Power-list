@@ -51,7 +51,8 @@ class Search extends Component {
                             </div>
                         </Grid.Column>
                     }) : null}
-                     {this.props.search.data.hasOwnProperty('playlists') && !this.props.search.data.playlists.data.length>0?<h2>搜尋不到歌單</h2>:null}
+                     {this.props.search.data.hasOwnProperty('playlists') && !this.props.search.data.playlists.data.length>0?
+                     <h2>搜尋不到歌單</h2>:null}
                 </Grid>
                 {this.props.search.data.hasOwnProperty('playlists') ?  <InfiniteScroll
                     pageStart={0}
