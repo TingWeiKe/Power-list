@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { get_KKbox_API, getCookie } from '../../component/getKKboxAPI'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {search_Data,get_Search_Next} from '../../redux/search.redux'
+import {search_Data,get_Search_Next,init_Search_Data} from '../../redux/search.redux'
 
 class Search extends Component {
     constructor(props) {
@@ -18,28 +18,16 @@ class Search extends Component {
     }
 
     handle_Seach(value) {
-        console.log('submit');
-        
+        this.props.init_Search_Data()
         this.setState({ bool: true, title: '' })
         this.props.search_Data(value, ()=>{
             this.setState({ bool: false, title: '“' + value + '“' + '：的搜尋結果' })
         })
-       
-        // this.props.history.push('/search', {})
-        // let url = 'https://api.kkbox.com/v1.1/search?q=' + value + '&type=playlist&territory=' + localStorage.getItem('language') + '&limit=50'
-        // get_KKbox_API(getCookie('token'), url)
-        //     .then(res => {
-        //         this.props.history.push('/search', res.data)
-        //       
-
-        //     })
     }
     hanlde_Next(){
         this.props.get_Search_Next(this.props.search.data.paging.next)
     }
     render() {
-        console.log(this.props);
-        console.log(this.state)
         return (
             <div className="container_header">
                 <h1>搜尋</h1>
@@ -63,6 +51,7 @@ class Search extends Component {
                             </div>
                         </Grid.Column>
                     }) : null}
+                     {this.props.search.data.hasOwnProperty('playlists') && !this.props.search.data.playlists.data.length>0?<h2>搜尋不到歌單</h2>:null}
                 </Grid>
                 {this.props.search.data.hasOwnProperty('playlists') ?  <InfiniteScroll
                     pageStart={0}
@@ -81,7 +70,7 @@ class Search extends Component {
 const mapStatetoProps = state => {
     return { search: state.search}
 }
-const actionCreate = { search_Data ,get_Search_Next}
+const actionCreate = { search_Data ,get_Search_Next ,init_Search_Data}
 Search = connect(mapStatetoProps, actionCreate)(Search)
 
 

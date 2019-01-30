@@ -1,7 +1,8 @@
 
 import { get_KKbox_API, getCookie } from '../component/getKKboxAPI'
-const SEARCH_DATA_SUCCESS = 'SEARCH_SUCCESS'
+const SEARCH_DATA_SUCCESS = 'SEARCH_DATA_SUCCESS'
 const GET_SEARCH_NEXT_SUCCESS = 'GET_SEARCH_NEXT_SUCCESS'
+const INIT_SEARCH_DATA ='INIT_SEARCH_DATA'
 const initState = {
     bool: true,
     data: {}
@@ -11,6 +12,8 @@ export function search(state = initState, action) {
     switch (action.type) {
         case SEARCH_DATA_SUCCESS:
             return state = { ...action.payload }
+        case INIT_SEARCH_DATA:
+        return state = initState
         case GET_SEARCH_NEXT_SUCCESS:
             action.payload.playlists.data.map(i=>{
                 state.data.playlists.data.push(i)
@@ -31,6 +34,15 @@ function get_Search_Next_Success(data){
 function search_Data_Success(data) {
     return { type: SEARCH_DATA_SUCCESS, payload: data }
 }
+
+
+export function init_Search_Data(){
+    return dispatch =>{
+        dispatch({type:INIT_SEARCH_DATA})
+    }
+}
+
+
 export function search_Data(value, callback) {
     return dispatch => {
         let url = 'https://api.kkbox.com/v1.1/search?q=' + value + '&type=playlist&territory=' + localStorage.getItem('language') + '&limit=50'
