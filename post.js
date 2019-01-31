@@ -1,17 +1,18 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 let axios = require('axios')
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+let token = require('./token')
 let grant_type = 'authorization_code'
 let code = ''
 let request = require("request");
 let Qs = require('qs');
+const kkbox_client_id = token.kkbox_client_id
+const kkbox_client_secret = token.kkbox_client_secret
+const spotify_client_id = token.spotify_client_id
+const spotify_client_secret = token.spotify_client_secret
 
-const kkbox_client_id = 'b89dc89b34b7f4d2759580c9b53141ae'
-const kkbox_client_secret = 'c47d5eebae5d6cf9da082e55447d4ec8'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-const spotify_client_id = '3d6feac295e24ced8496590335a261ef'
-const spotify_client_secret = 'f2f58350880048699c74dcf8775b1eb1'
 const mylist_redirect_url = 'http://localhost:9000/mylist'
 //  Local http://localhost:9000/mylist
 //  Production https://kkboxoauth2.herokuapp.com/mylist
@@ -20,7 +21,7 @@ router.post('/refresh', function (req, res, next) {
   let code = req.body.code
   async function get_refresh_access_data() {
     //FormData must be a String in order to fit in content-type: application/x-www-form-urlencoded
-    //Use Qs.stringify
+    //Use Qs.stringifyÎ
     let data = Qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: code,
@@ -127,7 +128,7 @@ router.post('/loggin_kkbox', (req, res) => {
 
 
 router.post('/loggin_spotify', (req, res) => {
-  let sp_my_client_id = '3d6feac295e24ced8496590335a261ef'
+
   let scopes = 'user-read-private user-read-email user-library-read';
   res.json('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
@@ -143,8 +144,8 @@ router.post('/loggin_spotify_callback', (req, res) => {
     code: code,
     redirect_uri: mylist_redirect_url,
     grant_type: 'authorization_code',
-    client_id: '3d6feac295e24ced8496590335a261ef',
-    client_secret: 'f2f58350880048699c74dcf8775b1eb1'
+    client_id: 'spotify_client_id',
+    client_secret: spotify_client_secret
   })
 
   const config = {
