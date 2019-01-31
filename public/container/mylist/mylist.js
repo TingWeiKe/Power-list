@@ -33,20 +33,22 @@ class Mylist extends Component {
             <div className="container_header">
                 <h1>我的歌單</h1>
                 <div className="login_button">
-                <div style={{marginBottom:'20px'}}>
-                    {sp_bool == true && kk_bool === true ?
-                        <Button  size='big' onClick={() => this.loggin_Kkbox()} style={kk_data.data != undefined ? { display: 'none' } : {}} primary disabled={!!this.props.mylist.my_info} >
-                            <img className='button_icon' src={kkbox_icon}/>
-                            <a>登入 ＫＫＢＯＸ</a>
-                        </Button> : null}
-                </div>
-                <div style={{marginBottom:'20px'}} >
-                    {sp_bool == true && kk_bool === true ? 
-                    <Button size='big' onClick={() => this.loggin_Spotify()} disabled={!!this.props.mylist.my_info} secondary>
-                    <img className='button_icon' src={spotify_icon}/>
-                        <a>登入ＳＰＯＴＩＦＹ</a>
-                    </Button> : null}
-                </div>
+                {sp_bool == true && kk_bool === true ?<div id='kkbox_login'>
+                <img className='button_icon' src={kkbox_icon}/>
+                        <Button circular size='big' onClick={() => this.loggin_Kkbox()} 
+                        style={kk_data.data != undefined ? { display: 'none' } : {}} primary 
+                        disabled={!!this.props.mylist.my_info} >
+                            <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登入 ＫＫＢＯＸ</a>
+                        </Button> 
+                </div>: null}
+                {sp_bool == true && kk_bool === true ? 
+                <div id='spotify_login' >
+                <img className='button_icon' src={spotify_icon}/>
+                    <Button circular size='big' onClick={() => this.loggin_Spotify()} 
+                    disabled={!!this.props.mylist.my_info} secondary>
+                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登入ＳＰＯＴＩＦＹ</a>
+                    </Button>
+                    </div>: null}
                 </div>
                 <Kkboxlist></Kkboxlist>
                 <Spotify_list></Spotify_list>

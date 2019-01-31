@@ -1,6 +1,7 @@
 .login_button a{
     color: white !important;
-    
+    display: block;
+    width:200px;
 }
 
 
@@ -16,9 +17,30 @@
     }
 
 }
+@media screen and (max-width: 380px) {
+    .button_icon{
+        right: 105px !important;
+        top: 40px !important;
+        left: unset !important;
+    }
+    #kkbox_login{
+       position: relative;
+       top: 30px;
+    }
+}
 .button_icon{
+    margin-top: 20px;
     position: relative;
-    right: 10px;
-    top: 4px;
-    height: 20px;
+    left: 40px;
+    top: 6px;
+    height: 28px;
+    
+}
+#kkbox_login{
+    margin-top: 20px;
+    text-align: center;
+}
+
+#spotify_login{
+    text-align: center;
 }
