@@ -30,7 +30,7 @@ class HeaderRoute extends Component {
     const { activeItem } = this.state
     return (
       <div>
-        <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100vw', zIndex: '99', Bottom: '200px' ,fontSize:'14px'}} size='small' borderless={true} >
+        <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100vw', zIndex: '99', Bottom: '200px' ,fontSize:'15px'}}  borderless={true} >
    
           <Menu.Item
             as={Link}

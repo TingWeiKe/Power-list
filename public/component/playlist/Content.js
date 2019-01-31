@@ -23,7 +23,6 @@ class Content extends Component {
     }
 
     handle_option_button(e) {
-        console.log(this.props)
         e.stopPropagation();
     }
 

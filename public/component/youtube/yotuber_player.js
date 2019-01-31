@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import './yotuber_player.css'
 import { Image, Button } from 'semantic-ui-react'
-import { grey_icon } from '../icon'
+import { grey_icon, pause_icon } from '../icon'
 import { connect } from 'react-redux'
+import { status } from '../youtube/youtube_API'
+import { onYouTubeIframeAPIReady } from './youtube_API'
 
 class Yotuber_player extends Component {
     constructor(props) {
@@ -16,12 +18,14 @@ class Yotuber_player extends Component {
     }
 
     componentDidMount() {
+
         //監聽Esc
         window.addEventListener('keydown', () => {
             if (event.keyCode === 27) {
                 this.setState({ toggle: false })
             }
         })
+
     }
 
     render() {
@@ -38,6 +42,7 @@ class Yotuber_player extends Component {
                 <div className='player_title'>{id ? title : '尚未播放'}</div>
                 <Button id='button' style={{ zIndex: '2' }} onClick={() => this.handle_Toggle()} inverted size='mini' className='player-toggle-button'>放大畫面</Button>
                 <Image src={grey_icon} id='play_button'></Image>
+                <Image src={pause_icon} id='pause_button'></Image>
             </div>
         )
     }

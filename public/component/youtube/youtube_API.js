@@ -1,12 +1,23 @@
 import { white_play_icon, pause_icon } from '../icon'
-const tag = document.createElement('script');
-tag.id = 'iframe-demo';
-tag.src = 'https://www.youtube.com/iframe_api';
-let firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-let player, iframe;
-let $ = document.querySelector.bind(document);
 
+
+let player;
+
+
+function pause() {
+    document.getElementById('play_button').src = white_play_icon
+    document.getElementById('play_button').style.display = 'block'
+    document.getElementById('pause_button').style.display = 'none'
+    player.pauseVideo()
+}
+
+
+export function play() {
+    document.getElementById('play_button').src = pause_icon
+    document.getElementById('play_button').style.display = 'none'
+    document.getElementById('pause_button').style.display = 'block'
+    player.playVideo()
+}
 
 
 export function onYouTubeIframeAPIReady() {
@@ -17,35 +28,34 @@ export function onYouTubeIframeAPIReady() {
         }
     });
 }
+
+
 function onPlayerReady(event) {
-    console.log(event);
-    
-    iframe = $('#player')
     document.getElementById('play_button').src = white_play_icon
-    document.getElementById('play_button').removeEventListener('click', pause)
-    document.getElementById('play_button').addEventListener('click', play);
+    document.getElementById('play_button').style.display = 'block'
+    document.getElementById('pause_button').style.display = 'none'
+    init_youtube()
 }
 
-function pause() {
-    player.pauseVideo()
-}
-
-function play() {
-    player.playVideo()
-}
 
 function onPlayerStateChange(event) {
-    if (event.data == 1) {
-        document.getElementById('play_button').src = pause_icon
-        document.getElementById('play_button').removeEventListener('click', play)
-        document.getElementById('play_button').addEventListener('click', pause);
-
+    if(event.data==1){
+        play() 
     }
-    else {
-        document.getElementById('play_button').src = white_play_icon
-        document.getElementById('play_button').removeEventListener('click', pause)
-        document.getElementById('play_button').addEventListener('click', play);
-
-    }
-
 }
+
+
+export function init_youtube() {
+    
+    document.getElementById('pause_button').onclick = () => {
+        if (player.getPlayerState() == 1) {
+            pause()
+        } 
+    }
+    document.getElementById('play_button').onclick = () => {
+        if (player.getPlayerState() != 1) {
+            play()
+        }
+    }
+}
+

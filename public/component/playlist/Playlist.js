@@ -12,8 +12,6 @@ class Playlist extends Component {
   get_Data(){
     let playlist_id = this.props.location.pathname.replace('/playlist/', '')
     let url = 'https://api.kkbox.com/v1.1/featured-playlists/' + playlist_id + '?territory=' + this.props.data.setting.language
-    console.log(url);
-    
     this.props.get_Playlists_Id_Api(url)
   }
 
@@ -51,8 +49,6 @@ class Playlist extends Component {
         <Button  onClick={()=>this.handle_Refresh()} primary size='big' >重新整理</Button>
         </div>
         <Loader active={bool} inline='centered' size='huge' ></Loader>
-        {console.log(this.props)
-        }
         {Object.keys(res).length ? <Content data={res}></Content> : null}
       </div>
     )

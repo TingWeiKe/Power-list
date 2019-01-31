@@ -88,4 +88,13 @@
     float: right;
     right: 3vw;
     cursor: pointer;
+    position: absolute;
+}
+#pause_button{
+    display: none;
+    top: 8px;
+    float: right;
+    right: 3vw;
+    cursor: pointer;
+    position: absolute;
 }

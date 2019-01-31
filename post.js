@@ -84,17 +84,20 @@ router.post('/youtube', function (req, res, next) {
   console.log(string)
   let url = "https://www.youtube.com/results?search_query=" + string
   request(encodeURI(url), (err, r, body) => {
-    if (r.statusCode === 200) {
-      let x = body.split('href="/watch?v=')
-      let id = (x[1]).substring(0, 11)
-      let title = ((x[2]).split('title="')[1].split('" ')[0])
-      if (id.length !== 11) {
-        throw ('Error Video_Id')
+    if(err){
+      res.status(500).json(new Error(err))
+    }
+    else {
+      if (r.statusCode === 200) {
+        let x = body.split('href="/watch?v=')
+        let id = (x[1]).substring(0, 11)
+        let title = ((x[2]).split('title="')[1].split('" ')[0])
+        if (id.length !== 11) {
+          throw ('Error Video_Id')
+        }
+        res.json({ id, title })
+        console.log(id, title);
       }
-      res.json({ id, title })
-      console.log(id, title);
-    } else {
-      res.status(400).json(new Error(err))
     }
   })
 });

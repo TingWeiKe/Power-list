@@ -37,7 +37,7 @@ class Mylist extends Component {
                 <img className='button_icon' src={kkbox_icon}/>
                         <Button circular size='big' onClick={() => this.loggin_Kkbox()} 
                         style={kk_data.data != undefined ? { display: 'none' } : {}} primary 
-                        disabled={!!this.props.mylist.my_info} >
+                        disabled={!!this.props.mylist.my_info } >
                             <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登入 ＫＫＢＯＸ</a>
                         </Button> 
                 </div>: null}
