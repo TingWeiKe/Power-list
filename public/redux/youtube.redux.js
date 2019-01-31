@@ -1,10 +1,11 @@
 
 import axios from 'axios'
 import { onYouTubeIframeAPIReady } from '../component/youtube/youtube_API'
+import {key} from '../../token'
 const GET_YOUTUBE_API_SUCCESS = 'GET_YOUTUBE_API_SUCCESS'
 const GET_YOUTUBE_API_ERR = 'GET_YOUTUBE_API_ERR'
 const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search'
-const key = 'AIzaSyDsa1h_sYYPTJ3LwizuBkyHNBEht2qUSJQ'
+const key = key
 const init = {
     msg: '',
     youtube_video: {},
