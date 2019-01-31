@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Grid, Image, Segment, Loader, Input, Form } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroller';
-import { get_KKbox_API, getCookie } from '../../component/getKKboxAPI'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {search_icon} from '../../component/icon'
 import {search_Data,get_Search_Next,init_Search_Data} from '../../redux/search.redux'
 
 class Search extends Component {
@@ -18,11 +18,12 @@ class Search extends Component {
     }
 
     handle_Seach(value) {
-        this.props.init_Search_Data()
+        if(value)
+       { this.props.init_Search_Data()
         this.setState({ bool: true, title: '' })
         this.props.search_Data(value, ()=>{
             this.setState({ bool: false, title: '“' + value + '“' + '：的搜尋結果' })
-        })
+        })}
     }
     hanlde_Next(){
         this.props.get_Search_Next(this.props.search.data.paging.next)
@@ -31,8 +32,9 @@ class Search extends Component {
         return (
             <div className="container_header">
                 <h1>搜尋</h1>
-                <Form onSubmit={() => { this.handle_Seach(this.state.value) }}>
+                <Form  onSubmit={() => { this.handle_Seach(this.state.value) }}>
                     <Input placeholder='搜尋歌單...' onChange={(e, { value }) => { this.setState({ value: value }) }} />
+                    <Image onClick={()=>{this.handle_Seach(this.state.value)}} style={{position:'relative',float:'right',right:'10px',bottom:'26px', cursor: 'pointer'}} src={search_icon}/>
                 <Loader content='搜尋中...' className='loader' active={this.state.bool} inline='centered' size='huge' disabled />
                     <h1 style={{ marginBottom: '40px' }}>{this.state.title}</h1>
                 </Form>

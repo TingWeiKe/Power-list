@@ -132,7 +132,7 @@ router.post('/loggin_spotify', (req, res) => {
   let scopes = 'user-read-private user-read-email user-library-read';
   res.json('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
-    '&client_id=' + sp_my_client_id +
+    '&client_id=' + spotify_client_id +
     (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
     '&redirect_uri=' + encodeURIComponent(mylist_redirect_url));
 })
@@ -144,7 +144,7 @@ router.post('/loggin_spotify_callback', (req, res) => {
     code: code,
     redirect_uri: mylist_redirect_url,
     grant_type: 'authorization_code',
-    client_id: 'spotify_client_id',
+    client_id: spotify_client_id,
     client_secret: spotify_client_secret
   })
 

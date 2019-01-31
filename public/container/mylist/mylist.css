@@ -1,6 +1,9 @@
 .login_button a{
     color: white !important;
+    
 }
+
+
 .kkbox_list{
     margin: auto;
     max-width: 70vw;
@@ -12,4 +15,10 @@
         max-width: none;
     }
 
+}
+.button_icon{
+    position: relative;
+    right: 10px;
+    top: 4px;
+    height: 20px;
 }
