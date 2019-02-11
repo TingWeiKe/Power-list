@@ -5,13 +5,17 @@ import {
     doCookieSetup,
     getCookie
 } from '../component/getKKboxAPI'
-
+import axios from 'axios'
 const GET_MYLIST_API_SUCCESS = 'GET_MYLIST_API_SUCCESS'
 const GET_MYLIST_API_ERR = 'GET_MYLIST_API_ERR'
 const GET_MY_INFO_SUCCESS = 'GET_MY_INFO_SUCCESS'
 const GET_KKBOX_NEXT_SUCCESS = 'GET_KKBOX_NEXT_SUCCESS'
-
+const PUT_KKBOX_TRACK_SUCCESS = 'PUT_KKBOX_TRACK_SUCCESS'
+const INIT_PUT_KKBOX ='INIT_PUT_KKBOX'
 const init = {
+    put_kkbox_negative:false,
+    put_kkbox_success: false,
+    put_kkbox_msg: '歌曲搜尋中．．．',
     msg: '',
     bool: true,
     mylist: {}
@@ -19,6 +23,10 @@ const init = {
 
 export function mylist(state = init, action) {
     switch (action.type) {
+        case INIT_PUT_KKBOX:
+        return state ={...state,  put_kkbox_negative:false,put_kkbox_success: false,put_kkbox_msg: '歌曲搜尋中．．．',}
+        case PUT_KKBOX_TRACK_SUCCESS:
+        return state = { ...state, put_kkbox_msg: '匯入歌曲成功', put_kkbox_success: true }
         case GET_MYLIST_API_SUCCESS:
             return state = { ...state, bool: false, msg: "success", ...action.mylist }
         case GET_MYLIST_API_ERR:
@@ -60,8 +68,10 @@ export function getMylist(url) {
                         .then(res => {
                             dispatch(get_My_Info_Success({ my_info: res.data }))
                         })
-                    get_KKbox_API(res.access_token, url + '/favorite?limit=60')
+                    get_KKbox_API(res.access_token, url + '/favorite?limit=500')
                         .then(res => {
+                            console.log(res);
+                            
                             if (res.status === 200)
                                 dispatch(get_Mylist_API_Success({ mylist: res.data }))
                         })
@@ -79,13 +89,32 @@ export function get_Kkbox_Next(url) {
                     if(res.status===200){
                         dispatch(get_Kkbox_Next_Success(res.data))
                     }
-                    console.log(res);
-
                 })
         }
-
-        // dispatch(get_Kkbox_Next_Success('qwert'))
-
-
     }
+}
+
+
+export function put_Kkbox_Track(id) {
+    return dispatch => {
+        axios.post('/post/push_tracks', { id: id, access_token: getCookie('token') })
+            .then(res => {
+                dispatch({ type: PUT_KKBOX_TRACK_SUCCESS })
+                console.log(res);
+                
+            })
+    }
+}
+
+export function init_Put_Kkbox(){
+    return dispatch=>{
+        let url = 'https://api.kkbox.com/v1.1/me'
+        get_KKbox_API(getCookie('token'), url + '/favorite?limit=500')
+        .then(res => {
+            if (res.status === 200)
+                dispatch(get_Mylist_API_Success({ mylist: res.data }))
+        })
+        dispatch({type:INIT_PUT_KKBOX})
+    }
+
 }

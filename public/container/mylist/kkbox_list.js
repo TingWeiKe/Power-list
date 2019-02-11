@@ -20,7 +20,6 @@ class kkboxlist extends Component {
     }
     componentDidMount() {
         const url = 'https://api.kkbox.com/v1.1/me'
-        console.log(getUrlVars());
         if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
             this.props.getMylist(url)
         }
@@ -32,7 +31,7 @@ class kkboxlist extends Component {
 
     handle_Sort() {
         this.setState({ toggle: !this.state.toggle })
-        this.props.data.mylist.data.reverse()
+        this.props.data.mylist.data
     }
     render() {
         let data = this.props.data.my_info ? this.props.data.my_info : null
@@ -47,8 +46,8 @@ class kkboxlist extends Component {
                                 <a className="list_owner" href={data ? this.props.data.my_info.url : null}><h2>{data ? this.props.data.my_info.name : null}</h2></a>
                             </div>
                             {this.props.data.mylist.data != undefined ? <Button onClick={() => this.handle_Sort()}>排序</Button> : null}
-                            {this.props.data.mylist.data != undefined ? <h3>{this.state.toggle ? '最舊 =============> 最新' : '最新 =============> 最舊'}</h3> : null}
-                            {this.props.data.mylist.data != undefined ? this.props.data.mylist.data.map(data => {
+                            {this.props.data.mylist.data != undefined ? <h3>{this.state.toggle ? '最新 =============> 最舊' : '最舊 =============> 最新'}</h3> : null}
+                            {this.props.data.mylist.data != undefined ? this.props.data.mylist.data.reverse().map(data => {
                                 return <div key={data.id} className="track">
                                     <Grid.Row>
                                         <Button className='play_button' fluid onClick={() => this.handle_play_button(data.name, data.album.artist.name)}>

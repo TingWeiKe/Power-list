@@ -102,23 +102,24 @@ router.post('/youtube', function (req, res, next) {
   })
 });
 
-// router.post('/push_tracks', function (req, res, next) {
-//   let id = (req.body.id).toString()
-//   let access_token = 'sHS2ey0UVYzICN6zcr5g6w=='
+router.post('/push_tracks', function (req, res, next) {
+  let id = (req.body.id).toString()
+  let access_token = req.body.access_token
+  console.log(id,access_token);
+  
+  request.post('https://api.kkbox.com/v1.1/me/favorite', {
+    headers: {
+      'Authorization': 'Bearer ' + access_token,
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      "track_id": id
+    })
+  }, (error, response, body) => {
+    res.send(body)
+  })
 
-//   request.post('https://api.kkbox.com/v1.1/me/favorite', {
-//     headers: {
-//       'Authorization': 'Bearer ' + access_token,
-//       'content-type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       "track_id": id
-//     })
-//   }, (error, response, body) => {
-//     res.send(body)
-//   })
-
-// })
+})
 
 router.post('/loggin_kkbox', (req, res) => {
   let rd_url = 'http://localhost:9000/mylist'

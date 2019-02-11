@@ -35,7 +35,7 @@ class Yotuber_player extends Component {
             <div id='ytplayer'>
                 {id ? <iframe id='player' onKeyDown={(e) => this.handleKeyDown(e)} className={this.state.toggle == true ? 'full_screen' : "movie"} frameBorder="0" type="text/html" width="600" height="340"
                     allow="accelerometer;encrypted-media;  autoplay; picture-in-picture"
-                    src={"https://www.youtube.com/embed/" + id + "?autoplay=1&disablekb=1&enablejsapi=1&playsinline=1"}
+                    src={"https://www.youtube.com/embed/" + id + "?autoplay=1&enablejsapi=1&playsinline=1"}
                     allowFullScreen='1'>
                 </iframe> : null}
                 {/* <div className={this.state.toggle == true ? 'full_screen' : "movie"}  id='player'></div> */}

@@ -10,7 +10,6 @@ class Mylist extends Component {
     loggin_Kkbox() {
         Axios.post('/post/loggin_kkbox')
             .then(res => {
-                console.log(res);
                 window.location.href = res.data
             })
     }

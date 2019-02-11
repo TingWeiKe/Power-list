@@ -115,14 +115,12 @@ export function search_Spotify_Track_and_Put(track) {
         .then(res => {
             // Regular Expression
             let name =  track
-            console.log(name);
             if (name.length<35){
                name =  name.replace('||', '').replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'')
             }
             else{
                 name = name.split('||')[1].replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'')
-            }
-            console.log(name);
+            }console.log(name);
             let url = 'https://api.spotify.com/v1/search?q=' + name + '&type=track&market=TW&limit=2'
             let access_token = res.data.access_token
             let config = {
