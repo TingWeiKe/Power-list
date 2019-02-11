@@ -31,7 +31,7 @@ class kkboxlist extends Component {
 
     handle_Sort() {
         this.setState({ toggle: !this.state.toggle })
-        this.props.data.mylist.data
+        this.props.data.mylist.data.reverse()
     }
     render() {
         let data = this.props.data.my_info ? this.props.data.my_info : null
@@ -47,7 +47,7 @@ class kkboxlist extends Component {
                             </div>
                             {this.props.data.mylist.data != undefined ? <Button onClick={() => this.handle_Sort()}>排序</Button> : null}
                             {this.props.data.mylist.data != undefined ? <h3>{this.state.toggle ? '最新 =============> 最舊' : '最舊 =============> 最新'}</h3> : null}
-                            {this.props.data.mylist.data != undefined ? this.props.data.mylist.data.reverse().map(data => {
+                            {this.props.data.mylist.data != undefined ? this.props.data.mylist.data.map(data => {
                                 return <div key={data.id} className="track">
                                     <Grid.Row>
                                         <Button className='play_button' fluid onClick={() => this.handle_play_button(data.name, data.album.artist.name)}>

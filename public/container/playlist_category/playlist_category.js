@@ -22,14 +22,11 @@ class Playlist_category extends Component {
         this.props.get_Category_Api(categoryUrl)
     }
     componentDidMount() {
-        console.log(this.props);
-
         this.props.data.playlist_category.playlist_category_data.hasOwnProperty('data') &&
             this.props.data.hot_board.hot_board_data.hasOwnProperty('data') ? null : this.get_Data()
     }
 
     handle_Refresh() {
-        console.log(this.props);
         this.props.handle_Init_State()
         get_Access_Token()
             .then(res => {
@@ -54,7 +51,6 @@ class Playlist_category extends Component {
                 <Loader content='載入中...' className='loader' active={bool1 == true && pc_msg !== '伺服器錯誤'} inline='centered' size='huge' />
                 {bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? null :
                     <div style={bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? { display: 'none' } : { display: 'block' }}>
-                        {console.log(bool1, bool2)}
                         {hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>最新主打</h2> : null}
                         <Feature data={this.props.data.playlist_category.playlist_category_data.data} />
                         {hb_msg && pc_msg !== '伺服器錯誤'? <h2 className='subheader'>排行榜</h2> : null}

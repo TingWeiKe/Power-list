@@ -123,7 +123,6 @@ router.post('/push_tracks', function (req, res, next) {
 
 router.post('/loggin_kkbox', (req, res) => {
   let rd_url = 'http://localhost:9000/mylist'
-
   res.json('https://account.kkbox.com/oauth2/authorize?redirect_uri='+encodeURIComponent(mylist_redirect_url)+
   '&client_id='+kkbox_client_id +'&response_type=code&state=123'
   )

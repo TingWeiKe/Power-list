@@ -84,7 +84,6 @@ class Content extends Component {
     }
     handle_Kkbox_Animation() {
         setTimeout(() => {
-            this.props.refresh_Spotify_List()
             document.body.style.overflow = "unset"
             this.setState({ putting_sp: false,putting_kk: false , bool: false })
             this.props.init_Put_Kkbox()

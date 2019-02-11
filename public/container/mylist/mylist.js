@@ -23,7 +23,6 @@ class Mylist extends Component {
     }
 
     render() {
-        console.log(this.props);
         let kk_bool = this.props.mylist.bool
         let sp_bool = this.props.spotify.bool
         let sp_data = this.props.spotify.data ? this.props.spotify.data : null

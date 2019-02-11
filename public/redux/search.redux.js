@@ -19,7 +19,6 @@ export function search(state = initState, action) {
                 state.data.playlists.data.push(i)
             })
             state.data.paging.next = action.payload.paging.next
-            console.log(action.payload,state);
         return state = {...state}
 
             
