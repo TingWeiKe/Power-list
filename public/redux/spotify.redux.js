@@ -67,7 +67,6 @@ export function get_Spotify_API() {
                 axios.get('	https://api.spotify.com/v1/me/tracks?offset=0&limit=20&market=TW', config)
                     .then(res => {
                         if (res.status === 200) {
-                            console.log(res.data);
                             dispatch(get_Spotify_API_Success({ data: res.data }))
                         }
                     })
@@ -84,7 +83,6 @@ export function get_Spotify_Next(url) {
         if (url) {
             axios.post('/post/refresh_spotify', { refresh_token: getCookie('sp_refresh_token') })
                 .then(res => {
-                    console.log(res.data);
                     let access_token = res.data.access_token
                     let config = {
                         method: "GET",
@@ -120,7 +118,7 @@ export function search_Spotify_Track_and_Put(track) {
             }
             else{
                 name = name.split('||')[1].replace(/[?\(].*[?\)]/,'').replace(/([?"].*[?"])+/,'')
-            }console.log(name);
+            }
             let url = 'https://api.spotify.com/v1/search?q=' + name + '&type=track&market=TW&limit=2'
             let access_token = res.data.access_token
             let config = {
@@ -139,7 +137,6 @@ export function search_Spotify_Track_and_Put(track) {
                             })
                     }else{
                         dispatch({ type: PUT_TRACK_FAIL })
-                        console.log('找不到歌曲');
                         
                     }
                 })

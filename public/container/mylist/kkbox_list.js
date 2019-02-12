@@ -5,6 +5,7 @@ import { getMylist, get_Kkbox_Next , put_Kkbox_Track} from '../../redux/mylist_r
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
+import Dimmer from '../../component/dimmer'
 import InfiniteScroll from 'react-infinite-scroller';
 import './mylist.css'
 
@@ -15,17 +16,18 @@ class kkboxlist extends Component {
         super(props)
         this.state = {
             toggle: true,
-
+            putting_kk:false
         }
     }
 
 
-    // componentWillMount(){
-    //     let id  = localStorage.getItem('track_id')
-    //     if(localStorage.getItem('track_id')){
-    //         this.props.put_Kkbox_Track(id)
-    //     }
-    // }
+    componentWillMount(){
+        if(localStorage.getItem('track_id')){
+            this.setState({ putting_kk: true })
+            this.props.put_Kkbox_Track( localStorage.getItem('track_id'))
+            
+        }
+    }
 
 
     componentDidMount() {
@@ -34,19 +36,43 @@ class kkboxlist extends Component {
             this.props.getMylist(url)
         }
     }
+
+    
+    shouldComponentUpdate(){
+        return this.props.data.mylist.data == this.props.data.mylist.data 
+    }
+
+
     handle_play_button(name, artist) {
         this.setState({ name: name })
         this.props.search_Youtube_By_Scraping({ name: name + '  ' + artist })
     }
 
+
     handle_Sort() {
         this.setState({ toggle: !this.state.toggle })
         this.props.data.mylist.data.reverse()
     }
+
+
+    init_State = () => {
+        this.setState({ putting_kk: false })
+        localStorage.removeItem('track_id')
+    }
+
+
     render() {
         let data = this.props.data.my_info ? this.props.data.my_info : null
         return (
             <div >
+                {this.state.putting_kk ?
+                    <Dimmer
+                        init_State={this.init_State}
+                        put_track_success={this.props.data.put_kkbox_success}
+                        put_track_negative={this.props.data.put_kkbox_negative}
+                        put_track_msg={this.props.data.put_kkbox_msg}
+                        name={'kkbox'}>
+                    </Dimmer> : null}
                 <Loader content='載入中...' active={!!getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50 && this.props.data.mylist.data == undefined} inline={'centered'} size='massive' />
                 {this.props.data.mylist.data != undefined ? <Grid stackable={true} textAlign={"left"}>
                     <Grid.Column>
@@ -86,11 +112,8 @@ class kkboxlist extends Component {
                             </InfiniteScroll>
                             <div style={{ paddingTop: '100px' }}></div>
                         </div>
-
                     </Grid.Column>
-
                 </Grid> : null}
-
             </div>
         )
     }

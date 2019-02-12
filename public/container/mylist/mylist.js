@@ -5,7 +5,7 @@ import './mylist.css'
 import Kkboxlist from './kkbox_list'
 import Spotify_list from './spotify_list'
 import Axios from 'axios';
-import {spotify_icon,kkbox_icon} from '../../component/icon'
+import { spotify_icon, kkbox_icon } from '../../component/icon'
 class Mylist extends Component {
     loggin_Kkbox() {
         Axios.post('/post/loggin_kkbox')
@@ -14,11 +14,11 @@ class Mylist extends Component {
             })
     }
 
+
     loggin_Spotify() {
         Axios.post('/post/loggin_spotify')
             .then(res => {
                 window.location.href = res.data
-
             })
     }
 
@@ -31,22 +31,22 @@ class Mylist extends Component {
             <div className="container_header">
                 <h1>我的歌單</h1>
                 <div className="login_button">
-                {sp_bool == true && kk_bool === true ?<div id='kkbox_login'>
-                <img className='button_icon' src={kkbox_icon}/>
-                        <Button circular size='big' onClick={() => this.loggin_Kkbox()} 
-                        style={kk_data.data != undefined ? { display: 'none' } : {}} primary 
-                        disabled={!!this.props.mylist.my_info } >
+                    {sp_bool == true && kk_bool === true ? <div id='kkbox_login'>
+                        <img className='button_icon' src={kkbox_icon} />
+                        <Button circular size='big' onClick={() => this.loggin_Kkbox()}
+                            style={kk_data.data != undefined ? { display: 'none' } : {}} primary
+                            disabled={!!this.props.mylist.my_info} >
                             <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登入 ＫＫＢＯＸ</a>
-                        </Button> 
-                </div>: null}
-                {sp_bool == true && kk_bool === true ? 
-                <div id='spotify_login' >
-                <img className='button_icon' src={spotify_icon}/>
-                    <Button circular size='big' onClick={() => this.loggin_Spotify()} 
-                    disabled={!!this.props.mylist.my_info} secondary>
-                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登入ＳＰＯＴＩＦＹ</a>
-                    </Button>
-                    </div>: null}
+                        </Button>
+                    </div> : null}
+                    {sp_bool == true && kk_bool === true ?
+                        <div id='spotify_login' >
+                            <img className='button_icon' src={spotify_icon} />
+                            <Button circular size='big' onClick={() => this.loggin_Spotify()}
+                                disabled={!!this.props.mylist.my_info} secondary>
+                                <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登入ＳＰＯＴＩＦＹ</a>
+                            </Button>
+                        </div> : null}
                 </div>
                 <Kkboxlist></Kkboxlist>
                 <Spotify_list></Spotify_list>

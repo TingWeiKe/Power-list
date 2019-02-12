@@ -123,8 +123,8 @@ class Content extends Component {
     }
 
 
-    init_State=()=> {
-        this.setState({ putting_sp: false,putting_kk: false,})
+    init_State = () => {
+        this.setState({ putting_sp: false, putting_kk: false, })
     }
 
 
@@ -140,31 +140,28 @@ class Content extends Component {
 
     render() {
         let data = this.props.data.playlist_data
-        console.log(this.state)
         return (
-
-
-
             <div >
-                {this.state.putting_sp ?<Dimmer 
-                init_State = {this.init_State}
-                put_track_success={this.props.spotify.put_track_success }
-                put_track_negative={this.props.spotify.put_track_negative }
-                put_track_msg={this.props.spotify.put_track_msg}
-                name={'spotify'}
-                ></Dimmer> : null}
+                {this.state.putting_sp ? 
+                <Dimmer
+                    init_State={this.init_State}
+                    put_track_success={this.props.spotify.put_track_success}
+                    put_track_negative={this.props.spotify.put_track_negative}
+                    put_track_msg={this.props.spotify.put_track_msg}
+                    name={'spotify'}>
+                </Dimmer> : null}
 
-
-                {this.state.putting_kk ? <Dimmer 
-                init_State = {this.init_State}
-                put_track_success={this.props.mylist.put_kkbox_success  }
-                put_track_negative={this.props.mylist.put_kkbox_negative }
-                put_track_msg={this.props.mylist.put_kkbox_msg}
-                name={'kkbox'}
-                ></Dimmer> : null
+                {this.state.putting_kk ?
+                    <Dimmer
+                        init_State={this.init_State}
+                        put_track_success={this.props.mylist.put_kkbox_success}
+                        put_track_negative={this.props.mylist.put_kkbox_negative}
+                        put_track_msg={this.props.mylist.put_kkbox_msg}
+                        name={'kkbox'}>
+                    </Dimmer> : null
 
                 }
-                 {this.state.dimmer ? <div onClick={() => this.handle_Cancle()} id='dimmer'></div> : null}
+                {this.state.dimmer ? <div onClick={() => this.handle_Cancle()} id='dimmer'></div> : null}
                 {this.state.dimmer ? <div className="loggin_box">
                     <div className='button_box'>
                         <h2>要登入{this.state.loggin_name}嗎？</h2>

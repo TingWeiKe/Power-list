@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Button, Grid, Image, Message, Icon } from 'semantic-ui-react'
 import { checked_icon, x_icon, sidebar_icon, play_Icon } from './icon'
 import { connect } from 'react-redux'
@@ -7,17 +7,13 @@ import { init_Put_Kkbox } from '../redux/mylist_redux'
 
 
 class Dimmer extends React.Component {
-   
-
-
     handle_Cancle() {
         document.body.style.overflow = "unset"
-        this.setState({ dimmer: false, putting_sp: false, bool: false })
+        this.props.init_State()
     }
 
 
     handle_Animation(name) {
-        console.log(name);
         if (name === 'kkbox') {
             setTimeout(() => {
                 document.body.style.overflow = "unset"
