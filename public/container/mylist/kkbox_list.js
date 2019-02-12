@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { play_Icon } from '../../component/icon'
 import { Button, Grid, Image, Loader } from 'semantic-ui-react'
-import { getMylist, get_Kkbox_Next } from '../../redux/mylist_redux'
+import { getMylist, get_Kkbox_Next , put_Kkbox_Track} from '../../redux/mylist_redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
@@ -18,6 +18,16 @@ class kkboxlist extends Component {
 
         }
     }
+
+
+    // componentWillMount(){
+    //     let id  = localStorage.getItem('track_id')
+    //     if(localStorage.getItem('track_id')){
+    //         this.props.put_Kkbox_Track(id)
+    //     }
+    // }
+
+
     componentDidMount() {
         const url = 'https://api.kkbox.com/v1.1/me'
         if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
@@ -89,7 +99,7 @@ class kkboxlist extends Component {
 
 const mapStatetoProps = state => { return { data: state.mylist } }
 
-const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next }
+const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next,put_Kkbox_Track }
 kkboxlist = connect(mapStatetoProps, actionCreate)(kkboxlist)
 
 export default kkboxlist

@@ -47,8 +47,8 @@ class spotify_list extends Component {
         let data = this.props.data.data ? this.props.data.data.items : null
         return (
             <div>
-                           
-                {data ?
+                
+                {this.props.data.msg=='success' ?
                     <Grid style={{ zIndex: '99' }}>
                         <div id='spotify'></div>
                         {/* {data ? <div id='spotify'></div> : null} */}

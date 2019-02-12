@@ -5,10 +5,10 @@ import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { search_Spotify_Track_and_Put, refresh_Spotify_List, init_Put_Track } from '../../redux/spotify.redux'
-import { put_Kkbox_Track ,init_Put_Kkbox} from '../../redux/mylist_redux'
+import { put_Kkbox_Track, init_Put_Kkbox } from '../../redux/mylist_redux'
 import Axios from 'axios'
 import { checked_icon, x_icon, sidebar_icon, play_Icon } from '../icon'
-
+import Dimmer from '../dimmer'
 
 class Content extends Component {
     constructor(props) {
@@ -18,16 +18,19 @@ class Content extends Component {
             loggin_name: '',
             bool: false,
             name: '',
+            id: '',
             dimmer: false,
             putting_sp: false,
-            putting_kk:false,
+            putting_kk: false,
 
         }
     }
 
+
     handle_option_button(e) {
         e.stopPropagation();
     }
+
 
     handle_Storage(storage) {
         if (typeof (Storage) !== "undefined") { // 瀏覽器是否支援Storage
@@ -45,16 +48,16 @@ class Content extends Component {
         }
     }
 
+
     handle_kkbox_button(e, id) {
         // if not loggined
         e.stopPropagation()
-        console.log(this.props);
         if (this.props.mylist.msg !== 'success') {
-            this.setState({ dimmer: true, loggin_name: 'KKBOX' })
+            this.setState({ id: id, dimmer: true, loggin_name: 'KKBOX' })
             document.body.style.overflow = "hidden"
             this.style = { display: 'none' }
 
-        }else{
+        } else {
             //push
             this.props.put_Kkbox_Track(id)
             document.body.style.overflow = "hidden"
@@ -62,63 +65,52 @@ class Content extends Component {
         }
     }
 
+
     handle_spotify_button(e, name) {
-        this.setState({ bool: true })
         e.stopPropagation()
+        let n = name.album.artist.name + '|| ' + name.name
+        this.setState({ name: n, bool: true })
+
         // if not loggined
         if (this.props.spotify.msg !== 'success') {
             this.setState({ dimmer: true, loggin_name: 'Spotify' })
             document.body.style.overflow = "hidden"
             this.style = { display: 'none' }
-
         }
         else {
             // push track to spotify favorite list
-            this.props.search_Spotify_Track_and_Put(name.album.artist.name + '|| ' + name.name)
+            this.props.search_Spotify_Track_and_Put(n)
             // undisplay Dropdown content
             document.body.style.overflow = "hidden"
             this.setState({ putting_sp: true })
-
         }
-
-    }
-    handle_Kkbox_Animation() {
-        setTimeout(() => {
-            document.body.style.overflow = "unset"
-            this.setState({ putting_sp: false,putting_kk: false , bool: false })
-            this.props.init_Put_Kkbox()
-        }, 2000)
     }
 
-    handle_Spotify_Animation() {
-        setTimeout(() => {
-            this.props.init_Put_Track()
-            this.props.refresh_Spotify_List()
-            document.body.style.overflow = "unset"
-            this.setState({ putting_sp: false,putting_kk: false , bool: false })
-        }, 2000)
-    }
 
     handle_Loggin() {
         if (this.state.loggin_name == 'Spotify') {
             Axios.post('/post/loggin_spotify')
                 .then(res => {
+                    localStorage['track_name'] = this.state.name
                     window.location.href = res.data
                 })
         }
         if (this.state.loggin_name == 'KKBOX') {
             Axios.post('/post/loggin_kkbox')
                 .then(res => {
+                    localStorage['track_id'] = this.state.id
                     window.location.href = res.data
                 })
         }
     }
+
 
     handle_Cancle() {
         document.body.style.overflow = "unset"
         this.setState({ dimmer: false, putting_kk: false, bool: false })
         this.props.init_Put_Track()
     }
+
 
     handle_play_button(name, data) {
         this.props.get_Video_Name(name)
@@ -128,39 +120,51 @@ class Content extends Component {
         if (this.state.name != name.name) {
             this.props.search_Youtube_By_Scraping({ name: name.album.artist.name + '  ' + name.name })
         }
-        // TODO: fuck the tracks
     }
+
+
+    init_State=()=> {
+        this.setState({ putting_sp: false,putting_kk: false,})
+    }
+
+
+    componentWillMount() {
+        localStorage.removeItem('track_name')
+        localStorage.removeItem('track_id')
+    }
+
 
     shouldComponentUpdate() {
         return this.state.name !== this.props.data.playlist_data.name
     }
 
-
     render() {
         let data = this.props.data.playlist_data
+        console.log(this.state)
         return (
+
+
+
             <div >
-                {this.state.putting_sp ? <div>
-                    <div onClick={() => this.handle_Cancle()} id='dimmer'></div>
-                    <Message icon className='putting_box' size={'large'} positive={this.props.spotify.put_track_success} negative={this.props.spotify.put_track_negative}>
-                        {!this.props.spotify.put_track_success && !this.props.spotify.put_track_negative ? <Icon name='circle notched' loading /> : null}
-                        {this.props.spotify.put_track_success ? <Image onLoad={this.handle_Spotify_Animation()} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={checked_icon} /> : null}
-                        {this.props.spotify.put_track_negative ? <Image onLoad={this.handle_Spotify_Animation()} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={x_icon} /> : null}
-                        <Message.Header>{this.props.spotify.put_track_msg}</Message.Header>
-                    </Message>
-                </div> : null}
-                    {this.state.putting_kk? <div>
-                    <div onClick={() => this.handle_Cancle()} id='dimmer'></div>
-                    <Message icon className='putting_box' size={'large'} positive={this.props.mylist.put_kkbox_success} negative={this.props.mylist.put_kkbox_negative}>
-                        {!this.props.mylist.put_kkbox_success && !this.props.spotify.put_track_negative ? <Icon name='circle notched' loading /> : null}
-                        {this.props.mylist.put_kkbox_success ? <Image onLoad={this.handle_Kkbox_Animation()} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={checked_icon} /> : null}
-                        {this.props.mylist.put_kkbox_negative ? <Image onLoad={this.handle_Kkbox_Animation()} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={x_icon} /> : null}
-                        <Message.Header>{this.props.mylist.put_kkbox_msg}</Message.Header>
-                    </Message>
-                </div> : null
-                    
+                {this.state.putting_sp ?<Dimmer 
+                init_State = {this.init_State}
+                put_track_success={this.props.spotify.put_track_success }
+                put_track_negative={this.props.spotify.put_track_negative }
+                put_track_msg={this.props.spotify.put_track_msg}
+                name={'spotify'}
+                ></Dimmer> : null}
+
+
+                {this.state.putting_kk ? <Dimmer 
+                init_State = {this.init_State}
+                put_track_success={this.props.mylist.put_kkbox_success  }
+                put_track_negative={this.props.mylist.put_kkbox_negative }
+                put_track_msg={this.props.mylist.put_kkbox_msg}
+                name={'kkbox'}
+                ></Dimmer> : null
+
                 }
-                {this.state.dimmer ? <div onClick={() => this.handle_Cancle()} id='dimmer'></div> : null}
+                 {this.state.dimmer ? <div onClick={() => this.handle_Cancle()} id='dimmer'></div> : null}
                 {this.state.dimmer ? <div className="loggin_box">
                     <div className='button_box'>
                         <h2>要登入{this.state.loggin_name}嗎？</h2>
@@ -238,7 +242,7 @@ class Content extends Component {
 const mapStatetoProps = state => {
     return { data: state.playlist, youtube: state.youtube, mylist: state.mylist, spotify: state.spotify }
 }
-const actionCreate = { get_Video_Name, search_Youtube_By_Scraping, refresh_Spotify_List, search_Spotify_Track_and_Put, init_Put_Track, put_Kkbox_Track,init_Put_Kkbox }
+const actionCreate = { get_Video_Name, search_Youtube_By_Scraping, refresh_Spotify_List, search_Spotify_Track_and_Put, init_Put_Track, put_Kkbox_Track, init_Put_Kkbox }
 Content = connect(mapStatetoProps, actionCreate)(Content)
 
 export default Content

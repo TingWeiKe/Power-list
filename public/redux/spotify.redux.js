@@ -134,11 +134,9 @@ export function search_Spotify_Track_and_Put(track) {
                             .then(res => {
                                 axios.post('/post/put_spotify_track', { access_token: access_token, id: id })
                                     .then(res => {
-                                        dispatch({ type: PUT_TRACK_SUCCESS })
-                                        
+                                        dispatch({ type: PUT_TRACK_SUCCESS })    
                                     })
                             })
-
                     }else{
                         dispatch({ type: PUT_TRACK_FAIL })
                         console.log('找不到歌曲');
