@@ -20,20 +20,17 @@ class spotify_list extends Component {
     }
 
 
-    componentWillMount(){
-        if(localStorage.getItem('track_name')){
-            this.setState({ putting_sp: true })
-            this.props.search_Spotify_Track_and_Put(localStorage.getItem('track_name'))
-            
-        }
-    }
-
-
     componentDidMount() {
         const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=40&market=TW'
         if (getUrlVars() && getUrlVars().length > 150) {
             this.props.get_Spotify_API(url)
         }
+        setTimeout(()=>{
+            if(localStorage.getItem('track_name')){
+                this.setState({ putting_sp: true })
+                this.props.search_Spotify_Track_and_Put(localStorage.getItem('track_name'))
+            }
+        },1500)
     }
 
 

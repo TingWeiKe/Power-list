@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { play_Icon } from '../../component/icon'
 import { Button, Grid, Image, Loader } from 'semantic-ui-react'
-import { getMylist, get_Kkbox_Next , put_Kkbox_Track} from '../../redux/mylist_redux'
+import { getMylist, get_Kkbox_Next, put_Kkbox_Track } from '../../redux/mylist_redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
 import { getUrlVars } from '../../component/getKKboxAPI'
@@ -16,18 +16,10 @@ class kkboxlist extends Component {
         super(props)
         this.state = {
             toggle: true,
-            putting_kk:false
+            putting_kk: false
         }
     }
 
-
-    componentWillMount(){
-        if(localStorage.getItem('track_id')){
-            this.setState({ putting_kk: true })
-            this.props.put_Kkbox_Track( localStorage.getItem('track_id'))
-            
-        }
-    }
 
 
     componentDidMount() {
@@ -35,11 +27,17 @@ class kkboxlist extends Component {
         if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
             this.props.getMylist(url)
         }
+        setTimeout(() => {
+            if (localStorage.getItem('track_id')) {
+                this.setState({ putting_kk: true })
+                this.props.put_Kkbox_Track(localStorage.getItem('track_id'))
+            }
+        }, 1500)
     }
 
-    
-    shouldComponentUpdate(){
-        return this.props.data.mylist.data == this.props.data.mylist.data 
+
+    shouldComponentUpdate() {
+        return this.props.data.mylist.data == this.props.data.mylist.data
     }
 
 
@@ -122,7 +120,7 @@ class kkboxlist extends Component {
 
 const mapStatetoProps = state => { return { data: state.mylist } }
 
-const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next,put_Kkbox_Track }
+const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next, put_Kkbox_Track }
 kkboxlist = connect(mapStatetoProps, actionCreate)(kkboxlist)
 
 export default kkboxlist
