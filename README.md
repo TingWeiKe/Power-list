@@ -15,8 +15,8 @@
     * Node.js v. 10.14
     * Express v. 4.16
 * Third Party APIs
-    * KKBox OAuth2
-    * Spotify OAuth2
+    * KKBox OAuth 2.0 API
+    * Spotify OAuth 2.0 API
     * Youtube 
 * Deploy:
     * Heroku
@@ -35,7 +35,7 @@
 
 The  project is inspired by Kube created by Hung-Yi Chen.
 
-Checkout his amazing productions
+Checkout his amazing products
    * [ Website Kube](https://www.kube-app.com/today) 
    * [iOS App](https://itunes.apple.com/tw/app/kube-playlists/id1369069997) 
    * [ Android App](https://play.google.com/store/apps/details?id=com.kube.app)
