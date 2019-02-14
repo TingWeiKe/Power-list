@@ -17,7 +17,7 @@
 * Third Party APIs
     * KKBox OAuth 2.0 API
     * Spotify OAuth 2.0 API
-    * Youtube 
+    * Youtube API
 * Deploy:
     * Heroku
 
