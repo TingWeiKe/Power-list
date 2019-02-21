@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Bridgewell</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+(async function (i, max_i) {
+    for (;i < max_i; i+=1) {
+       await $.ajax({
+            url: 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.' + i + '/jquery.min.js',
+            success: function () {
+                console.log(i);
+            }
+        });
+    }
+})(1, 5);
+</script>
+</body>
+</html>
