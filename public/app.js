@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
@@ -13,26 +13,29 @@ import Recent from './container/recents/recents'
 import Setting from './container/setting/setting'
 import Mylist from './container/mylist/mylist'
 import Playlist from './component/playlist/playlist'
-import reducer from './reducer';
+import reducer from './reducer'
 import Yotuber_player from './component/youtube/yotuber_player'
 
-
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? compose(
-  //處裡Async middleware
-  applyMiddleware(thunk),
-  //chrome redux extenion
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-) : compose(applyMiddleware(thunk)))
-
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__
+    ? compose(
+        //Async middleware
+        applyMiddleware(thunk),
+        //chrome redux extenion
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
+    : compose(applyMiddleware(thunk))
+)
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-
       <div>
         <HeaderRoutre />
         <Switch>
-        <Route exact path='/' component={Today} />
+          <Route exact path='/' component={Today} />
           <Route path='/today' component={Today} />
           <Route path='/recents' component={Recent} />
           <Route path='/playlist' component={Playlist} />
@@ -45,9 +48,7 @@ ReactDOM.render(
         <Yotuber_player />
       </div>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
 
-
-  ,
   document.getElementById('app')
-);
+)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Grid, Image, Message, Icon } from 'semantic-ui-react'
+import { Button, Grid, Image } from 'semantic-ui-react'
 import { modify_updated_at } from '../../component/getKKboxAPI'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
@@ -7,7 +7,7 @@ import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { search_Spotify_Track_and_Put, refresh_Spotify_List, init_Put_Track } from '../../redux/spotify.redux'
 import { put_Kkbox_Track, init_Put_Kkbox } from '../../redux/mylist_redux'
 import Axios from 'axios'
-import { checked_icon, x_icon, sidebar_icon, play_Icon } from '../icon'
+import {sidebar_icon, play_Icon } from '../icon'
 import Dimmer from '../dimmer'
 
 class Content extends Component {
@@ -150,7 +150,6 @@ class Content extends Component {
                     put_track_msg={this.props.spotify.put_track_msg}
                     name={'spotify'}>
                 </Dimmer> : null}
-
                 {this.state.putting_kk ?
                     <Dimmer
                         init_State={this.init_State}
@@ -165,8 +164,8 @@ class Content extends Component {
                 {this.state.dimmer ? <div className="loggin_box">
                     <div className='button_box'>
                         <h2>要登入{this.state.loggin_name}嗎？</h2>
-                        <Button className='login_button' onClick={() => this.handle_Loggin()} primary>登入去</Button>
-                        <Button className='login_button' onClick={(e) => this.handle_Cancle(e)} secondary>取消</Button>
+                        <Button className='dimmer_login_button' onClick={() => this.handle_Loggin()} primary>登入去</Button>
+                        <Button className='dimmer_login_button' onClick={(e) => this.handle_Cancle(e)} secondary>取消</Button>
                     </div>
                 </div> : null}
 
@@ -210,7 +209,7 @@ class Content extends Component {
                                             </Grid.Column>
                                             <Grid.Column width={4}>
                                                 <div className="sidebar">
-                                                    <div className="dropdown" style={this.state.bool ? { Float: 'left', display: 'none' } : { Float: 'left' }}>
+                                                    <div className="dropdown" style={{ Float: 'left'}}>
                                                         <Image className='sidebar_icon' src={sidebar_icon} onClick={(e) => this.handle_option_button(e, data)}></Image>
                                                         <div style={this.state.bool ? { display: 'none' } : null} className="dropdown-content">
                                                             <a onClick={e => this.handle_spotify_button(e, data)}>匯入SPOTIFY歌單</a>

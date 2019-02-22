@@ -6,6 +6,7 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const postRouter = require('./post')
 const rateLimit = require('express-rate-limit')
+const axios = require('axios')
 const app = express()
 
 const limiter = rateLimit({
@@ -23,7 +24,7 @@ function wakeup() {
     .catch((err) => {
       throw new err()
     })
-  setTimeout(wakeup, 170000)
+  setTimeout(wakeup, 1700000)//28min
 }
 
 //Allow CORS

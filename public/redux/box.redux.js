@@ -1,4 +1,3 @@
-
 import {
     get_Access_Token,
     get_KKbox_API,
@@ -51,8 +50,6 @@ export function get_Featured_Playlists_Api(url) {
                         doCookieSetup('token', data.access_token, data.expires_in)
                     }
                     
-                    
-              
                 get_KKbox_API(data.access_token, url)
                     .then(res => {
                         if (res && res.status === 200) {
@@ -76,8 +73,6 @@ export function get_Featured_Playlists_Api(url) {
                         console.log('err')
                     }
                 })
-
-
     }
 }
 

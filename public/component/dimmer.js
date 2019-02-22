@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Grid, Image, Message, Icon } from 'semantic-ui-react'
-import { checked_icon, x_icon, sidebar_icon, play_Icon } from './icon'
+import { checked_icon, x_icon } from './icon'
 import { connect } from 'react-redux'
 import { init_Put_Track, refresh_Spotify_List } from '../redux/spotify.redux'
 import { init_Put_Kkbox } from '../redux/mylist_redux'
