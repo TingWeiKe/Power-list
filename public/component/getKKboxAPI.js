@@ -75,8 +75,5 @@ export function push_Track(id){
     axios.post('/post/push_tracks', { id: id })
     .then(res=>{
         console.log(res);
-        
     })
-
-
 }

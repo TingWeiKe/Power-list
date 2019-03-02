@@ -30,14 +30,13 @@
     }
     #kkbox_login{
        position: relative;
-       top: 30px;
     }
 }
 .button_icon{
     margin-top: 20px;
     position: relative;
-    left: 40px;
-    top: 6px;
+    left: 40px !important;
+    top: 6px !important;
     height: 28px;
     
 }
