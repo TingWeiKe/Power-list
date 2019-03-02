@@ -180,7 +180,7 @@
     float: right;
     position: relative;
     bottom: 7px;
-    right: 5px;
+    right: 10px;
 }
 
 
@@ -292,8 +292,8 @@
 }
 
 .list_box{
-    max-height: 150vh ;
-    overflow: auto ;
+    max-height: 100vh ;
+    overflow: scroll ;
 }
 
 .putting_box{
