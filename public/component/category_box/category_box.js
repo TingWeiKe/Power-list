@@ -6,14 +6,15 @@ import { withRouter, } from 'react-router-dom'
 import Box from '../box/box'
 
 class Category_box extends Component {
+
     componentWillMount() {
         this.props.handle_Init_State()
-        let url = this.props.location.url ? this.props.location.url : 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + this.props.location.pathname.split('/')[2] + '?territory=' + localStorage.getItem('language')
+        let url = this.props.location.url 
+        ? this.props.location.url 
+        : 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + this.props.location.pathname.split('/')[2] + '?territory=' + localStorage.getItem('language')
         this.props.get_Category_Box_api(url)
     }
     render() {
-        //rediret to playlist_category if category_box doesn't exist when chanage language
-        //  {this.props.data.category_box.msg =="伺服器錯誤"?  this.props.history.push('/playlist_category'):null}
         return (
             <div>
                 <Box

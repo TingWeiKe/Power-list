@@ -21,7 +21,6 @@ const mylist_redirect_url = 'http://localhost:9000/mylist'
 router.post('/refresh', function(req, res, next) {
   let code = req.body.code
   async function get_refresh_access_data() {
-    //FormData must be a String in order
     let data = Qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: code,
@@ -84,6 +83,13 @@ router.post('/', function(req, res, next) {
     })
 })
 
+function parseHtmlEntities(str) {
+  return str.replace(/&#([0-9]{1,3});/gi, function(match, numStr) {
+    var num = parseInt(numStr, 10) // read num as normal number
+    return String.fromCharCode(num)
+  })
+}
+
 router.post('/youtube', function(req, res, next) {
   let string =
     req.body.name.name.length > 50
@@ -97,7 +103,9 @@ router.post('/youtube', function(req, res, next) {
       if (r.statusCode === 200) {
         let x = body.split('href="/watch?v=')
         let id = x[1].substring(0, 11)
-        let title = x[2].split('title="')[1].split('" ')[0]
+        let title = parseHtmlEntities(
+          x[2].split('title="')[1].split('" ')[0]
+        ).replace(/(&quot\;)/g, '"')
         if (id.length !== 11) {
           throw 'Error Video_Id'
         }

@@ -3,8 +3,6 @@
     color: #2185d0;
     font: 900;
     font-size: 16px;
-    ;
-
 }
 
 .back>span {
@@ -72,7 +70,7 @@
 }
 
 .playlist_info>h3 {
- 
+
     color: rgba(0, 0, 0, .9) !important;
     margin: 0px;
     max-width: 78% !important;
@@ -125,8 +123,10 @@
 
     .sidebar {
         bottom: 10px !important;
+        right: 0 !important;
     }
-    .list_box{
+
+    .list_box {
         max-height: none !important;
         overflow: none !important;
     }
@@ -194,7 +194,6 @@
 }
 
 .dropdown {
-
     padding-left: 20px;
     position: relative;
     display: inline-block;
@@ -209,8 +208,6 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-
-    /* display: none; */
 }
 
 .dropdown-content a {
@@ -228,10 +225,11 @@
 }
 
 .dropdown:hover .dropdown-content {
-    display: block ;
+    display: block;
 }
-.display_none{
-    display: none !important; 
+
+.display_none {
+    display: none !important;
 }
 
 
@@ -257,7 +255,6 @@
     width: 400px;
     position: fixed;
     margin: 5% auto;
-    /* Will not center vertically and won't work in IE6/7. */
     left: 0;
     right: 0;
     top: 100px
@@ -286,17 +283,17 @@
     position: fixed;
 }
 
-.sidebar_icon{
+.sidebar_icon {
     max-width: 18px !important;
     bottom: 3px;
 }
 
-.list_box{
-    max-height: 100vh ;
-    overflow: scroll ;
+.list_box {
+    max-height: 100vh;
+    overflow: auto;
 }
 
-.putting_box{
+.putting_box {
     margin: 5% auto !important;
     position: fixed !important;
     z-index: 99;

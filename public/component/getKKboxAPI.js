@@ -10,7 +10,6 @@ export function getUrlVars() {
     return vars["code"] ? vars["code"] : ''
 }
 
-
 export async function get_Access_Token_From_urlParam() {
     let urlPara = getUrlVars()
     if (urlPara) {
