@@ -1,5 +1,5 @@
 # 🎵Power-list 
-[**Power-list**](https://power-list.herokuapp.com) provides daily updated and organized musical playlists created by KKBox and KKBox's users for you. You can enjoy the millions of music tracks using Youtube API and put any your favorite track to your Spotify or KKBox playlist. 
+[**Power-list**](https://power-lists.herokuapp.com) provides daily updated and organized musical playlists created by KKBox and KKBox's users for you. You can enjoy the millions of music tracks using Youtube API and put any your favorite track to your Spotify or KKBox playlist. 
 
 ![Imgur](https://i.imgur.com/IOR612a.gif)
 
