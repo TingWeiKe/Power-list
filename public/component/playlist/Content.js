@@ -124,7 +124,7 @@ class Content extends Component {
 
 
     init_State = () => {
-        this.setState({ putting_sp: false, putting_kk: false, })
+        this.setState({ putting_sp: false, putting_kk: false, bool:false })
     }
 
 
@@ -170,15 +170,15 @@ class Content extends Component {
                 </div> : null}
 
                 <Grid stackable={true} textAlign={"left"}>
-                    <Grid.Column widescreen={7}>
+                    <Grid.Column widescreen={6}>
                         <h1>{data.title}</h1>
                         <Button className='play' fluid onClick={() => this.handle_play_button(this.props.data.playlist_data.tracks.data[0], this.props.data)}>開始播放</Button>
                         <Grid>
                             <Grid.Column width={16}>
-                                <Image src={data.images[2].url} />
+                                <Image className='main_img' src={data.images[2].url} />
                                 <div className='playlist_text_box'>
                                     <div className='list_description'>
-                                        <pre>{data.description}</pre>
+                                        <div>{data.description}</div>
                                     </div>
                                     <div className="list_text">
                                         <a className="list_owner link" href={data.owner.url}><p>作者：{data.owner.name}</p></a>
@@ -191,7 +191,7 @@ class Content extends Component {
                     </Grid.Column>
 
 
-                    <Grid.Column widescreen={9}>
+                    <Grid.Column widescreen={10}>
                         <div className='list_box' >
                             {data.tracks.data.length > 0 ? data.tracks.data.map(data => {
                                 return <div key={data.id} className="track">

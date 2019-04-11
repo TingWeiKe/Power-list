@@ -10,11 +10,10 @@
 }
 
 
-.list_description>pre {
+.list_description>div {
     font-size: 16px;
     line-height: 1.4;
-    white-space: pre-wrap;
-    /* 防止overflow */
+    margin: 14px 0;
 }
 
 .play {
@@ -39,6 +38,7 @@
 .play_button {
     background-color: #f0f2f5 !important;
     padding: 5px !important;
+    width: 99% !important;
 }
 
 .play_button:hover {
@@ -73,7 +73,7 @@
 
     color: rgba(0, 0, 0, .9) !important;
     margin: 0px;
-    max-width: 78% !important;
+    max-width: 82% !important;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -104,7 +104,7 @@
 
 @media screen and (max-width: 760px) {
     .playlist_info>h3 {
-        max-width: 60vw !important;
+        max-width: 64vw !important;
     }
 
     .playlist_info>p {
@@ -128,7 +128,7 @@
 
     .list_box {
         max-height: none !important;
-        overflow: none !important;
+        overflow: unset !important;
     }
 }
 
@@ -289,7 +289,7 @@
 }
 
 .list_box {
-    max-height: 100vh;
+    max-height: 80vh;
     overflow: auto;
 }
 
@@ -303,3 +303,4 @@
     width: 80vw !important;
     height: 80px !important;
 }
+

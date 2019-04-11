@@ -10,8 +10,9 @@ class Dimmer extends React.Component {
     handle_Cancle() {
         document.body.style.overflow = "unset"
         this.props.init_State()
+        this.props.init_Put_Track()
+        this.props.init_Put_Kkbox()
     }
-
 
     handle_Animation(name) {
         if (name === 'kkbox') {

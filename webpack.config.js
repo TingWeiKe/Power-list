@@ -36,7 +36,8 @@ module.exports = {
         port: 9000,
         compress:true,
         proxy: {
-            '/post': 'http://localhost:3000'
+            '/post': 'http://localhost:5000',
+            changeOrigin: true
         }
         
     },

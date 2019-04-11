@@ -16,7 +16,7 @@ axios.defaults.headers.post['Content-Type'] =
 
 const mylist_redirect_url = 'http://localhost:9000/mylist'
 //  Local http://localhost:9000/mylist
-//  Production https://kkboxoauth2.herokuapp.com/mylist
+//  Production https://power-list.herokuapp.com/today
 
 router.post('/refresh', function(req, res, next) {
   let code = req.body.code

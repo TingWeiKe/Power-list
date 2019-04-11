@@ -5,11 +5,8 @@ import { withRouter } from 'react-router-dom'
 class setting extends Component {
 
   componentWillMount(){
-    console.log(this.props.history);
     this.props.history.goBack()
   }
-
-
   render() {
     return (
       <div className="container_header">

@@ -17,12 +17,12 @@ const limiter = rateLimit({
 // Prevent Heroku from sleeping
 function wakeup() {
   axios
-    .get('https://power-list.herokuapp.com/today')
+    .get('https://power-lists.herokuapp.com/today')
     .then((res) => {
       console.log('Woke up!')
     })
     .catch((err) => {
-      throw new err()
+      throw  err
     })
   setTimeout(wakeup, 1700000)//28min
 }
@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/post', postRouter)
-wakeup()
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
