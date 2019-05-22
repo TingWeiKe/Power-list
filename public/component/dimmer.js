@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Image, Message, Icon } from 'semantic-ui-react'
+import { Image, Message, Icon } from 'semantic-ui-react'
 import { checked_icon, x_icon } from './icon'
 import { connect } from 'react-redux'
 import { init_Put_Track, refresh_Spotify_List } from '../redux/spotify.redux'
@@ -47,10 +47,10 @@ class Dimmer extends React.Component {
         )
     }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
     return {}
 }
 const actionCreate = { init_Put_Track, refresh_Spotify_List, init_Put_Kkbox }
-Dimmer = connect(mapStatetoProps, actionCreate)(Dimmer)
+Dimmer = connect(mapStateToProps, actionCreate)(Dimmer)
 
 export default Dimmer
