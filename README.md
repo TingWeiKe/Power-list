@@ -23,7 +23,7 @@
 
 # Feature
    * Play music using Youtube video
-   * Loggin KKBox or Spotif using OAuth 2.0
+   * Loggin KKBox or Spotify using OAuth 2.0
    * Show your KKBox or Spotify playlists 
    * Add tracks to your KKbox or Spotify playlists
    * Web Scraping Youtube video data
