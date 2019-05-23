@@ -27,7 +27,7 @@ class Category_box extends Component {
         )
     }
 }
-const mapStatetoProps = state => { return { data: state } }
+const mapStateToProps = state => { return { data: state } }
 const actionCreate = { get_Category_Box_api, handle_Init_State }
 
-export default withRouter(connect(mapStatetoProps, actionCreate)(Category_box))
+export default withRouter(connect(mapStateToProps, actionCreate)(Category_box))

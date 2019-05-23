@@ -55,10 +55,10 @@ class Playlist extends Component {
   }
 }
 
-const mapStatetoProps = state => { return { data: state } }
+const mapStateToProps = state => { return { data: state } }
 
 const actionCreate = { get_Playlists_Id_Api, hadndle_Init_State, get_Video_Name }
-Playlist = connect(mapStatetoProps, actionCreate)(Playlist)
+Playlist = connect(mapStateToProps, actionCreate)(Playlist)
 
 export default withRouter(Playlist)
 

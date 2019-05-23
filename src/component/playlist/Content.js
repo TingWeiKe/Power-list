@@ -235,10 +235,10 @@ class Content extends Component {
         )
     }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
     return { data: state.playlist, youtube: state.youtube, mylist: state.mylist, spotify: state.spotify }
 }
 const actionCreate = { get_Video_Name, search_Youtube_By_Scraping, refresh_Spotify_List, search_Spotify_Track_and_Put, init_Put_Track, put_Kkbox_Track, init_Put_Kkbox }
-Content = connect(mapStatetoProps, actionCreate)(Content)
+Content = connect(mapStateToProps, actionCreate)(Content)
 
 export default Content

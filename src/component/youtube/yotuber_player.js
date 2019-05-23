@@ -49,7 +49,7 @@ class Yotuber_player extends Component {
 }
 
 
-const mapStatetoProps = state => { return { data: state.youtube } }
+const mapStateToProps = state => { return { data: state.youtube } }
 const actionCreate = {}
-Yotuber_player = connect(mapStatetoProps, actionCreate)(Yotuber_player)
+Yotuber_player = connect(mapStateToProps, actionCreate)(Yotuber_player)
 export default Yotuber_player

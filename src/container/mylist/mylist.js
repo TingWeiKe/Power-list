@@ -57,9 +57,9 @@ class Mylist extends Component {
     }
 }
 
-const mapStatetoProps = state => { return { mylist: state.mylist, spotify: state.spotify } }
+const mapStateToProps = state => { return { mylist: state.mylist, spotify: state.spotify } }
 
 const actionCreate = {}
-Mylist = connect(mapStatetoProps, actionCreate)(Mylist)
+Mylist = connect(mapStateToProps, actionCreate)(Mylist)
 
 export default Mylist

@@ -115,9 +115,9 @@ class spotify_list extends Component {
     }
 }
 
-const mapStatetoProps = state => { return { data: state.spotify } }
+const mapStateToProps = state => { return { data: state.spotify } }
 const actionCreate = { get_Spotify_API, search_Youtube_By_Scraping, get_Spotify_Next, refresh_Spotify_List, search_Spotify_Track_and_Put }
-spotify_list = connect(mapStatetoProps, actionCreate)(spotify_list)
+spotify_list = connect(mapStateToProps, actionCreate)(spotify_list)
 
 
 export default spotify_list

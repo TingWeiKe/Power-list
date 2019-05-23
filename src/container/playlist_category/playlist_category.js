@@ -64,8 +64,8 @@ class Playlist_category extends Component {
     }
 }
 
-const mapStatetoProps = state => { return { data: state } }
+const mapStateToProps = state => { return { data: state } }
 const actionCreate = { get_Playlist_category_Api, get_Hotboard_Api, get_Category_Api, handle_Init_State }
-Playlist_category = connect(mapStatetoProps, actionCreate)(Playlist_category)
+Playlist_category = connect(mapStateToProps, actionCreate)(Playlist_category)
 
 export default Playlist_category

@@ -118,9 +118,9 @@ class kkboxlist extends Component {
 }
 
 
-const mapStatetoProps = state => { return { data: state.mylist } }
+const mapStateToProps = state => { return { data: state.mylist } }
 
 const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next, put_Kkbox_Track }
-kkboxlist = connect(mapStatetoProps, actionCreate)(kkboxlist)
+kkboxlist = connect(mapStateToProps, actionCreate)(kkboxlist)
 
 export default kkboxlist

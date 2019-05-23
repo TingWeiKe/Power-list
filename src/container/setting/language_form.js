@@ -40,7 +40,7 @@ class language_form extends Component {
   }
 }
 
-const mapStatetoProps = state => { return { data: state } }
+const mapStateToProps = state => { return { data: state } }
 const actionCreate = { hadndle_Change_Language, handle_Init_State }
 
-export default withRouter(connect(mapStatetoProps, actionCreate)(language_form))
+export default withRouter(connect(mapStateToProps, actionCreate)(language_form))

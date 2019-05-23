@@ -26,8 +26,8 @@ class category extends Component {
         )
     }
 }
-const mapStatetoProps = state => { return { data: state } }
+const mapStateToProps = state => { return { data: state } }
 const actionCreate = { handle_Init_State }
-category = connect(mapStatetoProps, actionCreate)(category)
+category = connect(mapStateToProps, actionCreate)(category)
 
 export default category

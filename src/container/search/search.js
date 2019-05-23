@@ -71,11 +71,11 @@ class Search extends Component {
     }
 }
 
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
     return { search: state.search}
 }
 const actionCreate = { search_Data ,get_Search_Next ,init_Search_Data}
-Search = connect(mapStatetoProps, actionCreate)(Search)
+Search = connect(mapStateToProps, actionCreate)(Search)
 
 
 export default withRouter(Search)
