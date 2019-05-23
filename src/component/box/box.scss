@@ -15,15 +15,14 @@
 
 @media screen and (min-width: 700px) {
     .playlist {
-        max-width: 270px !important;
+        max-width: 260px !important;
     }
 }
 
 .playlist {
     z-index: 3;
     border: 1px solid #ccc;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     margin-bottom: 40px;
     background-color: #fff;
 }

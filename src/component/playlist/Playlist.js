@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { get_Playlists_Id_Api, hadndle_Init_State, get_Video_Name } from '../../redux/playlist.redux'
 import { Button, Loader } from 'semantic-ui-react'
 import Content from './Content'
-import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKboxAPI'
+import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKBoxAPI'
 import './playlist.scss'
 
 class Playlist extends Component {

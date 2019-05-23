@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Image, Grid, Loader } from 'semantic-ui-react'
 import './box.scss'
 import { icon } from './box.img'
-import { modifyUpdatedAt } from '../../utils/getKKboxAPI'
+import { modifyUpdatedAt } from '../../utils/getKKBoxAPI'
 
 const Box = (props) => {
+	console.log(props.title)
 	const data = props.data
 	const bool = props.bool
 	return (
 		<>
+			<h1>{props.title}</h1>
 			<Loader content='載入中...' className='loader' active={bool} inline='centered' size='huge' disabled />
-			<Grid>
-				<Grid.Row>
+		
+			<div className='box_container'>
 					{data ? (
 						data.map((data) => {
 							return (
 								<div key={data.id} className='playlist'>
-									<Grid.Column>
 										<Link className='link' to={'/playlist/' + data.id} id={data.id}>
 											<Image style={{ width: ' 100%' }} centered={true} className='img' src={data.images[0].url} />
-										</Link>
-										<Link className='link' to={'/playlist/' + data.id} id={data.id}>
 											<Image className='play_icon' src={icon} bordered={true} />
 										</Link>
 										<div style={{ cursor: 'default' }}>
@@ -40,13 +39,11 @@ const Box = (props) => {
 												<p>更新：{modifyUpdatedAt(data.updated_at)}</p>
 											</div>
 										</div>
-									</Grid.Column>
 								</div>
 							)
 						})
 					) : null}
-				</Grid.Row>
-			</Grid>
+						</div>
 		</>
 	)
 }

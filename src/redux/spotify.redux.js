@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { getUrlVars, doCookieSetup, getCookie } from '../utils/getKKboxAPI'
+import { getUrlVars, doCookieSetup, getCookie } from '../utils/getKKBoxAPI'
 const GET_SPOTIFY_API_SUCCESS = 'GET_SPOTIFY_API_SUCCESS'
 const GET_SPOTIFY_API_ERR = 'GET_SPOTIFY_API_ERR'
 const GET_SPOTIFY_NEXT = 'GET_SPOTIFY_NEXT'

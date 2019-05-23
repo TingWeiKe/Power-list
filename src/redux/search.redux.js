@@ -1,5 +1,5 @@
 
-import { getKKboxAPI, getCookie } from '../utils/getKKboxAPI'
+import { getKKBoxAPI, getCookie } from '../utils/getKKBoxAPI'
 const SEARCH_DATA_SUCCESS = 'SEARCH_DATA_SUCCESS'
 const GET_SEARCH_NEXT_SUCCESS = 'GET_SEARCH_NEXT_SUCCESS'
 const INIT_SEARCH_DATA ='INIT_SEARCH_DATA'
@@ -45,7 +45,7 @@ export function init_Search_Data(){
 export function search_Data(value, callback) {
     return dispatch => {
         let url = 'https://api.kkbox.com/v1.1/search?q=' + value + '&type=playlist&territory=' + localStorage.getItem('language') + '&limit=50'
-        getKKboxAPI(getCookie('token'), url)
+        getKKBoxAPI(getCookie('token'), url)
             .then(res => {
                 dispatch(search_Data_Success({ data: res.data }))
                 callback()
@@ -58,7 +58,7 @@ export function search_Data(value, callback) {
 export function get_Search_Next(url) {
     return dispatch => {
         if (url) {
-            getKKboxAPI(getCookie('token'), url)
+            getKKBoxAPI(getCookie('token'), url)
                 .then(res => {
                     if(res.status===200){
                         dispatch(get_Search_Next_Success(res.data))

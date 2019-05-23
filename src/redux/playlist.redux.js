@@ -1,6 +1,6 @@
 
 
-import { getKKboxAPI,getCookie } from '../utils/getKKboxAPI'
+import { getKKBoxAPI,getCookie } from '../utils/getKKBoxAPI'
 const PLAYLIST_API_SUCCESS = 'PLAYLIST_API_SUCCESS'
 const PLAYLIST_API_ERROR_MSG = 'PLAYLIST_API_ERROR_MSG'
 const INIT_PLAYLIST_STATE = 'INIT_PLAYLIST_STATE'
@@ -53,7 +53,7 @@ export function get_Video_Name(video){
 
 export function get_Playlists_Id_Api(url) {
     return dispatch => {
-             getKKboxAPI(getCookie('token'), url)
+             getKKBoxAPI(getCookie('token'), url)
                 .then(res => {
                     if (res && res.status === 200) {
                         dispatch(get_Playlists_Id_Api_Success({ playlist_data: res.data }))

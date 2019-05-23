@@ -1,10 +1,10 @@
 
 import {
     getUserAccessToken,
-    getKKboxAPI,
+    getKKBoxAPI,
     doCookieSetup,
     getCookie
-} from '../utils/getKKboxAPI'
+} from '../utils/getKKBoxAPI'
 import axios from 'axios'
 const GET_MYLIST_API_SUCCESS = 'GET_MYLIST_API_SUCCESS'
 const GET_MYLIST_API_ERR = 'GET_MYLIST_API_ERR'
@@ -63,11 +63,11 @@ export function getMylist(url) {
             .then(res => {
                 if (res.access_token != undefined) {
                     doCookieSetup('token', res.access_token, res.expires_in)
-                    getKKboxAPI(res.access_token, url)
+                    getKKBoxAPI(res.access_token, url)
                         .then(res => {
                             dispatch(get_My_Info_Success({ my_info: res.data }))
                         })
-                    getKKboxAPI(res.access_token, url + '/favorite?limit=500')
+                    getKKBoxAPI(res.access_token, url + '/favorite?limit=500')
                         .then(res => {
 
                             if (res.status === 200)
@@ -82,7 +82,7 @@ export function getMylist(url) {
 export function get_Kkbox_Next(url) {
     return dispatch => {
         if (url) {
-            getKKboxAPI(getCookie('token'), url)
+            getKKBoxAPI(getCookie('token'), url)
                 .then(res => {
                     if (res.status === 200) {
                         dispatch(get_Kkbox_Next_Success(res.data))
@@ -106,7 +106,7 @@ export function put_Kkbox_Track(id) {
 export function init_Put_Kkbox() {
     return dispatch => {
         let url = 'https://api.kkbox.com/v1.1/me'
-        getKKboxAPI(getCookie('token'), url + '/favorite?limit=500')
+        getKKBoxAPI(getCookie('token'), url + '/favorite?limit=500')
             .then(res => {
                 if (res.status === 200)
                     dispatch(get_Mylist_API_Success({ mylist: res.data }))

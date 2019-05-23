@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Grid, Image } from 'semantic-ui-react'
-import { modifyUpdatedAt } from '../../utils/getKKboxAPI'
+import { modifyUpdatedAt } from '../../utils/getKKBoxAPI'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'

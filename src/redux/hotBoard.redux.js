@@ -1,5 +1,5 @@
 
-import { getKKboxAPI, getCookie } from '../utils/getKKboxAPI'
+import { getKKBoxAPI, getCookie } from '../utils/getKKBoxAPI'
 const HOT_BOARD_API_SUCCESS = 'HOT_BOARD_API_SUCCESS'
 const HOT_BOARD_API_ERROR_MSG = 'HOT_BOARD_API_ERROR_MSG'
 
@@ -33,7 +33,7 @@ function get_Hotboard_Api_ApiError() {
 export function get_Hotboard_Api(url) {
     return dispatch => {
 
-        getKKboxAPI(getCookie('token'), url)
+        getKKBoxAPI(getCookie('token'), url)
             .then(res => {
                 if (res && res.status === 200) {
                     dispatch(get_Hotboard_Api_Success({ hot_board_data: res.data }))

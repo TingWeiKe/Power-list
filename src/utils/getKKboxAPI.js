@@ -33,7 +33,7 @@ export async function getKKoxAccessToken() {
     }
 }
 
-export async function getKKboxAPI(access_token, url) {
+export async function getKKBoxAPI(access_token, url) {
     let config = {
         method: "GET",
         headers: { 'Authorization': 'Bearer ' + access_token }

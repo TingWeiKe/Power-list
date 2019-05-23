@@ -4,7 +4,7 @@ import { Button, Grid, Image, Loader } from 'semantic-ui-react'
 import { getMylist, get_Kkbox_Next, put_Kkbox_Track } from '../../redux/mylist_redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
-import { getUrlVars } from '../../utils/getKKboxAPI'
+import { getUrlVars } from '../../utils/getKKBoxAPI'
 import Dimmer from '../../component/dimmer'
 import InfiniteScroll from 'react-infinite-scroller';
 import './mylist.css'

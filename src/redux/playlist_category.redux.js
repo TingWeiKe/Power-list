@@ -1,5 +1,5 @@
 
-import { getKKboxAPI, getCookie } from '../utils/getKKboxAPI'
+import { getKKBoxAPI, getCookie } from '../utils/getKKBoxAPI'
 
 const PLAY_CATEGORY_API_SUCCESS = 'PLAY_CATEGORY_API_SUCCESS'
 const PLAY_CATEGORY_API_ERROR_MSG = 'PLAY_CATEGORY_API_ERROR_MSG'
@@ -44,7 +44,7 @@ function get_Playlist_category_Api_ApiError() {
 export function get_Playlist_category_Api(url) {
     return dispatch => {
 
-        getKKboxAPI(getCookie('token'), url)
+        getKKBoxAPI(getCookie('token'), url)
             .then(res => {
                 if (res && res.status === 200) {
                     dispatch(get_Playlist_category_Api_Success({ playlist_category_data: res.data }))

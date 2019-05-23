@@ -1,5 +1,5 @@
 
-import { getKKboxAPI, getCookie } from '../utils/getKKboxAPI'
+import { getKKBoxAPI, getCookie } from '../utils/getKKBoxAPI'
 
 const CATEGORY_API_SUCCESS = 'CATEGORY_API_SUCCESS'
 const CATEGORY_API_ERROR_MSG = 'CATEGORY_API_ERROR_MSG'
@@ -41,7 +41,7 @@ function get_Category_Api_ApiError() {
 export function get_Category_Api(url) {
     return dispatch => {
 
-        getKKboxAPI(getCookie('token'), url)
+        getKKBoxAPI(getCookie('token'), url)
             .then(res => {
                 if (res && res.status === 200) {
                     dispatch(get_Category_Api_Success({ category_data: res.data }))

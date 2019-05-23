@@ -8,7 +8,7 @@ import './playlist_category.css'
 import Feature from '../../component/feature/feature'
 import HotBoard from '../../component/hotBoard/hotBoard'
 import Category from '../../component/category/category'
-import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKboxAPI'
+import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKBoxAPI'
 
 
 class Playlist_category extends Component {

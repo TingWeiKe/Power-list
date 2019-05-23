@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Box from '../../component/box/box'
 import { get_Featured_Playlists_Api, handleInitState } from '../../redux/box.redux'
 import { connect } from 'react-redux'
+import './today.scss'
 import RefreshButton from '../../component/RefreshButton'
 
 class Today extends Component {
@@ -26,8 +27,7 @@ class Today extends Component {
 		const isError = box.msg === '伺服器錯誤'
 		return (
 			<div className='container_header'>
-				<h1>{box.title}</h1>
-				<Box msg={box.msg} data={box_data.data} title={box.title} bool={box.bool} />
+				<Box msg={box.msg} data={box_data.data} title={box.title} bool={box.bool} title={box.title}/>	
 				<RefreshButton onClick={() => this.handleRefresh()} className='refresh_button' show={isError} />
 			</div>
 		)
