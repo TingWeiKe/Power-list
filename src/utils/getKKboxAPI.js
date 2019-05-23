@@ -1,6 +1,7 @@
 import axios from 'axios'
-let authorization_code = 'authorization_code'
-let client_credentials = 'client_credentials'
+
+const authorization_code = 'authorization_code'
+const client_credentials = 'client_credentials'
 
 export function getUrlVars() {
     let vars = {};
