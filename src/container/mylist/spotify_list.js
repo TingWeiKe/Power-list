@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { get_Spotify_API, get_Spotify_Next, refresh_Spotify_List , search_Spotify_Track_and_Put} from '../../redux/spotify.redux'
-import { getUrlVars } from '../../component/getKKboxAPI'
+import { getUrlVars } from '../../utils/getKKboxAPI'
 import './spotify_list.css'
 import { music_icon } from './music_icon'
 import { Grid, Image, Loader, Button } from 'semantic-ui-react'

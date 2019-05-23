@@ -1,0 +1,290 @@
+.back {
+	margin-bottom: 20px !important;
+	color: #2185d0;
+	font: 900;
+	font-size: 16px;
+
+	span {
+		cursor: pointer;
+	}
+}
+
+.list_description > div {
+	font-size: 16px;
+	line-height: 1.4;
+	margin: 14px 0;
+}
+
+.play {
+	margin-bottom: 10px !important;
+}
+
+.play_text {
+	text-align: center;
+	margin-top: 30px;
+	:first-child {
+		text-decoration: underline;
+		font-weight: bold;
+	}
+	:first-child:hover {
+		color: #4183c4 !important;
+	}
+}
+
+.play_button {
+	background-color: #f0f2f5 !important;
+	padding: 5px !important;
+	width: 99% !important;
+}
+
+.play_button:hover {
+	background-color: #cacbcd !important;
+}
+
+.track {
+	border-bottom: 1px solid #ccc;
+}
+
+.track > p {
+	margin: 0;
+}
+
+.playlist_img {
+	position: absolute;
+	border: 1px solid #ccc;
+	float: left;
+	max-height: 55px;
+	margin: auto 0;
+}
+
+.playlist_info {
+	position: relative;
+	left: 10px;
+	padding-top: 8px;
+	text-align: left;
+    font: 800 !important;
+	h3 {
+		color: rgba(0, 0, 0, .9) !important;
+		margin: 0px;
+		max-width: 82% !important;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
+		overflow: hidden;
+    }
+    p {
+        color: rgba(0, 0, 0, .6) !important;
+        margin: 0px;
+        max-width: 78% !important;
+        z-index: 1;
+        float: left;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+}
+
+
+
+.siderbar_icon {
+	left: 12px;
+	float: right;
+	position: relative;
+	bottom: 8px;
+	padding-right: 10px;
+}
+
+@media screen and (max-width: 760px) {
+	.playlist_info > h3 {
+		max-width: 64vw !important;
+	}
+
+	.playlist_info > p {
+		max-width: 60vw !important;
+	}
+
+	.playlist_img {
+		max-height: 50px;
+	}
+
+	.play_icon {
+		min-width: 45px;
+		min-height: 45px;
+	}
+
+	.sidebar {
+		bottom: 10px !important;
+		right: 0 !important;
+	}
+
+	.list_box {
+		max-height: none !important;
+		overflow: unset !important;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.playlist_info > p {
+		max-width: 60vw !important;
+		font-size: 0.8em;
+	}
+
+	.playlist_info > p {
+		max-width: 60vw !important;
+		font-size: 0.8em !important;
+	}
+
+	.playlist_img {
+		max-height: 40px;
+	}
+}
+
+.list_owner {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.list_owner:hover {
+	text-decoration: underline;
+	color: #4183c4 !important;
+}
+
+.list_text {
+	padding-top: 10px;
+}
+
+.play_Icon {
+	float: left;
+	top: 16px;
+	padding-right: 3px;
+	margin: 3px;
+}
+
+.refresh_buton {
+	display: none !important;
+}
+
+.sidebar {
+	float: right;
+	position: relative;
+	bottom: 7px;
+	right: 10px;
+}
+
+.dropbtn {
+	background-color: #4caf50;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	padding-left: 20px;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	top: 15px;
+	right: 10px !important;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 15px;
+        text-decoration: none;
+        display: block;
+    }
+}
+
+.dropdown-content a:hover {
+	background-color: #2185d0;
+	color: white !important;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.display_none {
+	display: none !important;
+}
+
+.play {
+	background-color: #2185d0 !important;
+	color: white !important;
+    border-radius: 20px !important;
+    :hover {
+        color: white !important;
+        cursor: pointer !important;
+        filter: brightness(90%) !important;
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.3) !important;}
+}
+
+
+.loggin_box {
+	text-align: center;
+	float: left;
+	z-index: 20;
+	background-color: rgba(255, 255, 255, 0.9);
+	height: 220px;
+	width: 400px;
+	position: fixed;
+	margin: 5% auto;
+	left: 0;
+	right: 0;
+	top: 100px;
+}
+
+.button_box {
+	position: relative;
+    top: 70px;
+    h2 {
+        margin-bottom: 50px;
+    }
+}
+
+
+.dimmer_login_button {
+	margin: 0 30px !important;
+}
+
+#dimmer {
+	bottom: 60px;
+	right: 0;
+	z-index: 10;
+	width: 150%;
+	height: 150%;
+	background-color: rgba(0, 0, 0, .6);
+	position: fixed;
+}
+
+.sidebar_icon {
+	max-width: 18px !important;
+	bottom: 3px;
+}
+
+.list_box {
+	max-height: 80vh;
+	overflow: auto;
+}
+
+.putting_box {
+	margin: 5% auto !important;
+	position: fixed !important;
+	z-index: 99;
+	top: 200px;
+	left: 0;
+	right: 0;
+	width: 80vw !important;
+	height: 80px !important;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
 import { hadndle_Change_Language } from '../../redux/setting.redux'
-import { handle_Init_State } from '../../redux/box.redux'
+import { handleInitState } from '../../redux/box.redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import './language_form.css'
@@ -13,7 +13,7 @@ class language_form extends Component {
     }
   }
   handleChange(language) {
-    this.props.handle_Init_State()
+    this.props.handleInitState()
     this.props.hadndle_Change_Language(language)
     localStorage.setItem('language', language)
     this.props.history.push('/setting')
@@ -41,6 +41,6 @@ class language_form extends Component {
 }
 
 const mapStateToProps = state => { return { data: state } }
-const actionCreate = { hadndle_Change_Language, handle_Init_State }
+const actionCreate = { hadndle_Change_Language, handleInitState }
 
 export default withRouter(connect(mapStateToProps, actionCreate)(language_form))

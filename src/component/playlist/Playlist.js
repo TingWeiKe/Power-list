@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { get_Playlists_Id_Api, hadndle_Init_State, get_Video_Name } from '../../redux/playlist.redux'
 import { Button, Loader } from 'semantic-ui-react'
 import Content from './Content'
-import { get_Access_Token, doCookieSetup } from '../getKKboxAPI'
-import './playlist.css'
+import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKboxAPI'
+import './playlist.scss'
 
 class Playlist extends Component {
 
@@ -23,7 +23,7 @@ class Playlist extends Component {
 
   handle_Refresh(){
     this.props.hadndle_Init_State()
-    get_Access_Token()
+    getKKoxAccessToken()
     .then(res=>{
       if(res.access_token!==undefined){
         doCookieSetup('token',res.access_token,res.expires_in)

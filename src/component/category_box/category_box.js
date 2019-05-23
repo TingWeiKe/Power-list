@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { get_Category_Box_api, handle_Init_State } from '../../redux/category_box.redux'
+import { get_Category_Box_api, handleInitState } from '../../redux/category_box.redux'
 import { withRouter, } from 'react-router-dom'
 
 import Box from '../box/box'
@@ -8,7 +8,7 @@ import Box from '../box/box'
 class Category_box extends Component {
 
     componentWillMount() {
-        this.props.handle_Init_State()
+        this.props.handleInitState()
         let url = this.props.location.url 
         ? this.props.location.url 
         : 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + this.props.location.pathname.split('/')[2] + '?territory=' + localStorage.getItem('language')
@@ -28,6 +28,6 @@ class Category_box extends Component {
     }
 }
 const mapStateToProps = state => { return { data: state } }
-const actionCreate = { get_Category_Box_api, handle_Init_State }
+const actionCreate = { get_Category_Box_api, handleInitState }
 
 export default withRouter(connect(mapStateToProps, actionCreate)(Category_box))

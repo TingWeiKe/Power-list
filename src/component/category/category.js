@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Grid, Image, Segment, } from 'semantic-ui-react'
 import { Link, } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { handle_Init_State } from '../../redux/category_box.redux'
+import { handleInitState } from '../../redux/category_box.redux'
 
 class category extends Component {
     render() {
@@ -27,7 +27,7 @@ class category extends Component {
     }
 }
 const mapStateToProps = state => { return { data: state } }
-const actionCreate = { handle_Init_State }
+const actionCreate = { handleInitState }
 category = connect(mapStateToProps, actionCreate)(category)
 
 export default category

@@ -1,10 +1,10 @@
 
 import {
-    get_Access_Token,
-    get_KKbox_API,
+    getKKoxAccessToken,
+    getKKboxAPI,
     doCookieSetup,
     getCookie
-} from '../component/getKKboxAPI'
+} from '../utils/getKKboxAPI'
 
 const CATEGORY_BOX_API_SUCCESS = 'CATEGORY_BOX_API_SUCCESS'
 const CATEGORY_BOX_API_ERROR_MSG = 'CATEGORY_BOX_API_ERROR_MSG'
@@ -42,7 +42,7 @@ export function get_Category_Box_api_Api_Error() {
     return { type: CATEGORY_BOX_API_ERROR_MSG }
 }
 
-function handle_Init_State_Success(){
+function handleInitState_Success(){
     return {type:INIT_CATEGORY_STATE}
 }
 
@@ -50,10 +50,10 @@ function handle_Init_State_Success(){
 export function get_Category_Box_api(url) {
     return dispatch => { 
         let access_token;
-        !getCookie('token') ? get_Access_Token()
+        !getCookie('token') ? getKKoxAccessToken()
             .then(data => {
                 doCookieSetup('token', data.access_token, data.expires_in)
-                get_KKbox_API(data.access_token, url)
+                getKKboxAPI(data.access_token, url)
                     .then(res => {
                         if (res && res.status === 200) {
                             dispatch(get_Category_Box_api_Api_Success({ category_box_data: res.data }))
@@ -64,7 +64,7 @@ export function get_Category_Box_api(url) {
                     })
             }) :
 
-            get_KKbox_API(getCookie('token'), url)
+            getKKboxAPI(getCookie('token'), url)
                 .then(res => {
                     if (res && res.status === 200) {
                         dispatch(get_Category_Box_api_Api_Success({ category_box_data: res.data }))
@@ -77,8 +77,8 @@ export function get_Category_Box_api(url) {
     }
 }
 
-export function handle_Init_State(){
-    return dispatch=> dispatch(handle_Init_State_Success()) 
+export function handleInitState(){
+    return dispatch=> dispatch(handleInitState_Success()) 
 
 
 }

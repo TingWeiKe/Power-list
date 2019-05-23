@@ -1,5 +1,5 @@
 
-import { get_KKbox_API, getCookie } from '../component/getKKboxAPI'
+import { getKKboxAPI, getCookie } from '../utils/getKKboxAPI'
 
 const PLAY_CATEGORY_API_SUCCESS = 'PLAY_CATEGORY_API_SUCCESS'
 const PLAY_CATEGORY_API_ERROR_MSG = 'PLAY_CATEGORY_API_ERROR_MSG'
@@ -27,7 +27,7 @@ export function playlist_category(state = init, action) {
     }
 }
 
-export function handle_Init_State(){
+export function handleInitState(){
     return {type:INIT_STATE}
 }
 
@@ -44,7 +44,7 @@ function get_Playlist_category_Api_ApiError() {
 export function get_Playlist_category_Api(url) {
     return dispatch => {
 
-        get_KKbox_API(getCookie('token'), url)
+        getKKboxAPI(getCookie('token'), url)
             .then(res => {
                 if (res && res.status === 200) {
                     dispatch(get_Playlist_category_Api_Success({ playlist_category_data: res.data }))
@@ -59,7 +59,7 @@ export function get_Playlist_category_Api(url) {
 
 // export function hadndle_Init_State(){
 //     return dispatch =>{
-//         dispatch(handle_Init_State())
+//         dispatch(handleInitState())
 //     }
 // }
 

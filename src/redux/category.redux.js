@@ -1,5 +1,5 @@
 
-import { get_KKbox_API, getCookie } from '../component/getKKboxAPI'
+import { getKKboxAPI, getCookie } from '../utils/getKKboxAPI'
 
 const CATEGORY_API_SUCCESS = 'CATEGORY_API_SUCCESS'
 const CATEGORY_API_ERROR_MSG = 'CATEGORY_API_ERROR_MSG'
@@ -24,7 +24,7 @@ export function category(state = init, action) {
     }
 }
 
-// export function handle_Init_State(){
+// export function handleInitState(){
 //     return {type:INIT_STATE}
 // }
 
@@ -41,7 +41,7 @@ function get_Category_Api_ApiError() {
 export function get_Category_Api(url) {
     return dispatch => {
 
-        get_KKbox_API(getCookie('token'), url)
+        getKKboxAPI(getCookie('token'), url)
             .then(res => {
                 if (res && res.status === 200) {
                     dispatch(get_Category_Api_Success({ category_data: res.data }))

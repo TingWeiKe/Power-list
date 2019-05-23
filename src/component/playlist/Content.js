@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Grid, Image } from 'semantic-ui-react'
-import { modify_updated_at } from '../../component/getKKboxAPI'
+import { modifyUpdatedAt } from '../../utils/getKKboxAPI'
 import { get_Video_Name } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
@@ -182,7 +182,7 @@ class Content extends Component {
                                     </div>
                                     <div className="list_text">
                                         <a className="list_owner link" href={data.owner.url}><p>作者：{data.owner.name}</p></a>
-                                        <p>更新：{modify_updated_at(data.updated_at)}</p>
+                                        <p>更新：{modifyUpdatedAt(data.updated_at)}</p>
                                     </div>
 
                                 </div>

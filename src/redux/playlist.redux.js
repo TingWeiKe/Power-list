@@ -1,6 +1,6 @@
 
 
-import { get_KKbox_API,getCookie } from '../component/getKKboxAPI'
+import { getKKboxAPI,getCookie } from '../utils/getKKboxAPI'
 const PLAYLIST_API_SUCCESS = 'PLAYLIST_API_SUCCESS'
 const PLAYLIST_API_ERROR_MSG = 'PLAYLIST_API_ERROR_MSG'
 const INIT_PLAYLIST_STATE = 'INIT_PLAYLIST_STATE'
@@ -29,7 +29,7 @@ export function playlist(state = init, action) {
     }
 }
 
-export function handle_Init_State(){
+export function handleInitState(){
     return {type:INIT_PLAYLIST_STATE}
 }
 
@@ -53,7 +53,7 @@ export function get_Video_Name(video){
 
 export function get_Playlists_Id_Api(url) {
     return dispatch => {
-             get_KKbox_API(getCookie('token'), url)
+             getKKboxAPI(getCookie('token'), url)
                 .then(res => {
                     if (res && res.status === 200) {
                         dispatch(get_Playlists_Id_Api_Success({ playlist_data: res.data }))
@@ -71,7 +71,7 @@ export function get_Playlists_Id_Api(url) {
 
 export function hadndle_Init_State(){
     return dispatch =>{
-        dispatch(handle_Init_State())
+        dispatch(handleInitState())
     }
 }
 

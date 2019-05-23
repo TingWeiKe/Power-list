@@ -10,7 +10,7 @@ export function getUrlVars() {
     return vars["code"] ? vars["code"] : ''
 }
 
-export async function get_Access_Token_From_urlParam() {
+export async function getUserAccessToken() {
     let urlPara = getUrlVars()
     if (urlPara) {
         const res = await axios.post('/post', { grant_type: authorization_code, urlPara: urlPara })
@@ -23,7 +23,7 @@ export async function get_Access_Token_From_urlParam() {
 }
 
 
-export async function get_Access_Token() {
+export async function getKKoxAccessToken() {
     const res = await axios.post('/post', { grant_type: client_credentials })
     try {
         return res.data
@@ -32,7 +32,7 @@ export async function get_Access_Token() {
     }
 }
 
-export async function get_KKbox_API(access_token, url) {
+export async function getKKboxAPI(access_token, url) {
     let config = {
         method: "GET",
         headers: { 'Authorization': 'Bearer ' + access_token }
@@ -59,7 +59,7 @@ export function getCookie(name) {
     if (arr != null) return unescape(arr[2]); return null;
 }
 
-export function modify_updated_at(x) {
+export function modifyUpdatedAt(x) {
     let k = new Date(x)
     let kk = k.toLocaleDateString()
     let l = ['年', '月', '日']
@@ -70,8 +70,8 @@ export function modify_updated_at(x) {
     return date + ' ' + time[0] + '點' + time[1] + '分'
 }
 
-export function push_Track(id){
-    axios.post('/post/push_tracks', { id: id })
+export function pushTrack(id){
+    axios.post('/post/pushTracks', { id: id })
     .then(res=>{
         console.log(res);
     })

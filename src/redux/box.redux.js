@@ -1,4 +1,4 @@
-import { get_Access_Token, get_KKbox_API, doCookieSetup, getCookie } from '../component/getKKboxAPI'
+import { getKKoxAccessToken, getKKboxAPI, doCookieSetup, getCookie } from '../utils/getKKboxAPI'
 
 const BOX_API_SUCCESS = 'BOX_API_SUCCESS'
 const BOX_API_ERROR_MSG = 'BOX_API_ERROR_MSG'
@@ -37,13 +37,13 @@ export function get_Featured_Playlists_Api(url){
 	return (dispatch) => {
 		let access_token
 		!getCookie('token')
-			? get_Access_Token()
+			? getKKoxAccessToken()
 					.then((data) => {
 						if (data.access_token !== undefined) {
 							doCookieSetup('token', data.access_token, data.expires_in)
 						}
 
-						get_KKbox_API(data.access_token, url).then((res) => {
+						getKKboxAPI(data.access_token, url).then((res) => {
 							if (res && res.status === 200) {
 								dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data }))
 							} else {
@@ -55,7 +55,7 @@ export function get_Featured_Playlists_Api(url){
 					.catch((err) => {
 						dispatch(get_Featured_Playlists_Api_ApiError())
 					})
-			: get_KKbox_API(getCookie('token'), url).then((res) => {
+			: getKKboxAPI(getCookie('token'), url).then((res) => {
 					if (res && res.status === 200) {
 						dispatch(get_Featured_Playlists_Api_ApiSuccess({ box_data: res.data }))
 					} else {
@@ -66,6 +66,6 @@ export function get_Featured_Playlists_Api(url){
 	}
 }
 
-export function handle_Init_State(){
+export function handleInitState(){
 	return { type: INIT_STATE }
 }

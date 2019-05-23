@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Loader, Button } from 'semantic-ui-react'
-import { get_Playlist_category_Api, handle_Init_State } from '../../redux/playlist_category.redux'
+import { get_Playlist_category_Api, handleInitState } from '../../redux/playlist_category.redux'
 import { get_Hotboard_Api } from '../../redux/hotBoard.redux'
 import { get_Category_Api } from '../../redux/category.redux'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import './playlist_category.css'
 import Feature from '../../component/feature/feature'
 import HotBoard from '../../component/hotBoard/hotBoard'
 import Category from '../../component/category/category'
-import { get_Access_Token, doCookieSetup } from '../../component/getKKboxAPI'
+import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKboxAPI'
 
 
 class Playlist_category extends Component {
@@ -27,8 +27,8 @@ class Playlist_category extends Component {
     }
 
     handle_Refresh() {
-        this.props.handle_Init_State()
-        get_Access_Token()
+        this.props.handleInitState()
+        getKKoxAccessToken()
             .then(res => {
                 if (res.access_token !== undefined) {
                     doCookieSetup('token', res.access_token, res.expires_in)
@@ -65,7 +65,7 @@ class Playlist_category extends Component {
 }
 
 const mapStateToProps = state => { return { data: state } }
-const actionCreate = { get_Playlist_category_Api, get_Hotboard_Api, get_Category_Api, handle_Init_State }
+const actionCreate = { get_Playlist_category_Api, get_Hotboard_Api, get_Category_Api, handleInitState }
 Playlist_category = connect(mapStateToProps, actionCreate)(Playlist_category)
 
 export default Playlist_category

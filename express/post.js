@@ -116,7 +116,7 @@ router.post('/youtube', function(req, res, next) {
   })
 })
 
-router.post('/push_tracks', function(req, res, next) {
+router.post('/pushTracks', function(req, res, next) {
   let id = req.body.id.toString()
   let access_token = req.body.access_token
 
