@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Loader, Button } from 'semantic-ui-react'
-import { get_Playlist_category_Api, handleInitState } from '../../redux/playlist_category.redux'
+import { getPlaylistCategoryApi, handleInitState } from '../../redux/playlist_category.redux'
 import { get_Hotboard_Api } from '../../redux/hotBoard.redux'
 import { get_Category_Api } from '../../redux/category.redux'
 import { connect } from 'react-redux'
 import './playlistCategory.scss'
-import Feature from '../../component/feature/feature'
-import HotBoard from '../../component/hotBoard/hotBoard'
-import Category from '../../component/category/category'
+import Feature from '../../components/feature/feature'
+import HotBoard from '../../components/hotBoard/hotBoard'
+import Category from '../../components/category/category'
 import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKBoxAPI'
 
 
@@ -17,7 +17,7 @@ class PlaylistCategory extends Component {
         const featureUrl = 'https://api.kkbox.com/v1.1/new-hits-playlists?territory=' + language
         const hotBoardUrl = 'https://api.kkbox.com/v1.1/charts?territory=' + language
         const categoryUrl = 'https://api.kkbox.com//v1.1/featured-playlist-categories?territory=' + language
-        this.props.get_Playlist_category_Api(featureUrl)
+        this.props.getPlaylistCategoryApi(featureUrl)
         this.props.get_Hotboard_Api(hotBoardUrl)
         this.props.get_Category_Api(categoryUrl)
     }
@@ -65,7 +65,7 @@ class PlaylistCategory extends Component {
 }
 
 const mapStateToProps = state => { return { data: state } }
-const actionCreate = { get_Playlist_category_Api, get_Hotboard_Api, get_Category_Api, handleInitState }
+const actionCreate = { getPlaylistCategoryApi, get_Hotboard_Api, get_Category_Api, handleInitState }
 PlaylistCategory = connect(mapStateToProps, actionCreate)(PlaylistCategory)
 
 export default PlaylistCategory

@@ -3,9 +3,9 @@ import { Grid, Image, Loader, Input, Form } from 'semantic-ui-react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { search_icon } from '../../component/icon'
+import { search_icon } from '../../components/icon'
 import { search_Data, getSearchNext, initSearchData } from '../../redux/search.redux'
-import SmallBox from '../../component/smallBox/SmallBox'
+import SmallBox from '../../components/smallBox/SmallBox'
 import './search.scss'
 
 class Search extends Component {

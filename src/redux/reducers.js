@@ -8,7 +8,7 @@ import { category } from '../redux/category.redux'
 import { setting } from '../redux/setting.redux'
 import { categoryBox } from '../redux/categoryBox.redux'
 import { youtube } from '../redux/youtube.redux'
-import { mylist } from '../redux/mylist_redux'
+import { kkbox } from '../redux/kkbox_redux'
 import { spotify } from '../redux/spotify.redux'
 import { search } from '../redux/search.redux'
 
@@ -21,7 +21,7 @@ export default combineReducers({
   setting,
   categoryBox,
   youtube,
-  mylist,
+  kkbox,
   spotify,
   search,
 })

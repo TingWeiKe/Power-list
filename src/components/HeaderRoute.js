@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link,  withRouter, } from 'react-router-dom'
-import Language_form from '../container/setting/language_form'
+import Language_form from '../containers/setting/language_form'
 import { Menu } from 'semantic-ui-react'
 
 class HeaderRoute extends Component {

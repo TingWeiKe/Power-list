@@ -1,0 +1,26 @@
+.kkbox_list {
+	margin: auto;
+	max-width: 70vw;
+}
+
+@media screen and (max-width: 760px) {
+	.kkbox_list {
+		margin: auto;
+		max-width: none;
+	}
+}
+
+.kk_list_text {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.kk_list_owner {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.kklist_owner:hover {
+	text-decoration: underline;
+	color: #4183c4 !important;
+}

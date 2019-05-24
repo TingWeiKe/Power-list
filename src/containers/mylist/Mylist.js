@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Button, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import './mylist.css'
-import KKBoxList from './kkbox_list'
-import SpotifyList from './SpotifyList'
+import KKBoxList from '../kkboxList/KKBoxList'
+import SpotifyList from '../spotifyList/SpotifyList'
 import Axios from 'axios'
-import { spotify_icon, kkbox_icon } from '../../component/icon'
+import { spotify_icon, kkbox_icon } from '../../components/icon'
 
 class Mylist extends Component {
 	loginKKBox() {
@@ -29,7 +29,7 @@ class Mylist extends Component {
 			<div className='container_header'>
 				<h1>我的歌單</h1>
 				<div className='login_button'>
-					{isSpLogin == true && isKkLogin === true ? (
+					{isSpLogin == false && isKkLogin === false ? (
 						<div id='kkbox_login'>
 							<img className='button_icon' src={kkbox_icon} />
 							<Button circular size='big' onClick={() => this.loginKKBox()} style={kkData.data != undefined ? { display: 'none' } : {}} primary disabled={!!this.props.mylist.my_info}>
@@ -37,7 +37,7 @@ class Mylist extends Component {
 							</Button>
 						</div>
 					) : null}
-					{isSpLogin == true && isKkLogin === true ? (
+					{isSpLogin === false && isKkLogin === false ? (
 						<div id='spotify_login'>
 							<img className='button_icon' src={spotify_icon} />
 							<Button circular size='big' onClick={() => this.loginSpotify()} disabled={!!this.props.mylist.my_info} secondary>
@@ -54,7 +54,7 @@ class Mylist extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return { mylist: state.mylist, spotify: state.spotify }
+	return { mylist: state.kkbox, spotify: state.spotify }
 }
 
 const actionCreate = {}

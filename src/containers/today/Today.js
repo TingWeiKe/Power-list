@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Box from '../../component/box/box'
+import Box from '../../components/box/box'
 import { get_Featured_Playlists_Api, handleInitState } from '../../redux/box.redux'
 import { connect } from 'react-redux'
 import './today.scss'
-import RefreshButton from '../../component/RefreshButton'
+import RefreshButton from '../../components/RefreshButton'
 
 class Today extends Component {
 

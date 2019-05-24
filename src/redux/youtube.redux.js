@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { onYouTubeIframeAPIReady,init_youtube} from '../component/youtube/youtube_API'
+import { onYouTubeIframeAPIReady,init_youtube} from '../components/youtube/youtube_API'
 const GET_YOUTUBE_API_SUCCESS = 'GET_YOUTUBE_API_SUCCESS'
 const GET_YOUTUBE_API_ERR = 'GET_YOUTUBE_API_ERR'
 const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search'
@@ -49,7 +49,7 @@ function get_Youtube_API_Err() {
 //         })
 // }
 
-export function search_Youtube_By_Scraping(name) {
+export function scrapeYoutubeData(name) {
     return dispatch => {
         //和後端爬蟲拿 Video_ID
         axios.post('/post/youtube', { name: name })

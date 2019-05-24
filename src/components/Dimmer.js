@@ -2,12 +2,12 @@ import React from 'react'
 import { Image, Message, Icon } from 'semantic-ui-react'
 import { checked_icon, x_icon } from './icon'
 import { connect } from 'react-redux'
-import { init_Put_Track, refresh_Spotify_List } from '../redux/spotify.redux'
-import { init_Put_Kkbox } from '../redux/mylist_redux'
+import { init_Put_Track, refreshSpotifyList } from '../redux/spotify.redux'
+import { init_Put_Kkbox } from '../redux/kkbox_redux'
 
 
 class Dimmer extends React.Component {
-    handle_Cancle() {
+    handleCancel() {
         document.body.style.overflow = "unset"
         this.props.init_State()
         this.props.init_Put_Track()
@@ -25,7 +25,7 @@ class Dimmer extends React.Component {
         if (name === 'spotify') {
             setTimeout(() => {
                 this.props.init_Put_Track()
-                this.props.refresh_Spotify_List()
+                this.props.refreshSpotifyList()
                 document.body.style.overflow = "unset"
                 this.props.init_State()
             }, 2000)
@@ -34,9 +34,10 @@ class Dimmer extends React.Component {
 
 
     render() {
+        console.log(this.props.isShow)
         return (
-            <div>
-                <div onClick={() => this.handle_Cancle()} id='dimmer'></div>
+            <div style={this.props.isShow?{display:'block'}:{display:'none'}}>
+                <div onClick={() => this.handleCancel()} id='dimmer'></div>
                 <Message icon className='putting_box' size={'large'} positive={this.props.put_track_success} negative={this.props.put_track_negative}>
                     {!this.props.put_track_success && !this.props.put_track_negative ? <Icon name='circle notched' loading /> : null}
                     {this.props.put_track_success ? <Image onLoad={this.handle_Animation(this.props.name)} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={checked_icon} /> : null}
@@ -50,7 +51,7 @@ class Dimmer extends React.Component {
 const mapStateToProps = state => {
     return {}
 }
-const actionCreate = { init_Put_Track, refresh_Spotify_List, init_Put_Kkbox }
+const actionCreate = { init_Put_Track, refreshSpotifyList, init_Put_Kkbox }
 Dimmer = connect(mapStateToProps, actionCreate)(Dimmer)
 
 export default Dimmer
