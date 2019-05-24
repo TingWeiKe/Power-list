@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 
 import Box from '../box/box'
 
-class categoryBox extends Component {
+class CategoryBox extends Component {
 	componentDidMount() {
 		this.props.handleInitState()
 		const url = 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + this.props.location.pathname.split('/')[2] + '?territory=' + localStorage.getItem('language')
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
 }
 const actionCreate = { getCategoryBoxApi, handleInitState }
 
-export default withRouter(connect(mapStateToProps, actionCreate)(categoryBox))
+export default withRouter(connect(mapStateToProps, actionCreate)(CategoryBox))

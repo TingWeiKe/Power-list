@@ -11,7 +11,7 @@ import './mylist.css'
 
 
 
-class kkboxlist extends Component {
+class KKBoxList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -121,6 +121,6 @@ class kkboxlist extends Component {
 const mapStateToProps = state => { return { data: state.mylist } }
 
 const actionCreate = { getMylist, search_Youtube_By_Scraping, get_Kkbox_Next, put_Kkbox_Track }
-kkboxlist = connect(mapStateToProps, actionCreate)(kkboxlist)
+KKBoxList = connect(mapStateToProps, actionCreate)(KKBoxList)
 
-export default kkboxlist
+export default KKBoxList

@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Search from './container/search/search'
 import categoryBox from './component/categoryBox/categoryBox'
 import Today from './container/today/today'
-import Playlist_category from './container/playlist_category/playlist_category'
+import PlaylistCategory from './container/PlaylistCategory/playlistCategory'
 import Recent from './container/recents/recents'
 import Setting from './container/setting/setting'
 import Mylist from './container/mylist/mylist'
@@ -20,11 +20,10 @@ ReactDOM.render(
 			<div>
 				<HeaderRouter />
 				<Switch>
-					<Route exact path='/' component={Today} />
 					<Route path='/today' component={Today} />
 					<Route path='/recents' component={Recent} />
 					<Route path='/playlist' component={Playlist} />
-					<Route path='/playlist_category' component={Playlist_category} />
+					<Route path='/playlist_category' component={PlaylistCategory} />
 					<Route path='/categoryBox' component={categoryBox} />
 					<Route path='/mylist' component={Mylist} />
 					<Route path='/setting' component={Setting} />

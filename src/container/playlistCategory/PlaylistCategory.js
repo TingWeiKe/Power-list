@@ -4,14 +4,14 @@ import { get_Playlist_category_Api, handleInitState } from '../../redux/playlist
 import { get_Hotboard_Api } from '../../redux/hotBoard.redux'
 import { get_Category_Api } from '../../redux/category.redux'
 import { connect } from 'react-redux'
-import './playlist_category.css'
+import './playlistCategory.scss'
 import Feature from '../../component/feature/feature'
 import HotBoard from '../../component/hotBoard/hotBoard'
 import Category from '../../component/category/category'
 import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKBoxAPI'
 
 
-class Playlist_category extends Component {
+class PlaylistCategory extends Component {
     get_Data() {
         let language = this.props.data.setting.language
         const featureUrl = 'https://api.kkbox.com/v1.1/new-hits-playlists?territory=' + language
@@ -66,6 +66,6 @@ class Playlist_category extends Component {
 
 const mapStateToProps = state => { return { data: state } }
 const actionCreate = { get_Playlist_category_Api, get_Hotboard_Api, get_Category_Api, handleInitState }
-Playlist_category = connect(mapStateToProps, actionCreate)(Playlist_category)
+PlaylistCategory = connect(mapStateToProps, actionCreate)(PlaylistCategory)
 
-export default Playlist_category
+export default PlaylistCategory

@@ -5,7 +5,7 @@ import { handleInitState } from '../../redux/box.redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import './language_form.css'
-class language_form extends Component {
+class Language_form extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -43,4 +43,4 @@ class language_form extends Component {
 const mapStateToProps = state => { return { data: state } }
 const actionCreate = { hadndle_Change_Language, handleInitState }
 
-export default withRouter(connect(mapStateToProps, actionCreate)(language_form))
+export default withRouter(connect(mapStateToProps, actionCreate)(Language_form))

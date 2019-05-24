@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { search_Youtube_By_Scraping } from '../../redux/youtube.redux'
 import InfiniteScroll from 'react-infinite-scroller';
 import Dimmer from '../../component/dimmer'
-class spotify_list extends Component {
+class SpotifyList extends Component {
 
     constructor(props) {
         super(props)
@@ -117,7 +117,7 @@ class spotify_list extends Component {
 
 const mapStateToProps = state => { return { data: state.spotify } }
 const actionCreate = { get_Spotify_API, search_Youtube_By_Scraping, get_Spotify_Next, refresh_Spotify_List, search_Spotify_Track_and_Put }
-spotify_list = connect(mapStateToProps, actionCreate)(spotify_list)
+SpotifyList = connect(mapStateToProps, actionCreate)(SpotifyList)
 
 
-export default spotify_list
+export default SpotifyList

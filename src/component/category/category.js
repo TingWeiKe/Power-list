@@ -4,11 +4,12 @@ import { Link, } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitState } from '../../redux/categoryBox.redux'
 
-class category extends Component {
+class Category extends Component {
     render() {
+        const categoryData= this.props.data.category.category_data
         return (
             <Grid columns={4} doubling={true} stackable>
-                {this.props.data.category.category_data.data !== undefined ? this.props.data.category.category_data.data.map(data => {
+                {categoryData.hasOwnProperty('data')? categoryData.data.map(data => {
                     return <Grid.Column key={data.id}>
                         <div className='feature_content'>
                             <Link className='link' to={{ pathname: '/categoryBox/' + data.id, url: 'https://api.kkbox.com/v1.1/featured-playlist-categories/' + data.id + '?territory=' + this.props.language }}>
@@ -28,6 +29,6 @@ class category extends Component {
 }
 const mapStateToProps = state => { return { data: state } }
 const actionCreate = { handleInitState }
-category = connect(mapStateToProps, actionCreate)(category)
+Category = connect(mapStateToProps, actionCreate)(Category)
 
-export default category
+export default Category

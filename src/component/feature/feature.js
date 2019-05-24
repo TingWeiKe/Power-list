@@ -3,7 +3,7 @@ import './feature.css'
 import { Grid, Image, Segment, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-class feature extends Component {
+class Feature extends Component {
 
     render() {
         return (
@@ -28,4 +28,4 @@ class feature extends Component {
 }
 
 
-export default feature
+export default Feature
