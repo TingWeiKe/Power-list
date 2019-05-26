@@ -11,8 +11,9 @@ import Recent from './containers/recents/recents'
 import Setting from './containers/setting/setting'
 import Mylist from './containers/mylist/mylist'
 import Playlist from './components/playlist/playlist'
+import YotuberPlayer from './components/youtubePlayer/YoutubePlayer'
 import { store } from './redux/store/index'
-import Yotuber_player from './components/youtube/yotuber_player'
+
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -29,7 +30,7 @@ ReactDOM.render(
 					<Route path='/setting' component={Setting} />
 					<Route paht='/search' component={Search} />
 				</Switch>
-				<Yotuber_player />
+				<YotuberPlayer />
 			</div>
 		</BrowserRouter>
 	</Provider>,

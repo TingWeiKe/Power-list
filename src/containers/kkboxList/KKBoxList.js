@@ -5,7 +5,7 @@ import { getUserKKBoxList, getKKBoxNext, putKKBoxTrack } from '../../redux/kkbox
 import { scrapeYoutubeData } from '../../redux/youtube.redux'
 import { connect } from 'react-redux'
 import { getUrlVars } from '../../utils/getKKBoxAPI'
-import KkItem from '../../components/KkItem/KkItem'
+import KkItem from '../../components/kkItem/KkItem'
 import Dimmer from '../../components/dimmer'
 import InfiniteScroll from 'react-infinite-scroller'
 import './kkBoxList.scss'

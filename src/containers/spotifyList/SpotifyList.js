@@ -15,7 +15,7 @@ class SpotifyList extends Component {
 		super(props)
 		this.state = {
 			id: '',
-			putting_sp: false,
+			putting_sp: false
 		}
 	}
 
@@ -56,30 +56,23 @@ class SpotifyList extends Component {
 	}
 
 	render() {
-        const spData = this.props.data
-        console.log(spData)
-        return (
-			<div>
-                <Dimmer 
-                    isShow={this.state.putting_sp} 
-                    init_State={this.init_State} 
-                    put_track_success={spData.put_track_success} 
-                    put_track_negative={spData.put_track_negative} 
-                    put_track_msg={spData.data.put_track_msg} 
-                    name={'spotify'} 
-                />
+		const spData = this.props.data
+		console.log(spData)
+		return (
+			<>
+				<Dimmer isShow={this.state.putting_sp} init_State={this.init_State} put_track_success={spData.put_track_success} put_track_negative={spData.put_track_negative} put_track_msg={spData.data.put_track_msg} name={'spotify'} />
 				{spData.msg == 'success' ? (
 					<Grid style={{ zIndex: '99' }}>
-						<div id='spotify' />
+							<div id='spotify' />
 						<Grid.Column className='sp_column' widescreen={16}>
-							<Button size='large' style={{ margin: '10px' }} onClick={() => this.handleRefresh()} secondary content='重新整理'/>
+							<Button size='large' style={{ margin: '10px' }} onClick={() => this.handleRefresh()} secondary content='重新整理' />
 							{spData.data.items ? (
 								spData.data.items.map((data) => {
 									return (
 										<div className='spotify_box' key={data.track.id}>
 											<Grid.Row>
 												<div className='sp_track_box' onClick={() => this.handle_play_button(data.track)}>
-													<Image className='sp_play_Icon' src={this.state.id == data.track.id ? play_Icon : music_icon} />
+													<Image className='sp_play_Icon' src={this.state.id == data.track.id ? play_icon : music_icon} />
 													<Image circular className='sp_img' src={data.track.album.images[2].url} />
 													<div className='sp_title_box'>
 														<h3 className={this.state.id == data.track.id ? 'green' : null}>{data.track.name}</h3>
@@ -92,16 +85,11 @@ class SpotifyList extends Component {
 									)
 								})
 							) : null}
-                            <InfiniteScroll 
-                                pageStart={0} 
-                                loadMore={() => this.props.getSpotifyNext(spData.data.next)} 
-                                hasMore={true} 
-                                loader={<Loader key='loader' style={{ color: 'white' }} active={!!spData.data.next} content='載入中...' inline={'centered'} size='large' />}
-                            />
+							<InfiniteScroll pageStart={0} loadMore={() => this.props.getSpotifyNext(spData.data.next)} hasMore={true} loader={<Loader key='loader' style={{ color: 'white' }} active={!!spData.data.next} content='載入中...' inline={'centered'} size='large' />} />
 						</Grid.Column>
 					</Grid>
 				) : null}
-			</div>
+			</>
 		)
 	}
 }
