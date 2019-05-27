@@ -15,13 +15,13 @@ export async function getUserAccessToken(){
 	const urlPara = getUrlVars()
 	if (urlPara) {
 		const res = await axios.post('/post', { grant_type: authorization_code, urlPara: urlPara })
-		if (res.data === 200) return res.data
+		if (res.status === 200) return res.data
 	}
 }
 
 export async function getKKoxAccessToken(){
 	const res = await axios.post('/post', { grant_type: client_credentials })
-	if (res.data === 200) return res.data
+	if (res.status === 200) return res.data
 }
 
 export async function getKKBoxAPI(access_token, url){
@@ -30,7 +30,7 @@ export async function getKKBoxAPI(access_token, url){
 		headers: { Authorization: 'Bearer ' + access_token }
 	}
 	const res = await axios.get(url, config)
-	if (res.data === 200) return res
+	if (res.status === 200) return res
 }
 
 export function doCookieSetup(name, value, time){

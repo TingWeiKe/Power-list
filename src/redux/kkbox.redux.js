@@ -87,10 +87,6 @@ export function putKKBoxTrack(id){
 
 export function initPutKKBox(){
 	return dispatch => {
-		const url = 'https://api.kkbox.com/v1.1/me'
-		getKKBoxAPI(getCookie('token'), url + '/favorite?limit=500').then(res => {
-			if (res.status === 200) dispatch(getUserKKBoxIListSuccess({ mylist: res.data }))
-		})
 		dispatch({ type: INIT_PUT_KKBOX })
 	}
 }

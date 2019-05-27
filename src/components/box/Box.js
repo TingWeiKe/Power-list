@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Image, Grid, Loader } from 'semantic-ui-react'
 import './box.scss'
 import { icon } from './box.img'
@@ -17,7 +17,7 @@ const Box = props => {
 					data.map(data => {
 						return (
 							<div key={data.id} className='playlist'>
-								<Link className='link' to={'/playlist/' + data.id} id={data.id}>
+								<Link className='link' to={{ pathname: '/playlist/' + data.id, search: props.location.search }} id={data.id}>
 									<Image style={{ width: ' 100%' }} centered={true} className='img' src={data.images[0].url} />
 									<Image className='play_icon' src={icon} bordered={true} />
 								</Link>
@@ -46,4 +46,4 @@ const Box = props => {
 	)
 }
 
-export default Box
+export default withRouter(Box)

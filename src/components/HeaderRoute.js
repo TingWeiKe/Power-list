@@ -28,6 +28,7 @@ class HeaderRoute extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
     const { activeItem } = this.state
+    console.log(this.props)
     return (
       <div>
         <Menu color="blue" className='menu' style={{ position: 'fixed', top: '0px', width: '100vw', zIndex: '99', Bottom: '200px' ,fontSize:'15px'}}  borderless={true} >

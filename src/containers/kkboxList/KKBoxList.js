@@ -22,6 +22,7 @@ class KKBoxList extends Component {
 
 	componentDidMount() {
 		const url = 'https://api.kkbox.com/v1.1/me'
+		console.log(getUrlVars() )
 		if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
 			this.props.getUserKKBoxList(url)
 		}
@@ -47,7 +48,7 @@ class KKBoxList extends Component {
 		this.props.data.mylist.data.reverse()
 	}
 
-	init_State = () => {
+	init_State() {
 		this.setState({ putting_kk: false })
 		localStorage.removeItem('track_id')
 	}
@@ -58,7 +59,7 @@ class KKBoxList extends Component {
 		const isLoading = !!getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50 && !kkData
 		return (
 			<>
-				<Dimmer isShow={this.state.putting_kk} init_State={this.init_State} put_track_success={this.props.data.put_kkbox_success} put_track_negative={this.props.data.put_kkbox_negative} put_track_msg={this.props.data.put_kkbox_msg} name={'kkbox'} />
+				<Dimmer isShow={this.state.putting_kk} initState={()=>this.initState()} put_track_success={this.props.data.put_kkbox_success} put_track_negative={this.props.data.put_kkbox_negative} put_track_msg={this.props.data.put_kkbox_msg} name={'kkbox'} />
 				<Loader content='載入中...' active={isLoading} inline={'centered'} size='massive' />
 				{ kkData ? (
 					<Grid textAlign='left' stackable>

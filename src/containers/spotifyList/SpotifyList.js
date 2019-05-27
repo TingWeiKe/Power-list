@@ -29,7 +29,7 @@ class SpotifyList extends Component {
 				this.setState({ putting_sp: true })
 				this.props.putSpotifyTrack(localStorage.getItem('track_name'))
 			}
-		}, 1000)
+		}, 2000)
 	}
 
 	handle_play_button(data) {
@@ -50,7 +50,7 @@ class SpotifyList extends Component {
 		this.props.refreshSpotifyList()
 	}
 
-	init_State = () => {
+	initState() {
 		this.setState({ putting_sp: false })
 		localStorage.removeItem('track_name')
 	}
@@ -59,12 +59,12 @@ class SpotifyList extends Component {
 		const spData = this.props.data
 		return (
 			<div>
-				<Dimmer isShow={this.state.putting_sp} init_State={this.init_State} put_track_success={spData.put_track_success} put_track_negative={spData.put_track_negative} put_track_msg={spData.put_track_msg} name={'spotify'} />
+				<Dimmer isShow={this.state.putting_sp} initState={()=>this.initState()} put_track_success={spData.put_track_success} put_track_negative={spData.put_track_negative} put_track_msg={spData.put_track_msg} name={'spotify'} />
 				{spData.msg == 'success' ? (
 					<Grid style={{ zIndex: '99' }}>
 						<div id='spotify' />
 						<Grid.Column className='sp_column' widescreen={16}>
-							<Button size='large' style={{ margin: '10px' }} onClick={this.handleRefresh} secondary content='重新整理' />
+							<Button size='large' style={{ margin: '10px' }} onClick={()=>this.handleRefresh()} secondary content='重新整理' />
 							{spData.data.items.map(data => {
 								return (
 									<div className='spotify_box' key={data.track.id}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getPlaylistsId, handleInitState, getVideoName } from '../../redux/playlist.redux'
-import {  Loader } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 import Content from './Content'
 import { getKKoxAccessToken, doCookieSetup } from '../../utils/kkboxAPI'
 import RefreshButton from '../../components/RefreshButton'
@@ -31,7 +31,6 @@ class Playlist extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const res = this.props.data.playlist.playlist_data
 		const bool = this.props.data.playlist.bool
 		const isShow = this.props.data.playlist.msg === '伺服器錯誤'

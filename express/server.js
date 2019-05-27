@@ -14,19 +14,6 @@ const limiter = rateLimit({
   max: 10, // limit each IP to 10 requests 10 second
 })
 
-// Prevent Heroku from sleeping
-function wakeup() {
-  axios
-    .get('https://power-lists.herokuapp.com/today')
-    .then((res) => {
-      console.log('Woke up!')
-    })
-    .catch((err) => {
-      throw  err
-    })
-  setTimeout(wakeup, 1700000)//28min
-}
-
 //Allow CORS
 app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -60,5 +47,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.send('error')
 })
-console.log('Q')
+
 module.exports = app

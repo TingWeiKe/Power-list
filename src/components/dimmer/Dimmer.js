@@ -14,12 +14,12 @@ class Dimmer extends React.Component {
 		this.props.initPutKKBox()
 	}
 
-	handle_Animation(name) {
+	handleAnimation(name) {
 		if (name === 'kkbox') {
 			setTimeout(() => {
 				document.body.style.overflow = 'unset'
 				this.props.initPutKKBox()
-				this.props.init_State()
+				this.props.initState()
 			}, 2000)
 		}
 		if (name === 'spotify') {
@@ -27,7 +27,7 @@ class Dimmer extends React.Component {
 				this.props.init_Put_Track()
 				this.props.refreshSpotifyList()
 				document.body.style.overflow = 'unset'
-				this.props.init_State()
+				this.props.initState()
 			}, 2000)
 		}
 	}
@@ -38,8 +38,8 @@ class Dimmer extends React.Component {
 				<div onClick={() => this.handleCancel()} id='dimmer' />
 				<Message icon className='putting_box' size={'large'} positive={this.props.put_track_success} negative={this.props.put_track_negative}>
 					{!this.props.put_track_success && !this.props.put_track_negative ? <Icon name='circle notched' loading /> : null}
-					{this.props.put_track_success ? <Image onLoad={this.handle_Animation(this.props.name)} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={checked_icon} /> : null}
-					{this.props.put_track_negative ? <Image onLoad={this.handle_Animation(this.props.name)} style={{ margin: '0', height: '50px', paddingRight: '15px' }} src={x_icon} /> : null}
+					{this.props.put_track_success ? <Image className='putting_icon' onLoad={this.handleAnimation(this.props.name)} src={checked_icon} /> : null}
+					{this.props.put_track_negative ? <Image className='putting_icon' onLoad={this.handleAnimation(this.props.name)} src={x_icon} /> : null}
 					<Message.Header>{this.props.put_track_msg}</Message.Header>
 				</Message>
 			</div>
