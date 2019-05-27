@@ -15,7 +15,7 @@ class HeaderRoute extends Component {
     localStorage.getItem('language')==null? localStorage.setItem('language','TW'):null
 
     //Route
-    const publicList = ['/today', '/playlist_category','/recents','/search','/mylist','/post']
+    const publicList = ['/today', '/playlistCategory','/recents','/search','/mylist','/post']
     const pathName = this.props.location.pathname
     if (publicList.indexOf(pathName) === -1 ) {
       if(pathName.indexOf('/playlist/') === -1){
@@ -46,10 +46,10 @@ class HeaderRoute extends Component {
           <Menu.Item
             as={Link}
             style={{padding:'0px 7px'}} 
-            name='/playlist_category'
-            active={activeItem === '/playlist_category'}
+            name='/playlistCategory'
+            active={activeItem === '/playlistCategory'}
             onClick={this.handleItemClick}
-            to={{ pathname: '/playlist_category', search: this.props.location.search }}
+            to={{ pathname: '/playlistCategory', search: this.props.location.search }}
           >
             歌單
         </Menu.Item>

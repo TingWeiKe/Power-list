@@ -4,7 +4,6 @@ import { Grid, Image, Segment, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class Feature extends Component {
-
     render() {
         return (
             <Grid columns={4} doubling={true} stackable>

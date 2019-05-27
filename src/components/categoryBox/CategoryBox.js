@@ -13,6 +13,7 @@ class CategoryBox extends Component {
 	}
 
 	render() {
+		console.log('Q')
 		const categoryBox = this.props.data.categoryBox
 		const data = this.props.data.categoryBox.categoryBox_data
 		return (
@@ -23,9 +24,11 @@ class CategoryBox extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-	data: state
+const mapStateToProps = state => {
+	return { data: state }
 }
-const actionCreate = { getCategoryBoxApi, handleInitState }
 
-export default withRouter(connect(mapStateToProps, actionCreate)(CategoryBox))
+const actionCreate = { getCategoryBoxApi, handleInitState }
+CategoryBox = connect(mapStateToProps, actionCreate)(CategoryBox)
+
+export default withRouter(CategoryBox)

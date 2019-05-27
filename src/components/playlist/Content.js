@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { Button, Grid, Image } from 'semantic-ui-react'
-import { modifyUpdatedAt } from '../../utils/getKKBoxAPI'
-import { get_Video_Name } from '../../redux/playlist.redux'
+import { modifyUpdatedAt } from '../../utils/kkboxAPI'
+import { getVideoName } from '../../redux/playlist.redux'
 import { connect } from 'react-redux'
 import { scrapeYoutubeData } from '../../redux/youtube.redux'
 import { putSpotifyTrack, refreshSpotifyList, init_Put_Track } from '../../redux/spotify.redux'
-import { putKKBoxTrack, init_Put_Kkbox } from '../../redux/kkbox_redux'
+import { putKKBoxTrack, initPutKKBox } from '../../redux/kkbox.redux'
 import Axios from 'axios'
-import { sidebar_icon, play_Icon } from '../icon'
-import Dimmer from '../dimmer'
+import { sidebar_icon, play_Icon } from '../../utils/icon'
+import Dimmer from '../dimmer/Dimmer'
 
 class Content extends Component {
 	constructor(props) {
 		super(props)
-		this.handle_spotify_button = this.handle_spotify_button.bind(this)
+		this.handleSpotifyButton = this.handleSpotifyButton.bind(this)
 		this.state = {
 			loggin_name: '',
 			bool: false,
@@ -29,7 +29,7 @@ class Content extends Component {
 		e.stopPropagation()
 	}
 
-	handle_Storage(storage) {
+	handleStorage(storage) {
 		if (typeof Storage !== 'undefined') {
 			// 瀏覽器是否支援Storage
 			if (localStorage.recent) {
@@ -47,7 +47,7 @@ class Content extends Component {
 		}
 	}
 
-	handle_kkbox_button(e, id) {
+	handleKKBboxButton(e, id) {
 		// if not loggined
 		e.stopPropagation()
 		if (this.props.kkbox.msg !== 'success') {
@@ -62,7 +62,7 @@ class Content extends Component {
 		}
 	}
 
-	handle_spotify_button(e, name) {
+	handleSpotifyButton(e, name) {
 		e.stopPropagation()
 		let n = name.album.artist.name + '|| ' + name.name
 		this.setState({ name: n, bool: true })
@@ -81,7 +81,7 @@ class Content extends Component {
 		}
 	}
 
-	handle_Loggin() {
+	handleLogin() {
 		if (this.state.loggin_name == 'Spotify') {
 			Axios.post('/post/loggin_spotify').then(res => {
 				localStorage['track_name'] = this.state.name
@@ -96,15 +96,15 @@ class Content extends Component {
 		}
 	}
 
-	handle_Cancle() {
+	handleCancel() {
 		document.body.style.overflow = 'unset'
 		this.setState({ dimmer: false, putting_kk: false, bool: false })
 		this.props.init_Put_Track()
 	}
 
 	handle_play_button(name, data) {
-		this.props.get_Video_Name(name)
-		this.handle_Storage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
+		this.props.getVideoName(name)
+		this.handleStorage({ playlist_id: data.playlist_data.id, playlist_title: data.playlist_data.title, image_url: data.playlist_data.images[0] })
 		this.setState({ name: name.name })
 		//prevent repeatly requrest
 		if (this.state.name != name.name) {
@@ -112,7 +112,7 @@ class Content extends Component {
 		}
 	}
 
-	init_State = () => {
+	initState = () => {
 		this.setState({ putting_sp: false, putting_kk: false, bool: false })
 	}
 
@@ -129,18 +129,17 @@ class Content extends Component {
 		let data = this.props.data.playlist_data
 		return (
 			<div>
-				<Dimmer isShow={this.state.putting_sp} init_State={this.init_State} put_track_success={this.props.spotify.put_track_success} put_track_negative={this.props.spotify.put_track_negative} put_track_msg={this.props.spotify.put_track_msg} name={'spotify'} />
-				<Dimmer isShow={this.state.putting_kk} init_State={this.init_State} put_track_success={this.props.kkbox.put_kkbox_success} put_track_negative={this.props.kkbox.put_kkbox_negative} put_track_msg={this.props.kkbox.put_kkbox_msg} name={'kkbox'} />
-
-				{this.state.dimmer ? <div onClick={() => this.handle_Cancle()} id='dimmer' /> : null}
+				<Dimmer isShow={this.state.putting_sp} initState={this.initState} put_track_success={this.props.spotify.put_track_success} put_track_negative={this.props.spotify.put_track_negative} put_track_msg={this.props.spotify.put_track_msg} name={'spotify'} />
+				<Dimmer isShow={this.state.putting_kk} initState={this.initState} put_track_success={this.props.kkbox.put_kkbox_success} put_track_negative={this.props.kkbox.put_kkbox_negative} put_track_msg={this.props.kkbox.put_kkbox_msg} name={'kkbox'} />
+				{this.state.dimmer ? <div onClick={() => this.handleCancel()} id='dimmer' /> : null}
 				{this.state.dimmer ? (
 					<div className='loggin_box'>
 						<div className='button_box'>
 							<h2>要登入{this.state.loggin_name}嗎？</h2>
-							<Button className='dimmer_login_button' onClick={() => this.handle_Loggin()} primary>
+							<Button className='dimmer_login_button' onClick={() => this.handleLogin()} primary>
 								登入去
 							</Button>
-							<Button className='dimmer_login_button' onClick={e => this.handle_Cancle(e)} secondary>
+							<Button className='dimmer_login_button' onClick={e => this.handleCancel(e)} secondary>
 								取消
 							</Button>
 						</div>
@@ -150,9 +149,7 @@ class Content extends Component {
 				<Grid stackable={true} textAlign={'left'}>
 					<Grid.Column widescreen={6}>
 						<h1>{data.title}</h1>
-						<Button className='play' fluid onClick={() => this.handle_play_button(this.props.data.playlist_data.tracks.data[0], this.props.data)}>
-							開始播放
-						</Button>
+						<Button className='play' content='開始播放' fluid onClick={() => this.handle_play_button(this.props.data.playlist_data.tracks.data[0], this.props.data)}/>
 						<Grid>
 							<Grid.Column width={16}>
 								<Image className='main_img' src={data.images[2].url} />
@@ -192,10 +189,10 @@ class Content extends Component {
 													<Grid.Column width={4}>
 														<div className='sidebar'>
 															<div className='dropdown' style={{ Float: 'left' }}>
-																<Image className='sidebar_icon' src={sidebar_icon} onClick={e => this.handle_option_button(e, data)} />
+																<Image className='sidebar_icon' src={sidebar_icon} onClick={e => this.handle_option_button(e)} />
 																<div style={this.state.bool ? { display: 'none' } : null} className='dropdown-content'>
-																	<a onClick={e => this.handle_spotify_button(e, data)}>匯入SPOTIFY歌單</a>
-																	<a onClick={e => this.handle_kkbox_button(e, data.id)}>匯入KKBOX歌單</a>
+																	<a onClick={e => this.handleSpotifyButton(e, data)}>匯入SPOTIFY歌單</a>
+																	<a onClick={e => this.handleKKBboxButton(e, data.id)}>匯入KKBOX歌單</a>
 																	<a onClick={e => e.stopPropagation()} href={data.url}>
 																		在KKBOX上播放
 																	</a>
@@ -220,7 +217,7 @@ class Content extends Component {
 const mapStateToProps = state => {
 	return { data: state.playlist, youtube: state.youtube, kkbox: state.kkbox, spotify: state.spotify }
 }
-const actionCreate = { get_Video_Name, scrapeYoutubeData, refreshSpotifyList, putSpotifyTrack, init_Put_Track, putKKBoxTrack, init_Put_Kkbox }
+const actionCreate = { getVideoName, scrapeYoutubeData, refreshSpotifyList, putSpotifyTrack, init_Put_Track, putKKBoxTrack, initPutKKBox }
 Content = connect(mapStateToProps, actionCreate)(Content)
 
 export default Content

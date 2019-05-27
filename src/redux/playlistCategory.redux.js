@@ -1,25 +1,23 @@
-import { getKKBoxAPI, getCookie } from '../utils/getKKBoxAPI'
+import { getKKBoxAPI, getCookie } from '../utils/kkboxAPI'
 
 const PLAY_CATEGORY_API_SUCCESS = 'PLAY_CATEGORY_API_SUCCESS'
 const PLAY_CATEGORY_API_ERROR_MSG = 'PLAY_CATEGORY_API_ERROR_MSG'
 const INIT_STATE = 'INIT_STATE'
-// const INIT_STATE = 'INIT_STATE'
-// const INIT_MSG = 'INIT_MSG'
 
-const init = {
-	playlist_category_data: {},
+const initState = {
+	playlistCategory_data: {},
 	msg: '',
-	bool: true,
+	bool: true
 }
 
-export function playlist_category(state = init, action){
+export function playlistCategory(state = initState, action){
 	switch (action.type) {
 		case PLAY_CATEGORY_API_SUCCESS:
 			return (state = { ...state, bool: false, msg: 'success', ...action.payload })
 		case PLAY_CATEGORY_API_ERROR_MSG:
 			return (state = { ...state, msg: '伺服器錯誤', bool: false })
 		case INIT_STATE:
-			return (state = init)
+			return (state = initState)
 		default:
 			return state
 	}
@@ -38,19 +36,15 @@ function getPlaylistCategoryApiApiError(){
 }
 
 export function getPlaylistCategoryApi(url){
-	return (dispatch) => {
-		getKKBoxAPI(getCookie('token'), url).then((res) => {
-			if (res && res.status === 200) {
-				dispatch(getPlaylistCategoryApiSuccess({ playlist_category_data: res.data }))
-			} else {
-				dispatch(getPlaylistCategoryApiApiError())
-				console.log('err')
-			}
+	return dispatch => {
+		getKKBoxAPI(getCookie('token'), url).then(res => {
+			if (res && res.status === 200) dispatch(getPlaylistCategoryApiSuccess({ playlistCategory_data: res.data }))
+			else dispatch(getPlaylistCategoryApiApiError())
 		})
 	}
 }
 
-// export function hadndle_Init_State(){
+// export function handleInitState(){
 //     return dispatch =>{
 //         dispatch(handleInitState())
 //     }

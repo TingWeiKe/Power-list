@@ -1,4 +1,4 @@
-import { white_play_icon, pause_icon } from '../icon'
+import { white_play_icon, pause_icon } from './icon'
 
 let player
 
@@ -20,8 +20,8 @@ export function onYouTubeIframeAPIReady(){
 	player = new YT.Player('player', {
 		events: {
 			onReady: onPlayerReady,
-			onStateChange: onPlayerStateChange,
-		},
+			onStateChange: onPlayerStateChange
+		}
 	})
 }
 
@@ -29,7 +29,7 @@ function onPlayerReady(event){
 	document.getElementById('play_button').src = white_play_icon
 	document.getElementById('play_button').style.display = 'block'
 	document.getElementById('pause_button').style.display = 'none'
-	init_youtube()
+	initYoutube()
 }
 
 function onPlayerStateChange(event){
@@ -38,7 +38,7 @@ function onPlayerStateChange(event){
 	}
 }
 
-export function init_youtube(){
+export function initYoutube(){
 	document.getElementById('pause_button').onclick = () => {
 		if (player.getPlayerState() == 1) {
 			pause()

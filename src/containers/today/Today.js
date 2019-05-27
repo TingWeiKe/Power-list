@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Box from '../../components/box/box'
-import { get_Featured_Playlists_Api, handleInitState } from '../../redux/box.redux'
+import { getFeaturedPlaylists, handleInitState } from '../../redux/box.redux'
 import { connect } from 'react-redux'
 import './today.scss'
 import RefreshButton from '../../components/RefreshButton'
@@ -14,7 +14,7 @@ class Today extends Component {
 
 	handleGetTodayData() {
 		const url = 'https://api.kkbox.com/v1.1/featured-playlists?territory=' + this.props.setting.language
-		this.props.box.box_data.hasOwnProperty('data') ? null : this.props.get_Featured_Playlists_Api(url)
+		this.props.box.box_data.hasOwnProperty('data') ? null : this.props.getFeaturedPlaylists(url)
 	}
 
 	componentDidMount() {
@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
 	return { box: state.box, setting: state.setting }
 }
 
-const actionCreate = { get_Featured_Playlists_Api, handleInitState }
+const actionCreate = { getFeaturedPlaylists, handleInitState }
 Today = connect(mapStateToProps, actionCreate)(Today)
 
 export default Today

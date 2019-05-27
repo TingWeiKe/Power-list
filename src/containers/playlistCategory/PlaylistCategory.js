@@ -1,71 +1,71 @@
 import React, { Component } from 'react'
-import { Loader, Button } from 'semantic-ui-react'
-import { getPlaylistCategoryApi, handleInitState } from '../../redux/playlist_category.redux'
-import { get_Hotboard_Api } from '../../redux/hotBoard.redux'
-import { get_Category_Api } from '../../redux/category.redux'
+import { Loader } from 'semantic-ui-react'
+import { getPlaylistCategoryApi, handleInitState } from '../../redux/playlistCategory.redux'
+import { getHotBoardApi } from '../../redux/hotBoard.redux'
+import { getCategoryApi } from '../../redux/category.redux'
 import { connect } from 'react-redux'
 import './playlistCategory.scss'
 import Feature from '../../components/feature/feature'
-import HotBoard from '../../components/hotBoard/hotBoard'
+import HotBoard from '../../components/hotBoard/HotBoard'
 import Category from '../../components/category/category'
-import { getKKoxAccessToken, doCookieSetup } from '../../utils/getKKBoxAPI'
-
+import { getKKoxAccessToken, doCookieSetup } from '../../utils/kkboxAPI'
+import RefreshButton from '../../components/RefreshButton'
 
 class PlaylistCategory extends Component {
-    get_Data() {
-        let language = this.props.data.setting.language
-        const featureUrl = 'https://api.kkbox.com/v1.1/new-hits-playlists?territory=' + language
-        const hotBoardUrl = 'https://api.kkbox.com/v1.1/charts?territory=' + language
-        const categoryUrl = 'https://api.kkbox.com//v1.1/featured-playlist-categories?territory=' + language
-        this.props.getPlaylistCategoryApi(featureUrl)
-        this.props.get_Hotboard_Api(hotBoardUrl)
-        this.props.get_Category_Api(categoryUrl)
-    }
-    componentDidMount() {
-        this.props.data.playlist_category.playlist_category_data.hasOwnProperty('data') &&
-            this.props.data.hot_board.hot_board_data.hasOwnProperty('data') ? null : this.get_Data()
-    }
+	getData() {
+		const language = this.props.data.setting.language
+		const featureUrl = 'https://api.kkbox.com/v1.1/new-hits-playlists?territory=' + language
+		const hotBoardUrl = 'https://api.kkbox.com/v1.1/charts?territory=' + language
+		const categoryUrl = 'https://api.kkbox.com//v1.1/featured-playlist-categories?territory=' + language
+		this.props.getPlaylistCategoryApi(featureUrl)
+		this.props.getHotBoardApi(hotBoardUrl)
+		this.props.getCategoryApi(categoryUrl)
+	}
 
-    handle_Refresh() {
-        this.props.handleInitState()
-        getKKoxAccessToken()
-            .then(res => {
-                if (res.access_token !== undefined) {
-                    doCookieSetup('token', res.access_token, res.expires_in)
-                }
-                this.get_Data()
-            })
+	componentDidMount() {
+		this.props.data.playlistCategory.playlistCategory_data.hasOwnProperty('data') && this.props.data.hot_board.hot_board_data.hasOwnProperty('data') ? null : this.getData()
+	}
 
-    }
-    render() {
-        let bool1 = this.props.data.playlist_category.bool
-        let bool2 = this.props.data.category.bool
-        let hb_msg = this.props.data.hot_board.msg
-        let pc_msg = this.props.data.playlist_category.msg
-        return (
-            <div className="container_header">
-                <h1>歌單</h1>
-                <div className='refresh_button' style={hb_msg && pc_msg == '伺服器錯誤' ? { display: 'block' } : null}>
-                    <Button onClick={() => this.handle_Refresh()} primary size='big' >重新整理</Button>
-                </div>
-                <Loader content='載入中...' className='loader' active={bool1 == true && pc_msg !== '伺服器錯誤'} inline='centered' size='huge' />
-                {bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? null :
-                    <div style={bool1 && bool2 && this.props.data.playlist_category.hot_board == true ? { display: 'none' } : { display: 'block' }}>
-                        {hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>最新主打</h2> : null}
-                        <Feature data={this.props.data.playlist_category.playlist_category_data.data} />
-                        {hb_msg && pc_msg !== '伺服器錯誤'? <h2 className='subheader'>排行榜</h2> : null}
-                        <HotBoard data={this.props.data.hot_board.hot_board_data.data} />
-                        {hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>歌單分類</h2> : null}
-                        <Category data={this.props.data.category.category_data.data} language={this.props.data.setting.language} />
-                    </div>}
-                    <div style={{ marginTop: '100px' }}></div>
-            </div>
-        )
-    }
+	handleRefresh() {
+		this.props.handleInitState()
+		getKKoxAccessToken().then(res => {
+			if (res.access_token !== undefined) {
+				doCookieSetup('token', res.access_token, res.expires_in)
+			}
+			this.getData()
+		})
+	}
+	render() {
+		console.log(this.props)
+		const bool1 = this.props.data.playlistCategory.bool
+		const bool2 = this.props.data.category.bool
+		const hb_msg = this.props.data.hot_board.msg
+		const pc_msg = this.props.data.playlistCategory.msg
+		const isShow = hb_msg && pc_msg === '伺服器錯誤'
+		return (
+			<div className='container_header'>
+				<h1>歌單</h1>
+				<RefreshButton onClick={() => this.handleRefresh()} show={isShow} />
+				<Loader content='載入中...' className='loader' active={bool1 == true && pc_msg !== '伺服器錯誤'} inline='centered' size='huge' />
+				{bool1 && bool2 && this.props.data.playlistCategory.hot_board == true ? null : (
+					<div style={bool1 && bool2 && this.props.data.playlistCategory.hot_board == true ? { display: 'none' } : { display: 'block' }}>
+						{hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>最新主打</h2> : null}
+						<Feature data={this.props.data.playlistCategory.playlistCategory_data.data} />
+						{hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>排行榜</h2> : null}
+						<HotBoard data={this.props.data.hot_board.hot_board_data.data} />
+						{hb_msg && pc_msg !== '伺服器錯誤' ? <h2 className='subheader'>歌單分類</h2> : null}
+						<Category data={this.props.data.category.category_data.data} language={this.props.data.setting.language} />
+					</div>
+				)}
+			</div>
+		)
+	}
 }
 
-const mapStateToProps = state => { return { data: state } }
-const actionCreate = { getPlaylistCategoryApi, get_Hotboard_Api, get_Category_Api, handleInitState }
+const mapStateToProps = state => {
+	return { data: state }
+}
+const actionCreate = { getPlaylistCategoryApi, getHotBoardApi, getCategoryApi, handleInitState }
 PlaylistCategory = connect(mapStateToProps, actionCreate)(PlaylistCategory)
 
 export default PlaylistCategory

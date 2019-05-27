@@ -5,7 +5,7 @@ import './mylist.scss'
 import KKBoxList from '../kkboxList/KKBoxList'
 import SpotifyList from '../spotifyList/SpotifyList'
 import axios from 'axios'
-import { spotify_icon, kkbox_icon } from '../../components/icon'
+import { spotify_icon, kkbox_icon } from '../../utils/icon'
 
 class Mylist extends Component {
 	loginKKBox() {

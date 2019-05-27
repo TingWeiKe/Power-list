@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './yotuber_player.css'
 import { Image, Button } from 'semantic-ui-react'
-import { grey_icon, pause_icon } from '../icon'
+import { grey_icon, pause_icon } from '../../utils/icon'
 import { connect } from 'react-redux'
 
 class YoutubePlayer extends Component {

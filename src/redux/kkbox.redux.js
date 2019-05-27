@@ -1,4 +1,4 @@
-import { getUserAccessToken, getKKBoxAPI, doCookieSetup, getCookie } from '../utils/getKKBoxAPI'
+import { getUserAccessToken, getKKBoxAPI, doCookieSetup, getCookie } from '../utils/kkboxAPI'
 import axios from 'axios'
 const GET_USER_KKBOX_LIST_SUCCESS = 'GET_USER_KKBOX_LIST_SUCCESS'
 const GET_USER_KKBOX_LIST_ERROR = 'GET_MYLIST_API_ERR'
@@ -12,7 +12,7 @@ const init = {
 	put_kkbox_msg: '歌曲搜尋中．．．',
 	msg: '',
 	bool: false,
-	mylist: {},
+	mylist: {}
 }
 
 export function kkbox(state = init, action){
@@ -30,7 +30,7 @@ export function kkbox(state = init, action){
 			return (state = { ...state, ...action.my_info })
 		case GET_KKBOX_NEXT_SUCCESS:
 			state.mylist.paging.next = action.mylist.paging.next
-			action.mylist.data.map((i) => {
+			action.mylist.data.map(i => {
 				state.mylist.data.push(i)
 			})
 			return (state = { ...state })
@@ -52,14 +52,14 @@ function getKKBoxNextSuccess(data){
 }
 
 export function getUserKKBoxList(url){
-	return (dispatch) => {
-		getUserAccessToken().then((res) => {
+	return dispatch => {
+		getUserAccessToken().then(res => {
 			if (res.access_token != undefined) {
 				doCookieSetup('token', res.access_token, res.expires_in)
-				getKKBoxAPI(res.access_token, url).then((res) => {
+				getKKBoxAPI(res.access_token, url).then(res => {
 					dispatch(getUserKKBoxInfoSuccess({ my_info: res.data }))
 				})
-				getKKBoxAPI(res.access_token, url + '/favorite?limit=50').then((res) => {
+				getKKBoxAPI(res.access_token, url + '/favorite?limit=50').then(res => {
 					if (res.status === 200) dispatch(getUserKKBoxIListSuccess({ mylist: res.data }))
 				})
 			}
@@ -68,29 +68,27 @@ export function getUserKKBoxList(url){
 }
 
 export function getKKBoxNext(url){
-	return (dispatch) => {
+	return dispatch => {
 		if (url) {
-			getKKBoxAPI(getCookie('token'), url).then((res) => {
-				if (res.status === 200) {
-					dispatch(getKKBoxNextSuccess(res.data))
-				}
+			getKKBoxAPI(getCookie('token'), url).then(res => {
+				if (res.status === 200) dispatch(getKKBoxNextSuccess(res.data))
 			})
 		}
 	}
 }
 
 export function putKKBoxTrack(id){
-	return (dispatch) => {
-		axios.post('/post/pushTracks', { id: id, access_token: getCookie('token') }).then((res) => {
+	return dispatch => {
+		axios.post('/post/pushTracks', { id: id, access_token: getCookie('token') }).then(res => {
 			dispatch({ type: PUT_KKBOX_TRACK_SUCCESS })
 		})
 	}
 }
 
-export function init_Put_Kkbox(){
-	return (dispatch) => {
-		let url = 'https://api.kkbox.com/v1.1/me'
-		getKKBoxAPI(getCookie('token'), url + '/favorite?limit=500').then((res) => {
+export function initPutKKBox(){
+	return dispatch => {
+		const url = 'https://api.kkbox.com/v1.1/me'
+		getKKBoxAPI(getCookie('token'), url + '/favorite?limit=500').then(res => {
 			if (res.status === 200) dispatch(getUserKKBoxIListSuccess({ mylist: res.data }))
 		})
 		dispatch({ type: INIT_PUT_KKBOX })

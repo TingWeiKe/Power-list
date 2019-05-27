@@ -14,7 +14,6 @@ import Playlist from './components/playlist/playlist'
 import YotuberPlayer from './components/youtubePlayer/YoutubePlayer'
 import { store } from './redux/store/index'
 
-
 ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
@@ -24,7 +23,7 @@ ReactDOM.render(
 					<Route path='/today' component={Today} />
 					<Route path='/recents' component={Recent} />
 					<Route path='/playlist' component={Playlist} />
-					<Route path='/playlist_category' component={PlaylistCategory} />
+					<Route path='/playlistCategory' component={PlaylistCategory} />
 					<Route path='/categoryBox' component={categoryBox} />
 					<Route path='/mylist' component={Mylist} />
 					<Route path='/setting' component={Setting} />
