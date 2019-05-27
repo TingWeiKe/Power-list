@@ -22,7 +22,6 @@ class KKBoxList extends Component {
 
 	componentDidMount() {
 		const url = 'https://api.kkbox.com/v1.1/me'
-		console.log(getUrlVars() )
 		if (getUrlVars() && getUrlVars().length > 20 && getUrlVars().length < 50) {
 			this.props.getUserKKBoxList(url)
 		}
@@ -48,7 +47,7 @@ class KKBoxList extends Component {
 		this.props.data.mylist.data.reverse()
 	}
 
-	init_State() {
+	initState() {
 		this.setState({ putting_kk: false })
 		localStorage.removeItem('track_id')
 	}
