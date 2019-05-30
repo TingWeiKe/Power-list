@@ -36,7 +36,6 @@
 The  project is inspired by Kube created by Hung-Yi Chen.
 
 Checkout his amazing products
-   * [ Website Kube](https://www.kube-app.com/today) 
    * [iOS App](https://itunes.apple.com/tw/app/kube-playlists/id1369069997) 
    * [ Android App](https://play.google.com/store/apps/details?id=com.kube.app)
 
