@@ -12,7 +12,7 @@ const initState = {
 	title: '今日精選'
 }
 
-export function box(state = initState, action){
+export function box(state = initState, action) {
 	switch (action.type) {
 		case BOX_API_SUCCESS:
 			return (state = { ...state, bool: false, msg: 'success', ...action.payload })
@@ -25,33 +25,22 @@ export function box(state = initState, action){
 	}
 }
 
-export function getFeaturedPlaylistsSuccess(box_data){
+export function getFeaturedPlaylistsSuccess(box_data) {
 	return { type: BOX_API_SUCCESS, payload: box_data }
 }
 
-export function getFeaturedPlaylistsError(){
+export function getFeaturedPlaylistsError() {
 	return { type: BOX_API_ERROR_MSG }
 }
 
-export function getFeaturedPlaylists(url){
-	return dispatch => {
-		!getCookie('token')
-			? getKKoxAccessToken()
-					.then(data => {
-						if (data.access_token !== undefined) doCookieSetup('token', data.access_token, data.expires_in)
-						getKKBoxAPI(data.access_token, url).then(res => {
-							if (res && res.status === 200) dispatch(getFeaturedPlaylistsSuccess({ box_data: res.data }))
-							else dispatch(getFeaturedPlaylistsError())
-						})
-					})
-					.catch(err => dispatch(getFeaturedPlaylistsError()))
-			: getKKBoxAPI(getCookie('token'), url).then(res => {
-					if (res && res.status === 200) dispatch(getFeaturedPlaylistsSuccess({ box_data: res.data }))
-					else dispatch(getFeaturedPlaylistsError())
-				})
-	}
+export const getFeaturedPlaylists = url => async dispatch => {
+	const token = await getKKoxAccessToken()
+	getKKBoxAPI(token, url)
+		.then(res => dispatch(getFeaturedPlaylistsSuccess({ box_data: res.data })))
+		.catch(err => dispatch(getFeaturedPlaylistsError()))
+
 }
 
-export function handleInitState(){
+export function handleInitState() {
 	return { type: INIT_STATE }
 }
