@@ -28,7 +28,6 @@ router.post('/refresh', function(req, res, next){
 			host: 'account.kkbox.com',
 			'content-type': 'application/x-www-form-urlencoded'
 		},
-		// Must be a String in content-type: application/x-www-form-urlencoded
 		data: data
 	}
 
@@ -81,14 +80,12 @@ router.post('/youtube', function(req, res, next){
 			res.status(500).json(new Error(err))
 		} else {
 			if (r.statusCode === 200) {
-				let x = body.split('href="/watch?v=')
-				let id = x[1].substring(0, 11)
-				let title = parseHtmlEntities(x[2].split('title="')[1].split('" ')[0]).replace(/(&quot\;)/g, '"')
+				const id = body.split('sectionListRenderer:{')[0].split('videoId":"')[1].substring(0, 11)
+				const title = body.split('sectionListRenderer:{')[0].split('{"text":"')[1].split('"')[0]
 				if (id.length !== 11) {
 					throw 'Error Video_Id'
 				}
 				res.json({ id, title })
-				console.log(id, title)
 			}
 		}
 	})
